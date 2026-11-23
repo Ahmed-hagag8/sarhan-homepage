@@ -29,9 +29,9 @@ function OptionCard({
       aria-label={ariaLabel}
       className={cn(
         'group relative flex w-full items-center justify-between overflow-hidden',
-        // Responsive padding: compact on mobile, generous on desktop.
+        // Responsive padding: larger cards with generous internal spacing.
         // Cards ALWAYS stay side by side (the grid is always 2 columns).
-        'rounded-2xl px-3.5 py-4 sm:px-6 sm:py-7 md:px-9 md:py-9',
+        'rounded-2xl px-4 py-5 sm:px-7 sm:py-8 md:px-10 md:py-11',
         'gap-2 text-foreground shadow-sm sm:gap-3 md:gap-4',
         // Metallic gold gradient border; interior tints to accent on hover
         'gf gf-accent',
@@ -50,28 +50,28 @@ function OptionCard({
         )}
       />
       <span className="flex min-w-0 items-center gap-2 sm:gap-3">
-        {/* Leading line-style icon — shiny gold, brightens on hover */}
+        {/* Leading line-style icon — shiny gold, larger, brightens on hover */}
         <span
           aria-hidden="true"
           className={cn(
-            'gi flex h-4 w-4 shrink-0 items-center justify-center sm:h-5 sm:w-5',
+            'gi flex h-5 w-5 shrink-0 items-center justify-center sm:h-6 sm:w-6 md:h-7 md:w-7',
           )}
         >
           {icon}
         </span>
-        <span className="text-xs font-medium leading-tight tracking-tight sm:text-base md:text-lg">
+        <span className="text-[13px] font-medium leading-tight tracking-tight sm:text-lg md:text-xl">
           {label}
         </span>
       </span>
       <span
         aria-hidden="true"
         className={cn(
-          'arrow-chip flex h-7 w-7 shrink-0 items-center justify-center rounded-full sm:h-9 sm:w-9',
+          'arrow-chip flex h-8 w-8 shrink-0 items-center justify-center rounded-full sm:h-10 sm:w-10 md:h-11 md:w-11',
           // Flip arrow direction in RTL
           'rtl:-scale-x-100',
         )}
       >
-        <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+        <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 md:h-5 md:w-5" />
       </span>
     </a>
   )
@@ -102,7 +102,7 @@ export default function Home() {
         {/* ---------- B. Company Logo ---------- */}
         <section
           aria-label={t.logo.alt}
-          className="flex w-full flex-col items-center justify-center py-20 sm:py-28 md:py-32"
+          className="flex w-full flex-col items-center justify-center py-24 sm:py-32 md:py-40"
         >
           {/* Official SARHAN Import & Export logo — transparent background,
               golden brand identity preserved. Renders naturally on both
@@ -113,27 +113,27 @@ export default function Home() {
         {/* ---------- C. Main Options ---------- */}
         <section
           aria-label={t.options.shipForYou + ' / ' + t.options.customProduct}
-          className="grid w-full max-w-3xl grid-cols-2 gap-2 sm:gap-4 md:gap-6"
+          className="grid w-full max-w-4xl grid-cols-2 gap-2 sm:gap-4 md:gap-6"
         >
           <OptionCard
             href="#ship-for-you"
             label={t.options.shipForYou}
             ariaLabel={t.options.shipForYou}
-            icon={<Plane className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={1.5} />}
+            icon={<Plane className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" strokeWidth={1.5} />}
           />
           <OptionCard
             href="#custom-product"
             label={t.options.customProduct}
             ariaLabel={t.options.customProduct}
-            icon={<Package className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={1.5} />}
+            icon={<Package className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" strokeWidth={1.5} />}
           />
         </section>
 
         {/* ---------- D. About Us ---------- */}
-        <section className="mx-auto mt-20 flex w-full max-w-2xl flex-col items-center gap-6 text-center sm:mt-28">
+        <section className="mx-auto mt-20 flex w-full max-w-3xl flex-col items-center gap-6 text-center sm:mt-28 md:mt-32">
           <h2
             className={cn(
-              'text-sm font-semibold uppercase tracking-[0.25em] text-primary',
+              'text-base font-semibold uppercase tracking-[0.25em] text-primary sm:text-lg md:text-xl',
             )}
           >
             {t.about.heading}
@@ -143,11 +143,11 @@ export default function Home() {
               // More prominent description: elegant serif, larger size, golden brand color.
               // Latin uses Playfair Display; Arabic falls back to Inter (Playfair has no AR glyphs).
               'font-serif text-about',
-              'text-lg leading-relaxed sm:text-xl sm:leading-relaxed md:text-[1.4rem] md:leading-[1.85]',
+              'text-xl leading-relaxed sm:text-2xl sm:leading-relaxed md:text-2xl md:leading-[1.9]',
               // Arabic reads better with extra line height
               dir === 'rtl' && 'leading-loose',
             )}
-            style={dir === 'rtl' ? { lineHeight: 2 } : undefined}
+            style={dir === 'rtl' ? { lineHeight: 2.1 } : undefined}
           >
             {t.about.paragraph}
           </p>
@@ -171,36 +171,38 @@ export default function Home() {
               aria-label={t.contact.connectUsAria}
               title={t.contact.connectUs}
               className={cn(
-                'inline-flex h-10 items-center gap-2.5 rounded-full px-5',
+                'inline-flex h-12 items-center gap-2.5 rounded-full px-6',
                 'gf text-foreground',
                 'transition-all duration-300 ease-out',
                 'hover:shadow-sm',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
               )}
             >
-              <Phone className="gi h-4 w-4" aria-hidden="true" />
-              <span className="text-sm font-medium tracking-tight">
+              <Phone className="gi h-5 w-5" aria-hidden="true" />
+              <span className="text-base font-medium tracking-tight">
                 {t.contact.connectUs}
               </span>
             </a>
 
-            {/* Location Icon */}
+            {/* Location — pin icon + "Location" label, matching Connect Us */}
             <a
               href={PLACEHOLDER_LOCATION}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t.contact.locationAria}
-              title={t.contact.locationAria}
+              title={t.contact.locationLabel}
               className={cn(
-                'inline-flex h-10 w-10 items-center justify-center rounded-full',
+                'inline-flex h-12 items-center gap-2.5 rounded-full px-6',
                 'gf text-foreground',
                 'transition-all duration-300 ease-out',
                 'hover:shadow-sm',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
               )}
             >
-              <MapPin className="gi h-4 w-4" aria-hidden="true" />
-              <span className="sr-only">{t.contact.locationAria}</span>
+              <MapPin className="gi h-5 w-5" aria-hidden="true" />
+              <span className="text-base font-medium tracking-tight">
+                {t.contact.locationLabel}
+              </span>
             </a>
           </div>
 

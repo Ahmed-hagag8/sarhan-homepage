@@ -28,6 +28,7 @@ interface TranslationKeys {
   contact: {
     connectUs: string
     connectUsAria: string
+    locationLabel: string
     locationAria: string
     phonePlaceholder: string
     locationPlaceholder: string
@@ -63,6 +64,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     contact: {
       connectUs: 'Connect Us',
       connectUsAria: 'Call us',
+      locationLabel: 'Location',
       locationAria: 'View our location on the map',
       phonePlaceholder: 'Phone number will be added here.',
       locationPlaceholder: 'Location link will be added here.',
@@ -96,6 +98,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     contact: {
       connectUs: 'تواصل معنا',
       connectUsAria: 'اتصل بنا',
+      locationLabel: 'الموقع',
       locationAria: 'اعرض موقعنا على الخريطة',
       phonePlaceholder: 'سيتم إضافة رقم الهاتف هنا.',
       locationPlaceholder: 'سيتم إضافة رابط الموقع هنا.',
