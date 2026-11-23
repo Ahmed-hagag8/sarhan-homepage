@@ -28,9 +28,11 @@ function OptionCard({
       href={href}
       aria-label={ariaLabel}
       className={cn(
-        'group relative flex w-full items-center justify-between gap-4 overflow-hidden',
-        'rounded-2xl border border-border bg-card px-7 py-7 sm:px-9 sm:py-9',
-        'text-foreground shadow-sm',
+        'group relative flex w-full items-center justify-between overflow-hidden',
+        // Responsive padding: compact on mobile, generous on desktop.
+        // Cards ALWAYS stay side by side (the grid is always 2 columns).
+        'rounded-2xl border border-border bg-card px-3.5 py-4 sm:px-6 sm:py-7 md:px-9 md:py-9',
+        'gap-2 text-foreground shadow-sm sm:gap-3 md:gap-4',
         'transition-all duration-300 ease-out',
         // Subtle gold highlight on hover: gold border + faint gold tint
         'hover:-translate-y-0.5 hover:border-primary hover:bg-accent hover:shadow-md hover:shadow-primary/5',
@@ -46,24 +48,26 @@ function OptionCard({
           'group-hover:scale-x-100',
         )}
       />
-      <span className="flex items-center gap-3">
+      <span className="flex min-w-0 items-center gap-2 sm:gap-3">
         {/* Leading line-style icon — subtle, turns gold on hover */}
         <span
           aria-hidden="true"
           className={cn(
-            'flex h-5 w-5 items-center justify-center text-muted-foreground',
+            'flex h-4 w-4 shrink-0 items-center justify-center text-muted-foreground sm:h-5 sm:w-5',
             'transition-colors duration-300 ease-out',
             'group-hover:text-primary',
           )}
         >
           {icon}
         </span>
-        <span className="text-base font-medium tracking-tight sm:text-lg">{label}</span>
+        <span className="text-xs font-medium leading-tight tracking-tight sm:text-base md:text-lg">
+          {label}
+        </span>
       </span>
       <span
         aria-hidden="true"
         className={cn(
-          'flex h-9 w-9 shrink-0 items-center justify-center rounded-full',
+          'flex h-7 w-7 shrink-0 items-center justify-center rounded-full sm:h-9 sm:w-9',
           'bg-muted text-muted-foreground',
           'transition-all duration-300 ease-out',
           'group-hover:bg-primary group-hover:text-primary-foreground',
@@ -71,7 +75,7 @@ function OptionCard({
           'rtl:-scale-x-100',
         )}
       >
-        <ArrowRight className="h-4 w-4" />
+        <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
       </span>
     </a>
   )
@@ -87,7 +91,7 @@ export default function Home() {
         <nav
           aria-label="Utility"
           className={cn(
-            'mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5 sm:px-8 sm:py-6',
+            'mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6 sm:py-5 md:px-8 md:py-6',
           )}
         >
           {/* Top Left: Theme toggle */}
@@ -98,7 +102,7 @@ export default function Home() {
       </header>
 
       {/* ---------- Main ---------- */}
-      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col items-center px-6 sm:px-8">
+      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col items-center px-4 sm:px-6 md:px-8">
         {/* ---------- B. Company Logo ---------- */}
         <section
           aria-label={t.logo.alt}
@@ -113,19 +117,19 @@ export default function Home() {
         {/* ---------- C. Main Options ---------- */}
         <section
           aria-label={t.options.shipForYou + ' / ' + t.options.customProduct}
-          className="grid w-full max-w-3xl grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2"
+          className="grid w-full max-w-3xl grid-cols-2 gap-2 sm:gap-4 md:gap-6"
         >
           <OptionCard
             href="#ship-for-you"
             label={t.options.shipForYou}
             ariaLabel={t.options.shipForYou}
-            icon={<Plane className="h-5 w-5" strokeWidth={1.5} />}
+            icon={<Plane className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={1.5} />}
           />
           <OptionCard
             href="#custom-product"
             label={t.options.customProduct}
             ariaLabel={t.options.customProduct}
-            icon={<Package className="h-5 w-5" strokeWidth={1.5} />}
+            icon={<Package className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={1.5} />}
           />
         </section>
 
@@ -159,12 +163,12 @@ export default function Home() {
 
       {/* ---------- E. Footer / Contact ---------- */}
       <footer className="mt-auto w-full">
-        <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
+        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8">
           {/* Thin, subtle golden horizontal divider */}
           <div aria-hidden="true" className="h-px w-full bg-primary/20" />
 
-          {/* Contact area */}
-          <div className="flex flex-col items-center justify-center gap-5 py-8 sm:flex-row sm:gap-8 sm:py-10">
+          {/* Contact area — preserved as a horizontal row at all sizes */}
+          <div className="flex flex-row flex-wrap items-center justify-center gap-3 py-6 sm:gap-6 sm:py-8 md:gap-8 md:py-10">
             {/* Phone Icon – Connect Us */}
             <a
               href={PLACEHOLDER_PHONE}
