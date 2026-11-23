@@ -45,10 +45,21 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ---- Light Mode: Warm white + charcoal text + gold accents ---- */
+/* ---- Light Mode: Warm white + charcoal text + brighter metallic gold ---- */
 :root {
   --radius: 0.625rem;
   --about-text: var(--foreground);                    /* neutral readable text (was gold) */
+  /* Brighter, richer metallic gold for Light Mode — illuminated and luxurious,
+     not flat yellow or neon. */
+  --gold-light: #FFD95E;
+  --gold-primary: #E0B030;
+  --gold-deep: #B8860B;
+  --gold-highlight: #FFEB9E;
+  --gold-grad: linear-gradient(135deg, #FFD95E 0%, #E0B030 45%, #B8860B 100%);
+  --gold-grad-bright: linear-gradient(135deg, #FFEB9E 0%, #FFD95E 45%, #E0B030 100%);
+  --gold-grad-line: linear-gradient(90deg, transparent 0%, rgba(224, 176, 48, 0.6) 50%, transparent 100%);
+  --gold-on-gold: #1a1410;
+  --gold-arrow-border: rgba(224, 176, 48, 0.45);
   --background: oklch(0.985 0.004 75);           /* warm white */
   --foreground: oklch(0.20 0.005 60);            /* dark charcoal text */
   --card: oklch(1 0 0);                          /* pure white cards */
@@ -85,6 +96,16 @@
 /* ---- Dark Mode: Deep charcoal-black + light text + gold accents ---- */
 .dark {
   --about-text: var(--foreground);                    /* neutral readable text (was gold) */
+  /* Dark Mode gold — unchanged from the original approved values. */
+  --gold-light: #F5D77A;
+  --gold-primary: #D4AF37;
+  --gold-deep: #A87919;
+  --gold-highlight: #FFE6A0;
+  --gold-grad: linear-gradient(135deg, #F5D77A 0%, #D4AF37 45%, #A87919 100%);
+  --gold-grad-bright: linear-gradient(135deg, #FFE6A0 0%, #F5D77A 45%, #D4AF37 100%);
+  --gold-grad-line: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.5) 50%, transparent 100%);
+  --gold-on-gold: #1a1410;
+  --gold-arrow-border: rgba(212, 175, 55, 0.35);
   --background: oklch(0.135 0.005 60);           /* deep charcoal-black */
   --foreground: oklch(0.96 0.004 70);            /* off-white */
   --card: oklch(0.175 0.005 60);                 /* slightly raised charcoal */
@@ -143,16 +164,10 @@
    ========================================================================= */
 
 @layer components {
-  :root {
-    --gold-light: #F5D77A;
-    --gold-primary: #D4AF37;
-    --gold-deep: #A87919;
-    --gold-highlight: #FFE6A0;
-    --gold-grad: linear-gradient(135deg, #F5D77A 0%, #D4AF37 45%, #A87919 100%);
-    --gold-grad-bright: linear-gradient(135deg, #FFE6A0 0%, #F5D77A 45%, #D4AF37 100%);
-    --gold-grad-line: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.5) 50%, transparent 100%);
-    --gold-on-gold: #1a1410; /* dark text/icon on a gold fill */
-  }
+  /* Gold variables are defined per-theme in the main :root (light) and .dark
+     blocks above — Light Mode uses brighter, richer gold; Dark Mode uses the
+     original approved values. The utility classes below reference those
+     variables so all gold elements adapt automatically. */
 
   /* --- Metallic gold gradient border (follows border-radius perfectly) ---
      Uses the padding-box/border-box composite background trick so the
@@ -198,7 +213,7 @@
   /* --- Card arrow chip: subtle gold border + gold icon by default,
          fills with the gold gradient on card hover (icon darkens) --- */
   .arrow-chip {
-    border: 1px solid rgba(212, 175, 55, 0.35);
+    border: 1px solid var(--gold-arrow-border);
     background: color-mix(in oklch, var(--muted) 70%, transparent);
     color: var(--gold-primary);
     transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;

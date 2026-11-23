@@ -32,6 +32,9 @@ interface TranslationKeys {
     locationAria: string
     phonePlaceholder: string
     locationPlaceholder: string
+    whatsappLabel: string
+    emailLabel: string
+    callLabel: string
   }
   footer: {
     rights: string
@@ -68,6 +71,9 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       locationAria: 'View our location on the map',
       phonePlaceholder: 'Phone number will be added here.',
       locationPlaceholder: 'Location link will be added here.',
+      whatsappLabel: 'WhatsApp',
+      emailLabel: 'Email',
+      callLabel: 'Call',
     },
     footer: {
       rights: 'All rights reserved.',
@@ -102,6 +108,9 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       locationAria: 'اعرض موقعنا على الخريطة',
       phonePlaceholder: 'سيتم إضافة رقم الهاتف هنا.',
       locationPlaceholder: 'سيتم إضافة رابط الموقع هنا.',
+      whatsappLabel: 'واتساب',
+      emailLabel: 'البريد الإلكتروني',
+      callLabel: 'اتصال',
     },
     footer: {
       rights: 'جميع الحقوق محفوظة.',
@@ -136,6 +145,9 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       locationAria: '在地图上查看我们的位置',
       phonePlaceholder: '电话号码将在此处显示。',
       locationPlaceholder: '位置链接将在此处显示。',
+      whatsappLabel: 'WhatsApp',
+      emailLabel: '电子邮件',
+      callLabel: '电话',
     },
     footer: {
       rights: '保留所有权利。',

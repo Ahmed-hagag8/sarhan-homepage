@@ -5,30 +5,36 @@ import { ArrowRight, Plane, Package, Phone, MapPin } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { LanguageSelector } from '@/components/language-selector'
 import { Logo } from '@/components/logo'
+import { ConnectUs } from '@/components/connect-us'
+import { EasyFluxDialog } from '@/components/easy-flux-dialog'
 import { useI18n } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
 
-// NOTE: Replace these placeholder destinations with real values when available.
-const PLACEHOLDER_PHONE = 'tel:+1-555-000-0000'
+// NOTE: Replace this placeholder destination with the real value when available.
 const PLACEHOLDER_LOCATION = 'https://www.google.com/maps/search/?api=1&query=Company'
 
 function OptionCard({
   href,
+  onClick,
   label,
   ariaLabel,
   icon,
 }: {
-  href: string
+  href?: string
+  onClick?: () => void
   label: string
   ariaLabel: string
   icon: React.ReactNode
 }) {
+  // Render as <button> when onClick is provided, <a> when href is provided.
+  const isButton = !!onClick
+  const Tag = isButton ? 'button' : 'a'
   return (
-    <a
-      href={href}
+    <Tag
+      {...(isButton ? { type: 'button' as const, onClick } : { href })}
       aria-label={ariaLabel}
       className={cn(
-        'group relative flex w-full items-center justify-between overflow-hidden',
+        'group relative flex w-full cursor-pointer items-center justify-between overflow-hidden',
         // Responsive padding: larger cards with generous internal spacing.
         // Cards ALWAYS stay side by side (the grid is always 2 columns).
         'rounded-2xl px-4 py-5 sm:px-7 sm:py-8 md:px-10 md:py-11',
@@ -73,12 +79,13 @@ function OptionCard({
       >
         <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 md:h-5 md:w-5" />
       </span>
-    </a>
+    </Tag>
   )
 }
 
 export default function Home() {
   const { t, dir } = useI18n()
+  const [easyFluxOpen, setEasyFluxOpen] = React.useState(false)
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -122,7 +129,7 @@ export default function Home() {
             icon={<Plane className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" strokeWidth={1.5} />}
           />
           <OptionCard
-            href="#custom-product"
+            onClick={() => setEasyFluxOpen(true)}
             label={t.options.customProduct}
             ariaLabel={t.options.customProduct}
             icon={<Package className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" strokeWidth={1.5} />}
@@ -166,24 +173,8 @@ export default function Home() {
 
           {/* Contact area — smallest, most compact section; horizontal row at all sizes */}
           <div className="flex flex-row flex-wrap items-center justify-center gap-3 py-4 sm:gap-5 sm:py-6 md:gap-6 md:py-8">
-            {/* Phone Icon – Connect Us */}
-            <a
-              href={PLACEHOLDER_PHONE}
-              aria-label={t.contact.connectUsAria}
-              title={t.contact.connectUs}
-              className={cn(
-                'inline-flex h-10 items-center gap-2 rounded-full px-5',
-                'gf text-foreground',
-                'transition-all duration-300 ease-out',
-                'hover:shadow-sm',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-              )}
-            >
-              <Phone className="gi h-4 w-4" aria-hidden="true" />
-              <span className="text-sm font-medium tracking-tight">
-                {t.contact.connectUs}
-              </span>
-            </a>
+            {/* Connect Us — reveals WhatsApp / Email / Call panel on hover (desktop) or tap (mobile) */}
+            <ConnectUs />
 
             {/* Location — pin icon + "Location" label, matching Connect Us */}
             <a
@@ -226,6 +217,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Easy Flux product dialog — opened by clicking the Custom Product card */}
+      <EasyFluxDialog open={easyFluxOpen} onClose={() => setEasyFluxOpen(false)} />
     </div>
   )
 }
