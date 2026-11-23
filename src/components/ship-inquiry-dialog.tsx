@@ -130,11 +130,11 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             <div>
               <h2
                 id="ship-inquiry-title"
-                className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-foreground"
+                className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-foreground dark:text-white"
               >
                 {t.shipForm.dialogTitle}
               </h2>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
+              <p className="text-xs sm:text-sm text-muted-foreground dark:text-white mt-0.5">
                 {t.shipForm.dialogDesc}
               </p>
             </div>
@@ -145,7 +145,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             type="button"
             onClick={onClose}
             aria-label={t.shipForm.close}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:text-foreground dark:text-white hover:bg-muted/80 transition-colors"
           >
             <X className="h-5 w-5" />
           </button>
@@ -156,7 +156,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
           {/* Row 1: Name and Phone */}
           <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
                 <User className="gi h-3.5 w-3.5" />
                 <span>{t.shipForm.nameLabel}</span>
                 <span className="text-destructive">*</span>
@@ -167,12 +167,12 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={t.shipForm.namePlaceholder}
-                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
               />
             </div>
 
             <div>
-              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
                 <Phone className="gi h-3.5 w-3.5" />
                 <span>{t.shipForm.phoneLabel}</span>
               </label>
@@ -181,7 +181,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder={t.shipForm.phonePlaceholder}
-                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
               />
             </div>
           </div>
@@ -189,7 +189,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
           {/* Row 2: Origin and Destination */}
           <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
                 <MapPin className="gi h-3.5 w-3.5 text-primary" />
                 <span>{t.shipForm.originLabel}</span>
               </label>
@@ -198,12 +198,12 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
                 value={origin}
                 onChange={(e) => setOrigin(e.target.value)}
                 placeholder={t.shipForm.originPlaceholder}
-                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
               />
             </div>
 
             <div>
-              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
                 <MapPin className="gi h-3.5 w-3.5" />
                 <span>{t.shipForm.destLabel}</span>
               </label>
@@ -212,14 +212,14 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
                 placeholder={t.shipForm.destPlaceholder}
-                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
               />
             </div>
           </div>
 
           {/* Details & Notes */}
           <div>
-            <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
+            <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
               <FileText className="gi h-3.5 w-3.5" />
               <span>{t.shipForm.detailsLabel}</span>
               <span className="text-destructive">*</span>
@@ -230,7 +230,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
               value={details}
               onChange={(e) => setDetails(e.target.value)}
               placeholder={t.shipForm.detailsPlaceholder}
-              className="w-full rounded-xl border border-border/70 bg-muted/40 p-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all resize-none"
+              className="w-full rounded-xl border border-border/70 bg-muted/40 p-3 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all resize-none"
             />
           </div>
 

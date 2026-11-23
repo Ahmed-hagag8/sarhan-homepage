@@ -93,9 +93,9 @@
   --sidebar-ring: oklch(0.62 0.10 78);
 }
 
-/* ---- Dark Mode: Deep charcoal-black + light text + gold accents ---- */
+/* ---- Dark Mode: Deep charcoal-black + pure white text + gold accents ---- */
 .dark {
-  --about-text: var(--foreground);                    /* neutral readable text (was gold) */
+  --about-text: #ffffff;
   /* Dark Mode gold — unchanged from the original approved values. */
   --gold-light: #F5D77A;
   --gold-primary: #D4AF37;
@@ -108,19 +108,19 @@
   --gold-arrow-border: rgba(212, 175, 55, 0.35);
   --gold-border: rgba(212, 175, 55, 0.3);
   --background: oklch(0.135 0.005 60);           /* deep charcoal-black */
-  --foreground: oklch(0.96 0.004 70);            /* off-white */
+  --foreground: #ffffff;                         /* pure white */
   --card: oklch(0.175 0.005 60);                 /* slightly raised charcoal */
-  --card-foreground: oklch(0.96 0.004 70);
+  --card-foreground: #ffffff;                    /* pure white */
   --popover: oklch(0.175 0.005 60);
-  --popover-foreground: oklch(0.96 0.004 70);
+  --popover-foreground: #ffffff;                 /* pure white */
   --primary: oklch(0.74 0.11 82);                /* brighter gold for dark bg contrast */
-  --primary-foreground: oklch(0.135 0.005 60);
+  --primary-foreground: #000000;
   --secondary: oklch(0.22 0.005 60);
-  --secondary-foreground: oklch(0.96 0.004 70);
+  --secondary-foreground: #ffffff;               /* pure white */
   --muted: oklch(0.22 0.005 60);
-  --muted-foreground: oklch(0.66 0.01 60);
+  --muted-foreground: #ffffff;                   /* pure white */
   --accent: oklch(0.23 0.025 75);                /* dark gold-tinted hover */
-  --accent-foreground: oklch(0.96 0.004 70);
+  --accent-foreground: #ffffff;                  /* pure white */
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(0.78 0.06 82 / 14%);           /* subtle translucent gold-tinted border */
   --input: oklch(0.78 0.06 82 / 18%);
@@ -131,11 +131,11 @@
   --chart-4: oklch(0.80 0.12 86);
   --chart-5: oklch(0.52 0.08 75);
   --sidebar: oklch(0.175 0.005 60);
-  --sidebar-foreground: oklch(0.96 0.004 70);
+  --sidebar-foreground: #ffffff;                 /* pure white */
   --sidebar-primary: oklch(0.74 0.11 82);
-  --sidebar-primary-foreground: oklch(0.135 0.005 60);
+  --sidebar-primary-foreground: #000000;
   --sidebar-accent: oklch(0.23 0.025 75);
-  --sidebar-accent-foreground: oklch(0.96 0.004 70);
+  --sidebar-accent-foreground: #ffffff;          /* pure white */
   --sidebar-border: oklch(0.78 0.06 82 / 14%);
   --sidebar-ring: oklch(0.74 0.11 82);
 }
@@ -147,6 +147,31 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  /* Pure white text across all dark mode typography */
+  .dark,
+  .dark body,
+  .dark p,
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6,
+  .dark label,
+  .dark input,
+  .dark textarea,
+  .dark a:not(.gi),
+  .dark button:not(.gi):not(.gold-fill) {
+    color: #ffffff;
+  }
+  .dark .gi {
+    color: var(--gold-primary);
+  }
+  .dark .group:hover .gi,
+  .dark button:hover .gi,
+  .dark a:hover .gi {
+    color: var(--gold-light);
   }
   /* Smooth, subtle theme transition */
   body,
