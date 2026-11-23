@@ -59,7 +59,7 @@ function OptionCard({
         >
           {icon}
         </span>
-        <span className="text-[13px] font-medium leading-tight tracking-tight sm:text-lg md:text-xl">
+        <span className="text-[13px] font-bold leading-tight tracking-tight sm:text-lg md:text-xl">
           {label}
         </span>
       </span>
@@ -133,7 +133,7 @@ export default function Home() {
         <section className="mx-auto mt-20 flex w-full max-w-3xl flex-col items-center gap-5 text-center sm:mt-28 md:mt-32">
           <h2
             className={cn(
-              'text-xs font-semibold uppercase tracking-[0.25em] text-primary sm:text-sm md:text-sm',
+              'text-xs font-semibold uppercase tracking-[0.25em] text-foreground sm:text-sm md:text-sm',
             )}
           >
             {t.about.heading}

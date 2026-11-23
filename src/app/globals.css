@@ -48,7 +48,7 @@
 /* ---- Light Mode: Warm white + charcoal text + gold accents ---- */
 :root {
   --radius: 0.625rem;
-  --about-text: oklch(0.42 0.085 68);            /* deep readable gold for About body */
+  --about-text: var(--foreground);                    /* neutral readable text (was gold) */
   --background: oklch(0.985 0.004 75);           /* warm white */
   --foreground: oklch(0.20 0.005 60);            /* dark charcoal text */
   --card: oklch(1 0 0);                          /* pure white cards */
@@ -84,7 +84,7 @@
 
 /* ---- Dark Mode: Deep charcoal-black + light text + gold accents ---- */
 .dark {
-  --about-text: oklch(0.82 0.11 82);             /* bright readable gold for About body */
+  --about-text: var(--foreground);                    /* neutral readable text (was gold) */
   --background: oklch(0.135 0.005 60);           /* deep charcoal-black */
   --foreground: oklch(0.96 0.004 70);            /* off-white */
   --card: oklch(0.175 0.005 60);                 /* slightly raised charcoal */
