@@ -34,9 +34,9 @@ export function EgyFlaxDialog({ open, onClose }: EgyFlaxDialogProps) {
 
   const handleInquireWhatsApp = () => {
     const message = [
-      '🌿 *Inquiry for EGY FLAX (Egyptian Natural Flax & Fibers)*',
+      '🌿 *Inquiry for FLAX & LINEN PRODUCTS (Egyptian Natural Flax & Fibers)*',
       '─────────────────────────',
-      'Hello SARHAN Team, I would like to request product specifications, pricing, and minimum order quantities for *EGY FLAX*.',
+      'Hello SARHAN Team, I would like to request product specifications, pricing, and minimum order quantities for *FLAX & LINEN PRODUCTS*.',
       '─────────────────────────',
       'Sent via SARHAN Products Portal',
     ].join('\n')
@@ -46,11 +46,11 @@ export function EgyFlaxDialog({ open, onClose }: EgyFlaxDialogProps) {
   }
 
   const handleInquireEmail = () => {
-    const subject = 'Product Inquiry: EGY FLAX - Egyptian Natural Flax & Fibers'
+    const subject = 'Product Inquiry: FLAX & LINEN PRODUCTS - Egyptian Natural Flax & Fibers'
     const body = [
       'Hello SARHAN Import & Export Team,',
       '',
-      'I am interested in sourcing EGY FLAX (Natural Egyptian Flax & Fibers). Please provide product technical sheets, current FOB/CIF pricing, and available packaging/container volumes.',
+      'I am interested in sourcing FLAX & LINEN PRODUCTS (Natural Egyptian Flax & Fibers). Please provide product technical sheets, current FOB/CIF pricing, and available packaging/container volumes.',
       '',
       'Thank you.',
     ].join('\n')
