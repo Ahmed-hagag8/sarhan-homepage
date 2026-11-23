@@ -329,7 +329,7 @@ export default function Home() {
         {/* ===================================================================
             SECTION 3: CORE SERVICES & PRODUCTS (Always 2 columns)
             - Ship: Opens interactive quote modal (WhatsApp / Email)
-            - Products: Hover reveals EGY FLAX card; Click opens full dialog
+            - Products: Hover reveals FLAX & LINEN PRODUCTS card; Click opens full dialog
             =================================================================== */}
         <section
           id="services-section"
@@ -357,18 +357,18 @@ export default function Home() {
               icon={<Plane className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" strokeWidth={1.5} />}
             />
 
-            {/* Card 2: Our Products (Hover reveals EGY FLAX / Click opens dialog) */}
+            {/* Card 2: Our Products (Hover reveals FLAX & LINEN PRODUCTS / Click opens dialog) */}
             <OptionCard
               onClick={() => setEgyFlaxOpen(true)}
               onMouseEnter={handleProductMouseEnter}
               onMouseLeave={handleProductMouseLeave}
               label={t.options.customProduct}
-              badge="EGY FLAX"
+              badge="FLAX & LINEN PRODUCTS"
               description={t.options.customProductDesc}
               ariaLabel={t.options.customProduct}
               icon={<Package className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" strokeWidth={1.5} />}
             >
-              {/* Desktop Hover Floating Preview Card for EGY FLAX */}
+              {/* Desktop Hover Floating Preview Card for FLAX & LINEN PRODUCTS */}
               {productHovered && (
                 <div
                   className={cn(
@@ -532,7 +532,7 @@ export default function Home() {
         onClose={() => setShipInquiryOpen(false)}
       />
 
-      {/* EGY FLAX Product Modal */}
+      {/* FLAX & LINEN PRODUCTS Product Modal */}
       <EgyFlaxDialog
         open={egyFlaxOpen}
         onClose={() => setEgyFlaxOpen(false)}

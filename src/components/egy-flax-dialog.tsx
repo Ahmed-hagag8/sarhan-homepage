@@ -64,7 +64,7 @@ export function EgyFlaxDialog({ open, onClose }: EgyFlaxDialogProps) {
       className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-6"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="egy-flax-title"
+      aria-labelledby="flax-linen-title"
     >
       {/* Backdrop */}
       <div
@@ -101,7 +101,7 @@ export function EgyFlaxDialog({ open, onClose }: EgyFlaxDialogProps) {
 
           {/* Product Title */}
           <h2
-            id="egy-flax-title"
+            id="flax-linen-title"
             className="mt-4 font-serif text-4xl sm:text-5xl font-black tracking-tight"
             style={{
               background: 'var(--gold-grad-bright)',

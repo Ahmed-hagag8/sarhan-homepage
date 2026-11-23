@@ -159,7 +159,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       shipForYou: 'Ship For You',
       shipForYouDesc: 'Instant shipping quote via WhatsApp or Email',
       customProduct: 'Our Products',
-      customProductDesc: 'Featured: EGY FLAX natural flax & fibers',
+      customProductDesc: 'Featured: FLAX & LINEN PRODUCTS — natural fibers & textiles',
     },
     shipForm: {
       dialogTitle: 'Request a Shipping Quote',
@@ -186,8 +186,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     },
     productEgyFlax: {
       badge: 'Featured Export Product',
-      name: 'EGY FLAX',
-      tagline: 'Premium Natural Egyptian Flax & Fibers',
+      name: 'FLAX & LINEN PRODUCTS',
+      tagline: 'Premium Natural Egyptian Flax & Linen Products',
       description:
         'Sustainably cultivated in fertile Egyptian soil and processed to high international standards. High-tensile flax fibers, tow, raw flax, and spun yarn designed for luxury textiles and high-performance industrial applications.',
       spec1: '100% Organic Egyptian Flax',
@@ -274,7 +274,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       shipForYou: 'نشحن لك',
       shipForYouDesc: 'احصل على تسعير شحن فوري عبر واتساب أو البريد',
       customProduct: 'منتجاتنا',
-      customProductDesc: 'المنتج الحصري: ألياف وخيوط الكتان EGY FLAX',
+      customProductDesc: 'المنتج الحصري: منتجات الكتان واللينين FLAX & LINEN PRODUCTS',
     },
     shipForm: {
       dialogTitle: 'طلب تسعير شحنة جديدة',
@@ -301,8 +301,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     },
     productEgyFlax: {
       badge: 'المنتج الحصري للتصدير',
-      name: 'EGY FLAX',
-      tagline: 'ألياف وخيوط الكتان المصري الطبيعي الفاخر',
+      name: 'FLAX & LINEN PRODUCTS',
+      tagline: 'أجود ألياف وخيوط الكتان واللينين المصري الفاخر',
       description:
         'كتان مصري طبيعي عالي النقاء مزروع في أجود الأراضي الزراعية ومجهز وفق أعلى مواصفات الجودة العالمية. ألياف قوية، مشاق، وخيوط غزل مخصصة لمصانع النسيج الفاخر والتطبيقات الصناعية الدقيقة.',
       spec1: 'كتان مصري طبيعي 100%',
@@ -389,7 +389,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       shipForYou: '为您发货',
       shipForYouDesc: '通过 WhatsApp 或电子邮件获取即时报价',
       customProduct: '特色产品',
-      customProductDesc: '主营推荐：EGY FLAX 纯天然埃及特级亚麻纤维',
+      customProductDesc: '主营推荐：FLAX & LINEN PRODUCTS 纯天然亚麻与高档亚麻制品',
     },
     shipForm: {
       dialogTitle: '获取航运即时报价',
@@ -416,8 +416,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     },
     productEgyFlax: {
       badge: '出口核心主打产品',
-      name: 'EGY FLAX',
-      tagline: '埃及优质特级天然亚麻与高强纤维',
+      name: 'FLAX & LINEN PRODUCTS',
+      tagline: '特级埃及天然亚麻与高档亚麻制品',
       description:
         '源自埃及尼罗河流域优质土壤培育，遵循国际高级别纺织出口标准加工。具备出众的高抗拉强度、透气性及柔韧度，专为全球高档纺织面料与工业复合制造供应。',
       spec1: '100% 埃及原产纯天然亚麻',
