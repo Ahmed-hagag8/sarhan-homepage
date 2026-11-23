@@ -1,9 +1,10 @@
 'use client'
 
 import * as React from 'react'
-import { ArrowRight, Phone, MapPin } from 'lucide-react'
+import { ArrowRight, Plane, Package, Phone, MapPin } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { LanguageSelector } from '@/components/language-selector'
+import { Logo } from '@/components/logo'
 import { useI18n } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
 
@@ -15,10 +16,12 @@ function OptionCard({
   href,
   label,
   ariaLabel,
+  icon,
 }: {
   href: string
   label: string
   ariaLabel: string
+  icon: React.ReactNode
 }) {
   return (
     <a
@@ -29,11 +32,12 @@ function OptionCard({
         'rounded-2xl border border-border bg-card px-7 py-7 sm:px-9 sm:py-9',
         'text-foreground shadow-sm',
         'transition-all duration-300 ease-out',
-        'hover:-translate-y-0.5 hover:border-primary hover:shadow-md hover:shadow-primary/5',
+        // Subtle gold highlight on hover: gold border + faint gold tint
+        'hover:-translate-y-0.5 hover:border-primary hover:bg-accent hover:shadow-md hover:shadow-primary/5',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
       )}
     >
-      {/* Subtle accent bar that grows on hover */}
+      {/* Subtle gold accent bar that grows on hover */}
       <span
         aria-hidden="true"
         className={cn(
@@ -42,7 +46,20 @@ function OptionCard({
           'group-hover:scale-x-100',
         )}
       />
-      <span className="text-base font-medium tracking-tight sm:text-lg">{label}</span>
+      <span className="flex items-center gap-3">
+        {/* Leading line-style icon — subtle, turns gold on hover */}
+        <span
+          aria-hidden="true"
+          className={cn(
+            'flex h-5 w-5 items-center justify-center text-muted-foreground',
+            'transition-colors duration-300 ease-out',
+            'group-hover:text-primary',
+          )}
+        >
+          {icon}
+        </span>
+        <span className="text-base font-medium tracking-tight sm:text-lg">{label}</span>
+      </span>
       <span
         aria-hidden="true"
         className={cn(
@@ -87,16 +104,11 @@ export default function Home() {
           aria-label={t.logo.alt}
           className="flex w-full flex-col items-center justify-center py-16 sm:py-24 md:py-28"
         >
-          <h1
-            className={cn(
-              'select-none text-center font-semibold uppercase tracking-[0.35em] text-foreground',
-              'text-3xl sm:text-4xl md:text-5xl',
-            )}
-            style={{ fontFeatureSettings: '"ss01"' }}
-          >
-            {t.logo.wordmark}
-          </h1>
-          {/* Thin accent rule beneath the wordmark for a premium finish */}
+          {/* Official company logo — gold brand identity.
+              Currently renders an elegant gold wordmark placeholder.
+              Swap in the uploaded asset via src/components/logo.tsx (LOGO_SRC). */}
+          <Logo />
+          {/* Thin gold accent rule beneath the logo for a premium finish */}
           <span
             aria-hidden="true"
             className="mt-6 h-px w-12 bg-primary/70"
@@ -112,11 +124,13 @@ export default function Home() {
             href="#ship-for-you"
             label={t.options.shipForYou}
             ariaLabel={t.options.shipForYou}
+            icon={<Plane className="h-5 w-5" strokeWidth={1.5} />}
           />
           <OptionCard
             href="#custom-product"
             label={t.options.customProduct}
             ariaLabel={t.options.customProduct}
+            icon={<Package className="h-5 w-5" strokeWidth={1.5} />}
           />
         </section>
 
@@ -148,8 +162,8 @@ export default function Home() {
       {/* ---------- E. Footer / Contact ---------- */}
       <footer className="mt-auto w-full">
         <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
-          {/* Thin, subtle horizontal divider */}
-          <div aria-hidden="true" className="h-px w-full bg-border" />
+          {/* Thin, subtle golden horizontal divider */}
+          <div aria-hidden="true" className="h-px w-full bg-primary/20" />
 
           {/* Contact area */}
           <div className="flex flex-col items-center justify-center gap-5 py-8 sm:flex-row sm:gap-8 sm:py-10">
