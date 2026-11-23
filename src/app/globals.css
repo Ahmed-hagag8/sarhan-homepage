@@ -133,3 +133,98 @@
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   }
 }
+
+/* =========================================================================
+   Metallic Gold Brand Identity
+   Inspired by the official SARHAN logo — a shiny, metallic gold treatment
+   applied consistently to all borders, icons, arrows, separators, and
+   interactive highlights. Uses a 135° gradient (light → primary → deep)
+   that gives a reflective metallic sheen. No flat yellow, no neon glow.
+   ========================================================================= */
+
+@layer components {
+  :root {
+    --gold-light: #F5D77A;
+    --gold-primary: #D4AF37;
+    --gold-deep: #A87919;
+    --gold-highlight: #FFE6A0;
+    --gold-grad: linear-gradient(135deg, #F5D77A 0%, #D4AF37 45%, #A87919 100%);
+    --gold-grad-bright: linear-gradient(135deg, #FFE6A0 0%, #F5D77A 45%, #D4AF37 100%);
+    --gold-grad-line: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.5) 50%, transparent 100%);
+    --gold-on-gold: #1a1410; /* dark text/icon on a gold fill */
+  }
+
+  /* --- Metallic gold gradient border (follows border-radius perfectly) ---
+     Uses the padding-box/border-box composite background trick so the
+     gold gradient renders as a thin border while the element's own
+     background fills the interior. */
+  .gf {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--card), var(--card)) padding-box,
+      var(--gold-grad) border-box;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .gf:hover {
+    background:
+      linear-gradient(var(--card), var(--card)) padding-box,
+      var(--gold-grad-bright) border-box;
+  }
+  /* Variant: interior tints to --accent on hover (used by the option cards) */
+  .gf-accent:hover {
+    background:
+      linear-gradient(var(--accent), var(--accent)) padding-box,
+      var(--gold-grad-bright) border-box;
+  }
+
+  /* --- Gold gradient fill (for the active theme indicator) --- */
+  .gold-fill {
+    background: var(--gold-grad);
+    color: var(--gold-on-gold);
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  /* --- Gold icon (rich metallic gold, brightens on parent hover) --- */
+  .gi {
+    color: var(--gold-primary);
+    transition: color 0.3s ease;
+  }
+  .group:hover .gi,
+  button:hover .gi,
+  a:hover .gi {
+    color: var(--gold-light);
+  }
+
+  /* --- Card arrow chip: subtle gold border + gold icon by default,
+         fills with the gold gradient on card hover (icon darkens) --- */
+  .arrow-chip {
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    background: color-mix(in oklch, var(--muted) 70%, transparent);
+    color: var(--gold-primary);
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  .group:hover .arrow-chip {
+    border-color: transparent;
+    background: var(--gold-grad);
+    color: var(--gold-on-gold);
+  }
+
+  /* --- Metallic gold divider line (fades at edges) --- */
+  .gold-line {
+    background: var(--gold-grad-line);
+  }
+
+  /* --- Gold dropdown menu frame --- */
+  .gf-popover {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--popover), var(--popover)) padding-box,
+      var(--gold-grad) border-box;
+  }
+
+  /* --- Active language badge: gold fill --- */
+  .badge-gold {
+    background: var(--gold-grad);
+    color: var(--gold-on-gold);
+  }
+}

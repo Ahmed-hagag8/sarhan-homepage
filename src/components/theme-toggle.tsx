@@ -28,9 +28,8 @@ export function ThemeToggle() {
       aria-label={t.nav.themeLabel}
       className={cn(
         'inline-flex items-center gap-1 rounded-full p-1',
-        // Thin golden outline around the entire toggle
-        'border border-primary/50',
-        'bg-card/60 backdrop-blur-sm',
+        // Metallic gold gradient border around the entire toggle
+        'gf',
       )}
     >
       {/* Light mode (sun) */}
@@ -43,8 +42,8 @@ export function ThemeToggle() {
         className={cn(
           'flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300',
           isLight
-            ? 'bg-primary text-primary-foreground shadow-sm'
-            : 'text-muted-foreground hover:text-foreground hover:bg-accent',
+            ? 'gold-fill shadow-sm'  // gold gradient fill + dark icon
+            : 'gi hover:bg-accent',   // gold icon, subtle hover tint
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background',
         )}
       >
@@ -61,8 +60,8 @@ export function ThemeToggle() {
         className={cn(
           'flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300',
           isDark
-            ? 'bg-primary text-primary-foreground shadow-sm'
-            : 'text-muted-foreground hover:text-foreground hover:bg-accent',
+            ? 'gold-fill shadow-sm'
+            : 'gi hover:bg-accent',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background',
         )}
       >

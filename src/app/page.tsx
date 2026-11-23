@@ -31,11 +31,12 @@ function OptionCard({
         'group relative flex w-full items-center justify-between overflow-hidden',
         // Responsive padding: compact on mobile, generous on desktop.
         // Cards ALWAYS stay side by side (the grid is always 2 columns).
-        'rounded-2xl border border-border bg-card px-3.5 py-4 sm:px-6 sm:py-7 md:px-9 md:py-9',
+        'rounded-2xl px-3.5 py-4 sm:px-6 sm:py-7 md:px-9 md:py-9',
         'gap-2 text-foreground shadow-sm sm:gap-3 md:gap-4',
+        // Metallic gold gradient border; interior tints to accent on hover
+        'gf gf-accent',
         'transition-all duration-300 ease-out',
-        // Subtle gold highlight on hover: gold border + faint gold tint
-        'hover:-translate-y-0.5 hover:border-primary hover:bg-accent hover:shadow-md hover:shadow-primary/5',
+        'hover:-translate-y-0.5 hover:shadow-md',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
       )}
     >
@@ -43,19 +44,17 @@ function OptionCard({
       <span
         aria-hidden="true"
         className={cn(
-          'pointer-events-none absolute inset-x-0 bottom-0 h-px scale-x-0 bg-primary',
+          'pointer-events-none absolute inset-x-0 bottom-0 h-px scale-x-0 gold-line',
           'origin-center transition-transform duration-300 ease-out',
           'group-hover:scale-x-100',
         )}
       />
       <span className="flex min-w-0 items-center gap-2 sm:gap-3">
-        {/* Leading line-style icon — subtle, turns gold on hover */}
+        {/* Leading line-style icon — shiny gold, brightens on hover */}
         <span
           aria-hidden="true"
           className={cn(
-            'flex h-4 w-4 shrink-0 items-center justify-center text-muted-foreground sm:h-5 sm:w-5',
-            'transition-colors duration-300 ease-out',
-            'group-hover:text-primary',
+            'gi flex h-4 w-4 shrink-0 items-center justify-center sm:h-5 sm:w-5',
           )}
         >
           {icon}
@@ -67,10 +66,7 @@ function OptionCard({
       <span
         aria-hidden="true"
         className={cn(
-          'flex h-7 w-7 shrink-0 items-center justify-center rounded-full sm:h-9 sm:w-9',
-          'bg-muted text-muted-foreground',
-          'transition-all duration-300 ease-out',
-          'group-hover:bg-primary group-hover:text-primary-foreground',
+          'arrow-chip flex h-7 w-7 shrink-0 items-center justify-center rounded-full sm:h-9 sm:w-9',
           // Flip arrow direction in RTL
           'rtl:-scale-x-100',
         )}
@@ -164,8 +160,8 @@ export default function Home() {
       {/* ---------- E. Footer / Contact ---------- */}
       <footer className="mt-auto w-full">
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8">
-          {/* Thin, subtle golden horizontal divider */}
-          <div aria-hidden="true" className="h-px w-full bg-primary/20" />
+          {/* Thin, shiny metallic gold horizontal divider */}
+          <div aria-hidden="true" className="gold-line h-px w-full" />
 
           {/* Contact area — preserved as a horizontal row at all sizes */}
           <div className="flex flex-row flex-wrap items-center justify-center gap-3 py-6 sm:gap-6 sm:py-8 md:gap-8 md:py-10">
@@ -176,13 +172,13 @@ export default function Home() {
               title={t.contact.connectUs}
               className={cn(
                 'inline-flex h-10 items-center gap-2.5 rounded-full px-5',
-                'border border-border bg-card text-foreground',
+                'gf text-foreground',
                 'transition-all duration-300 ease-out',
-                'hover:border-primary hover:text-primary hover:shadow-sm',
+                'hover:shadow-sm',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
               )}
             >
-              <Phone className="h-4 w-4" aria-hidden="true" />
+              <Phone className="gi h-4 w-4" aria-hidden="true" />
               <span className="text-sm font-medium tracking-tight">
                 {t.contact.connectUs}
               </span>
@@ -197,13 +193,13 @@ export default function Home() {
               title={t.contact.locationAria}
               className={cn(
                 'inline-flex h-10 w-10 items-center justify-center rounded-full',
-                'border border-border bg-card text-foreground',
+                'gf text-foreground',
                 'transition-all duration-300 ease-out',
-                'hover:border-primary hover:text-primary hover:shadow-sm',
+                'hover:shadow-sm',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
               )}
             >
-              <MapPin className="h-4 w-4" aria-hidden="true" />
+              <MapPin className="gi h-4 w-4" aria-hidden="true" />
               <span className="sr-only">{t.contact.locationAria}</span>
             </a>
           </div>
