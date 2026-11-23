@@ -29,9 +29,9 @@ export function Logo() {
       alt={t.logo.alt}
       className={
         // Height-driven sizing — the logo is the LARGEST and most visually
-        // dominant element on the page, scaled up significantly across
-        // mobile / tablet / desktop while preserving proportions.
-        'h-[170px] w-auto select-none object-contain sm:h-[240px] md:h-[300px]'
+        // dominant element on the page. Significantly increased for strong
+        // visual presence across mobile / tablet / desktop.
+        'h-[200px] w-auto select-none object-contain sm:h-[280px] md:h-[360px]'
       }
       draggable={false}
     />
