@@ -1,15 +1,21 @@
 'use client'
 
 import * as React from 'react'
-import { Globe, Check } from 'lucide-react'
+import { Globe, Check, ChevronDown } from 'lucide-react'
 import { useI18n, type Locale } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
 
 const OPTIONS: { value: Locale; label: string; short: string }[] = [
   { value: 'en', label: 'English', short: 'EN' },
-  { value: 'ar', label: 'العربية', short: 'ع' },
+  { value: 'ar', label: 'العربية', short: 'AR' },
 ]
 
+/**
+ * Language selector — a rounded pill with a thin golden border.
+ *
+ * Trigger:  🌐  EN  ▼   (globe icon + current abbreviation + chevron)
+ * Dropdown: full language options with active check mark.
+ */
 export function LanguageSelector() {
   const { locale, setLocale, t } = useI18n()
   const [open, setOpen] = React.useState(false)
@@ -45,13 +51,24 @@ export function LanguageSelector() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          'inline-flex h-9 w-9 items-center justify-center rounded-full',
-          'text-muted-foreground hover:text-foreground hover:bg-accent',
+          // Pill: same height as the theme toggle, rounded-full, golden border
+          'inline-flex h-10 items-center gap-2 rounded-full px-4',
+          'border border-primary/50 bg-card/60 backdrop-blur-sm',
+          'text-sm font-medium text-foreground',
+          'transition-all duration-300',
+          'hover:border-primary hover:bg-accent',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background',
-          'transition-colors duration-300',
         )}
       >
-        <Globe className="h-[18px] w-[18px]" aria-hidden="true" />
+        <Globe className="h-4 w-4 text-primary" aria-hidden="true" />
+        <span className="tabular-nums tracking-wide">{activeOption.short}</span>
+        <ChevronDown
+          className={cn(
+            'h-3.5 w-3.5 text-muted-foreground transition-transform duration-300',
+            open && 'rotate-180',
+          )}
+          aria-hidden="true"
+        />
       </button>
 
       {open && (
@@ -59,10 +76,10 @@ export function LanguageSelector() {
           role="menu"
           aria-label={t.nav.languageLabel}
           className={cn(
-            'absolute top-full z-50 mt-2 min-w-[160px] overflow-hidden rounded-xl',
-            'border border-border bg-popover p-1 shadow-lg shadow-black/5',
+            'absolute top-full z-50 mt-2 min-w-[170px] overflow-hidden rounded-xl',
+            'border border-primary/40 bg-popover p-1 shadow-lg shadow-black/10',
             'animate-in fade-in-0 zoom-in-95 duration-150',
-            // Position: in LTR the menu sits at the inline-end corner of the button;
+            // In LTR the menu aligns to the right edge of the trigger;
             // in RTL it mirrors automatically via `inset-inline-end`.
             'end-0',
           )}
@@ -81,14 +98,16 @@ export function LanguageSelector() {
                 }}
                 className={cn(
                   'flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm',
-                  'hover:bg-accent transition-colors duration-200',
-                  isActive ? 'text-foreground font-medium' : 'text-muted-foreground',
+                  'transition-colors duration-200',
+                  isActive
+                    ? 'bg-accent text-foreground font-medium'
+                    : 'text-muted-foreground hover:bg-accent hover:text-foreground',
                 )}
               >
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-2.5">
                   <span
                     className={cn(
-                      'flex h-5 w-5 items-center justify-center rounded-md text-[11px] font-semibold',
+                      'flex h-6 w-9 items-center justify-center rounded-md text-[11px] font-semibold tracking-wide',
                       isActive
                         ? 'bg-primary text-primary-foreground'
                         : 'bg-muted text-muted-foreground',
@@ -104,8 +123,6 @@ export function LanguageSelector() {
           })}
         </div>
       )}
-      {/* Hidden label for the active option for screen readers using the button alone */}
-      <span className="sr-only">{activeOption.label}</span>
     </div>
   )
 }

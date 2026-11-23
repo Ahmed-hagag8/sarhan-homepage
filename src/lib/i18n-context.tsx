@@ -9,6 +9,7 @@ type Direction = 'ltr' | 'rtl'
 interface TranslationKeys {
   nav: {
     languageLabel: string
+    themeLabel: string
     themeLight: string
     themeDark: string
   }
@@ -42,6 +43,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     label: 'English',
     nav: {
       languageLabel: 'Language',
+      themeLabel: 'Theme',
       themeLight: 'Switch to light mode',
       themeDark: 'Switch to dark mode',
     },
@@ -74,6 +76,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     label: 'العربية',
     nav: {
       languageLabel: 'اللغة',
+      themeLabel: 'السمة',
       themeLight: 'التبديل إلى الوضع الفاتح',
       themeDark: 'التبديل إلى الوضع الداكن',
     },

@@ -28,9 +28,9 @@ export function Logo() {
       src={LOGO_SRC}
       alt={t.logo.alt}
       className={
-        // Height-driven sizing so the logo is the main visual element
-        // while staying balanced across mobile / tablet / desktop.
-        'h-[88px] w-auto select-none object-contain sm:h-[112px] md:h-[140px]'
+        // Height-driven sizing — the logo is the main visual focal point,
+        // noticeably large but balanced across mobile / tablet / desktop.
+        'h-[120px] w-auto select-none object-contain sm:h-[170px] md:h-[210px]'
       }
       draggable={false}
     />

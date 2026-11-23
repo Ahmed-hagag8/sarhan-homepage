@@ -102,7 +102,7 @@ export default function Home() {
         {/* ---------- B. Company Logo ---------- */}
         <section
           aria-label={t.logo.alt}
-          className="flex w-full flex-col items-center justify-center py-16 sm:py-24 md:py-28"
+          className="flex w-full flex-col items-center justify-center py-20 sm:py-28 md:py-32"
         >
           {/* Official SARHAN Import & Export logo — transparent background,
               golden brand identity preserved. Renders naturally on both
@@ -130,7 +130,7 @@ export default function Home() {
         </section>
 
         {/* ---------- D. About Us ---------- */}
-        <section className="mx-auto mt-20 flex w-full max-w-2xl flex-col items-center gap-5 text-center sm:mt-28">
+        <section className="mx-auto mt-20 flex w-full max-w-2xl flex-col items-center gap-6 text-center sm:mt-28">
           <h2
             className={cn(
               'text-sm font-semibold uppercase tracking-[0.25em] text-primary',
@@ -140,8 +140,11 @@ export default function Home() {
           </h2>
           <p
             className={cn(
-              'text-base leading-relaxed text-muted-foreground sm:text-lg sm:leading-relaxed',
-              // Arabic reads better with slightly more line height and no tracking tweaks
+              // More prominent description: elegant serif, larger size, golden brand color.
+              // Latin uses Playfair Display; Arabic falls back to Inter (Playfair has no AR glyphs).
+              'font-serif text-about',
+              'text-lg leading-relaxed sm:text-xl sm:leading-relaxed md:text-[1.4rem] md:leading-[1.85]',
+              // Arabic reads better with extra line height
               dir === 'rtl' && 'leading-loose',
             )}
             style={dir === 'rtl' ? { lineHeight: 2 } : undefined}
