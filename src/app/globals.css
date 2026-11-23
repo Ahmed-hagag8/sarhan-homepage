@@ -45,40 +45,40 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ---- Light Mode: Warm white + charcoal text + brighter metallic gold ---- */
+/* ---- Light Mode: Warm white + charcoal text + richer, vivid metallic gold ---- */
 :root {
   --radius: 0.625rem;
-  --about-text: var(--foreground);                    /* neutral readable text (was gold) */
-  /* Brighter, richer metallic gold for Light Mode — illuminated and luxurious,
-     not flat yellow or neon. */
-  --gold-light: #FFD95E;
-  --gold-primary: #E0B030;
-  --gold-deep: #B8860B;
-  --gold-highlight: #FFEB9E;
-  --gold-grad: linear-gradient(135deg, #FFD95E 0%, #E0B030 45%, #B8860B 100%);
-  --gold-grad-bright: linear-gradient(135deg, #FFEB9E 0%, #FFD95E 45%, #E0B030 100%);
-  --gold-grad-line: linear-gradient(90deg, transparent 0%, rgba(224, 176, 48, 0.6) 50%, transparent 100%);
-  --gold-on-gold: #1a1410;
-  --gold-arrow-border: rgba(224, 176, 48, 0.45);
+  --about-text: var(--foreground);                    /* neutral readable text */
+  /* Clear, vivid, high-contrast metallic gold for Light Mode — vibrant & prominent */
+  --gold-light: #E5A81E;
+  --gold-primary: #C5880C;
+  --gold-deep: #8E5F00;
+  --gold-highlight: #F5C242;
+  --gold-grad: linear-gradient(135deg, #E5A81E 0%, #C5880C 45%, #8E5F00 100%);
+  --gold-grad-bright: linear-gradient(135deg, #F5C242 0%, #E5A81E 45%, #C5880C 100%);
+  --gold-grad-line: linear-gradient(90deg, transparent 0%, rgba(197, 136, 12, 0.7) 50%, transparent 100%);
+  --gold-on-gold: #ffffff;
+  --gold-arrow-border: rgba(197, 136, 12, 0.55);
+  --gold-border: rgba(197, 136, 12, 0.45);
   --background: oklch(0.985 0.004 75);           /* warm white */
   --foreground: oklch(0.20 0.005 60);            /* dark charcoal text */
   --card: oklch(1 0 0);                          /* pure white cards */
   --card-foreground: oklch(0.20 0.005 60);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.20 0.005 60);
-  --primary: oklch(0.62 0.10 78);                /* muted brand gold */
-  --primary-foreground: oklch(0.16 0.005 60);    /* near-black on gold */
+  --primary: oklch(0.58 0.16 75);                /* rich, prominent brand gold */
+  --primary-foreground: oklch(0.98 0 0);
   --secondary: oklch(0.965 0.006 75);
   --secondary-foreground: oklch(0.20 0.005 60);
   --muted: oklch(0.965 0.006 75);
-  --muted-foreground: oklch(0.50 0.01 60);
-  --accent: oklch(0.95 0.028 82);                /* very pale warm-gold hover tint */
+  --muted-foreground: oklch(0.48 0.01 60);
+  --accent: oklch(0.95 0.035 80);                /* warm gold hover tint */
   --accent-foreground: oklch(0.20 0.005 60);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.91 0.012 75);                /* warm gray border, faint gold tint */
-  --input: oklch(0.91 0.012 75);
-  --ring: oklch(0.62 0.10 78);                   /* gold focus ring */
-  --chart-1: oklch(0.62 0.10 78);
+  --border: oklch(0.88 0.03 75);                 /* clear warm gold-tinted border */
+  --input: oklch(0.88 0.03 75);
+  --ring: oklch(0.58 0.16 75);                   /* vivid gold focus ring */
+  --chart-1: oklch(0.58 0.16 75);
   --chart-2: oklch(0.70 0.09 80);
   --chart-3: oklch(0.55 0.08 75);
   --chart-4: oklch(0.76 0.11 85);
@@ -106,6 +106,7 @@
   --gold-grad-line: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.5) 50%, transparent 100%);
   --gold-on-gold: #1a1410;
   --gold-arrow-border: rgba(212, 175, 55, 0.35);
+  --gold-border: rgba(212, 175, 55, 0.3);
   --background: oklch(0.135 0.005 60);           /* deep charcoal-black */
   --foreground: oklch(0.96 0.004 70);            /* off-white */
   --card: oklch(0.175 0.005 60);                 /* slightly raised charcoal */

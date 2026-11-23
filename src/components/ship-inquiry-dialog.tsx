@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { X, Plane, Ship, Zap, Send, Mail, User, Phone, MapPin, FileText, CheckCircle2 } from 'lucide-react'
+import { X, Plane, Mail, User, Phone, MapPin, FileText } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
 import { useI18n } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
@@ -21,7 +21,6 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
   const [phone, setPhone] = React.useState('')
   const [origin, setOrigin] = React.useState('')
   const [destination, setDestination] = React.useState('')
-  const [shippingType, setShippingType] = React.useState<'air' | 'sea' | 'express'>('air')
   const [details, setDetails] = React.useState('')
   const [error, setError] = React.useState('')
 
@@ -40,17 +39,6 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
   }, [open, onClose])
 
   if (!open) return null
-
-  const getTypeName = () => {
-    switch (shippingType) {
-      case 'air':
-        return t.shipForm.typeAir
-      case 'sea':
-        return t.shipForm.typeSea
-      case 'express':
-        return t.shipForm.typeExpress
-    }
-  }
 
   const validate = () => {
     if (!name.trim() || !details.trim()) {
@@ -72,7 +60,6 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
       phone.trim() ? `📞 *Phone / Contact:* ${phone.trim()}` : null,
       origin.trim() ? `📍 *Origin (From):* ${origin.trim()}` : null,
       destination.trim() ? `🏁 *Destination (To):* ${destination.trim()}` : null,
-      `✈️ *Shipping Mode:* ${getTypeName()}`,
       `📦 *Cargo Specifications:* \n${details.trim()}`,
       '─────────────────────────',
       'Sent via SARHAN Official Portal',
@@ -89,7 +76,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
     e.preventDefault()
     if (!validate()) return
 
-    const subject = `Shipping Quote Request: ${name.trim()} (${getTypeName()})`
+    const subject = `Shipping Quote Request: ${name.trim()}`
     const body = [
       'SARHAN Import & Export — Shipping Quote Request',
       '==================================================',
@@ -97,7 +84,6 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
       phone.trim() ? `Contact Phone: ${phone.trim()}` : '',
       origin.trim() ? `Origin (From): ${origin.trim()}` : '',
       destination.trim() ? `Destination (To): ${destination.trim()}` : '',
-      `Freight Mode: ${getTypeName()}`,
       '',
       'Cargo Specifications & Details:',
       details.trim(),
@@ -231,57 +217,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             </div>
           </div>
 
-          {/* Row 3: Freight Type Selector */}
-          <div>
-            <label className="mb-2 block text-xs font-semibold text-foreground">
-              {t.shipForm.shippingTypeLabel}
-            </label>
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                onClick={() => setShippingType('air')}
-                className={cn(
-                  'flex flex-col items-center justify-center gap-1.5 rounded-xl border p-2.5 text-xs font-medium transition-all',
-                  shippingType === 'air'
-                    ? 'border-primary bg-accent/80 text-foreground font-semibold shadow-sm'
-                    : 'border-border/60 bg-muted/30 text-muted-foreground hover:bg-muted/60',
-                )}
-              >
-                <Plane className={cn('h-4 w-4', shippingType === 'air' ? 'gi' : '')} />
-                <span className="truncate">{t.shipForm.typeAir}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setShippingType('sea')}
-                className={cn(
-                  'flex flex-col items-center justify-center gap-1.5 rounded-xl border p-2.5 text-xs font-medium transition-all',
-                  shippingType === 'sea'
-                    ? 'border-primary bg-accent/80 text-foreground font-semibold shadow-sm'
-                    : 'border-border/60 bg-muted/30 text-muted-foreground hover:bg-muted/60',
-                )}
-              >
-                <Ship className={cn('h-4 w-4', shippingType === 'sea' ? 'gi' : '')} />
-                <span className="truncate">{t.shipForm.typeSea}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setShippingType('express')}
-                className={cn(
-                  'flex flex-col items-center justify-center gap-1.5 rounded-xl border p-2.5 text-xs font-medium transition-all',
-                  shippingType === 'express'
-                    ? 'border-primary bg-accent/80 text-foreground font-semibold shadow-sm'
-                    : 'border-border/60 bg-muted/30 text-muted-foreground hover:bg-muted/60',
-                )}
-              >
-                <Zap className={cn('h-4 w-4', shippingType === 'express' ? 'gi' : '')} />
-                <span className="truncate">{t.shipForm.typeExpress}</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Row 4: Details & Notes */}
+          {/* Details & Notes */}
           <div>
             <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
               <FileText className="gi h-3.5 w-3.5" />
@@ -312,11 +248,11 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
               onClick={handleSendWhatsApp}
               className={cn(
                 'flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl py-3 px-4 font-semibold text-sm',
-                'bg-[#25D366] text-white shadow-md shadow-[#25D366]/20',
-                'hover:bg-[#20ba59] hover:-translate-y-0.5 transition-all active:translate-y-0',
+                'gf text-foreground shadow-md',
+                'hover:-translate-y-0.5 hover:shadow-lg transition-all active:translate-y-0',
               )}
             >
-              <WhatsAppIcon className="h-5 w-5 fill-white" />
+              <WhatsAppIcon className="gi h-5 w-5" />
               <span>{t.shipForm.sendWhatsApp}</span>
             </button>
 

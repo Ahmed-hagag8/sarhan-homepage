@@ -6,21 +6,15 @@ import {
   Plane,
   Package,
   MapPin,
-  Sparkles,
-  Globe2,
-  CheckCircle2,
-  Layers,
   ShieldCheck,
   Feather,
-  ExternalLink,
-  ChevronRight,
+  X,
 } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { LanguageSelector } from '@/components/language-selector'
 import { Logo } from '@/components/logo'
 import { ConnectUs } from '@/components/connect-us'
 import { ShipInquiryDialog } from '@/components/ship-inquiry-dialog'
-import { EgyFlaxDialog } from '@/components/egy-flax-dialog'
 import { useI18n } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
 
@@ -29,65 +23,62 @@ const PLACEHOLDER_LOCATION = 'https://www.google.com/maps/search/?api=1&query=SA
 
 function OptionCard({
   onClick,
-  onMouseEnter,
-  onMouseLeave,
   label,
   description,
   ariaLabel,
   icon,
   badge,
-  children,
+  active,
+  arrowDirection = 'right',
 }: {
   onClick?: () => void
-  onMouseEnter?: () => void
-  onMouseLeave?: () => void
   label: string
   description?: string
   ariaLabel: string
   icon: React.ReactNode
   badge?: string
-  children?: React.ReactNode
+  active?: boolean
+  arrowDirection?: 'right' | 'down'
 }) {
   return (
-    <div
-      className="relative flex w-full"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
+    <div className="relative flex w-full h-full">
       <button
         type="button"
         onClick={onClick}
         aria-label={ariaLabel}
         className={cn(
-          'group relative flex w-full cursor-pointer items-center justify-between overflow-hidden text-start',
+          'group relative flex w-full h-full cursor-pointer items-center justify-between overflow-hidden text-start',
           // Responsive padding: comfortable cards with generous internal spacing.
           // The grid is always 2 columns side-by-side as in original design.
-          'rounded-2xl p-4 sm:p-6 md:p-8',
+          'rounded-2xl p-3 sm:p-6 md:p-8',
           'gap-2 text-foreground shadow-sm sm:gap-4 md:gap-6',
           // Metallic gold gradient border; interior tints to accent on hover
           'gf gf-accent',
           'transition-all duration-300 ease-out',
           'hover:-translate-y-1 hover:shadow-lg',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+          active && 'ring-2 ring-primary border-primary shadow-md',
         )}
       >
-        {/* Subtle gold accent bar that grows on hover */}
+        {/* Subtle gold accent bar that grows on hover / active */}
         <span
           aria-hidden="true"
           className={cn(
             'pointer-events-none absolute inset-x-0 bottom-0 h-0.5 scale-x-0 gold-line',
             'origin-center transition-transform duration-300 ease-out',
             'group-hover:scale-x-100',
+            active && 'scale-x-100',
           )}
         />
 
-        <div className="flex min-w-0 items-center gap-2.5 sm:gap-4 md:gap-5">
+        <div className="flex min-w-0 items-center gap-2 sm:gap-4 md:gap-5">
           {/* Leading icon container with metallic sheen */}
           <div
             aria-hidden="true"
             className={cn(
-              'flex h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 shrink-0 items-center justify-center rounded-xl',
+              'flex h-9 w-9 sm:h-12 sm:w-12 md:h-14 md:w-14 shrink-0 items-center justify-center rounded-xl',
               'border border-border/60 bg-muted/50 transition-colors duration-300 group-hover:bg-accent/60',
+              active && 'bg-accent/80',
             )}
           >
             <span className="gi flex items-center justify-center">
@@ -95,17 +86,17 @@ function OptionCard({
             </span>
           </div>
 
-          <div className="flex flex-col text-start">
+          <div className="flex flex-col text-start justify-center min-w-0">
             {badge && (
-              <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-primary mb-0.5 sm:mb-1">
+              <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-primary mb-0.5 sm:mb-1 truncate">
                 {badge}
               </span>
             )}
-            <span className="text-sm font-bold leading-snug tracking-tight sm:text-lg md:text-xl">
+            <span className="text-xs sm:text-base md:text-xl font-bold leading-snug tracking-tight truncate sm:whitespace-normal">
               {label}
             </span>
             {description && (
-              <span className="mt-0.5 hidden text-xs text-muted-foreground/90 sm:block md:text-sm">
+              <span className="mt-0.5 hidden text-xs text-muted-foreground/90 sm:block md:text-sm line-clamp-2">
                 {description}
               </span>
             )}
@@ -115,16 +106,13 @@ function OptionCard({
         <span
           aria-hidden="true"
           className={cn(
-            'arrow-chip flex h-8 w-8 sm:h-10 sm:w-10 md:h-11 md:w-11 shrink-0 items-center justify-center rounded-full',
-            'rtl:-scale-x-100',
+            'arrow-chip flex h-7 w-7 sm:h-10 sm:w-10 md:h-11 md:w-11 shrink-0 items-center justify-center rounded-full transition-transform duration-300',
+            arrowDirection === 'down' ? 'rotate-90' : 'rtl:-scale-x-100',
           )}
         >
-          <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+          <ArrowRight className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
         </span>
       </button>
-
-      {/* Optional floating hover element */}
-      {children}
     </div>
   )
 }
@@ -132,20 +120,7 @@ function OptionCard({
 export default function Home() {
   const { t, dir } = useI18n()
   const [shipInquiryOpen, setShipInquiryOpen] = React.useState(false)
-  const [egyFlaxOpen, setEgyFlaxOpen] = React.useState(false)
-  const [productHovered, setProductHovered] = React.useState(false)
-  const hoverTimeoutRef = React.useRef<NodeJS.Timeout | null>(null)
-
-  const handleProductMouseEnter = () => {
-    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current)
-    setProductHovered(true)
-  }
-
-  const handleProductMouseLeave = () => {
-    hoverTimeoutRef.current = setTimeout(() => {
-      setProductHovered(false)
-    }, 200)
-  }
+  const [showProductCard, setShowProductCard] = React.useState(false)
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id)
@@ -199,14 +174,8 @@ export default function Home() {
 
           {/* Hero Right (Desktop) / Below Logo (Mobile): Description */}
           <div className="order-2 flex w-full flex-col items-center text-center md:order-2 md:w-7/12 lg:w-1/2 md:items-start md:text-start">
-            {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-semibold uppercase tracking-wider gf text-foreground shadow-sm">
-              <Sparkles className="gi h-3.5 w-3.5" aria-hidden="true" />
-              <span>{t.hero.badge}</span>
-            </div>
-
             {/* Main Headline */}
-            <h1 className="mt-4 font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-5xl">
+            <h1 className="font-serif text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-5xl">
               <span>{t.hero.title}</span>
               <span className="block mt-1 sm:mt-1.5 text-xl font-medium tracking-normal text-muted-foreground sm:text-2xl md:text-3xl">
                 {t.hero.subtitle}
@@ -280,56 +249,14 @@ export default function Home() {
               >
                 {t.about.paragraph}
               </p>
-
-              {/* 3 Pillars / Highlights Grid */}
-              <div className="mt-4 grid w-full grid-cols-1 gap-4 pt-4 sm:grid-cols-3 sm:gap-6 border-t border-border/50">
-                {/* Pillar 1 */}
-                <div className="flex flex-col items-center text-center p-3.5 rounded-2xl bg-muted/30 border border-border/40">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/60 mb-2.5">
-                    <Globe2 className="gi h-5 w-5" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-foreground">
-                    {t.about.pillar1Title}
-                  </h3>
-                  <p className="mt-1 text-xs text-muted-foreground leading-normal">
-                    {t.about.pillar1Desc}
-                  </p>
-                </div>
-
-                {/* Pillar 2 */}
-                <div className="flex flex-col items-center text-center p-3.5 rounded-2xl bg-muted/30 border border-border/40">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/60 mb-2.5">
-                    <Layers className="gi h-5 w-5" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-foreground">
-                    {t.about.pillar2Title}
-                  </h3>
-                  <p className="mt-1 text-xs text-muted-foreground leading-normal">
-                    {t.about.pillar2Desc}
-                  </p>
-                </div>
-
-                {/* Pillar 3 */}
-                <div className="flex flex-col items-center text-center p-3.5 rounded-2xl bg-muted/30 border border-border/40">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/60 mb-2.5">
-                    <CheckCircle2 className="gi h-5 w-5" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-foreground">
-                    {t.about.pillar3Title}
-                  </h3>
-                  <p className="mt-1 text-xs text-muted-foreground leading-normal">
-                    {t.about.pillar3Desc}
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </section>
 
         {/* ===================================================================
-            SECTION 3: CORE SERVICES & PRODUCTS (Always 2 columns)
+            SECTION 3: CORE SERVICES & PRODUCTS (Equal size cards)
             - Ship: Opens interactive quote modal (WhatsApp / Email)
-            - Products: Hover reveals FLAX & LINEN PRODUCTS card; Click opens full dialog
+            - Products: Click reveals FLAX & LINEN PRODUCTS full-width card under both
             =================================================================== */}
         <section
           id="services-section"
@@ -346,8 +273,8 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Cards Grid: Always 2 columns side by side */}
-          <div className="grid w-full grid-cols-2 gap-3 sm:gap-5 md:gap-6">
+          {/* Cards Grid: 2 columns side by side, strictly equal size & height */}
+          <div className="grid w-full grid-cols-2 items-stretch gap-3 sm:gap-5 md:gap-6">
             {/* Card 1: Ship For You (Opens interactive inquiry modal) */}
             <OptionCard
               onClick={() => setShipInquiryOpen(true)}
@@ -357,77 +284,71 @@ export default function Home() {
               icon={<Plane className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" strokeWidth={1.5} />}
             />
 
-            {/* Card 2: Our Products (Hover reveals FLAX & LINEN PRODUCTS / Click opens dialog) */}
+            {/* Card 2: Our Products (Click shows FLAX & LINEN PRODUCTS card below both) */}
             <OptionCard
-              onClick={() => setEgyFlaxOpen(true)}
-              onMouseEnter={handleProductMouseEnter}
-              onMouseLeave={handleProductMouseLeave}
+              onClick={() => setShowProductCard((prev) => !prev)}
               label={t.options.customProduct}
-              badge="FLAX & LINEN PRODUCTS"
               description={t.options.customProductDesc}
               ariaLabel={t.options.customProduct}
               icon={<Package className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" strokeWidth={1.5} />}
-            >
-              {/* Desktop Hover Floating Preview Card for FLAX & LINEN PRODUCTS */}
-              {productHovered && (
-                <div
-                  className={cn(
-                    'hidden sm:block absolute bottom-full mb-3 z-30 w-[300px] md:w-[340px] rounded-2xl p-4',
-                    'gf-card bg-card/95 backdrop-blur-xl shadow-2xl shadow-black/30',
-                    'animate-in fade-in-0 zoom-in-95 duration-150',
-                    'start-1/2 -translate-x-1/2',
-                  )}
-                >
-                  <div className="flex items-center justify-between pb-2 mb-2 border-b border-border/50">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-primary flex items-center gap-1">
-                      <Sparkles className="gi h-3 w-3" />
-                      {t.productEgyFlax.badge}
-                    </span>
-                    <span className="text-[10px] text-muted-foreground">
-                      100% Export Grade
-                    </span>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent text-primary border border-[var(--gold-arrow-border)]">
-                      <Feather className="gi h-5 w-5" />
-                    </div>
-                    <div className="flex flex-col text-start">
-                      <span
-                        className="font-serif text-xl font-black tracking-tight"
-                        style={{
-                          background: 'var(--gold-grad-bright)',
-                          WebkitBackgroundClip: 'text',
-                          backgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                          color: 'var(--gold-primary)',
-                        }}
-                      >
-                        {t.productEgyFlax.name}
-                      </span>
-                      <span className="text-xs font-medium text-foreground/85 leading-tight mt-0.5">
-                        {t.productEgyFlax.tagline}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    <span className="inline-flex rounded-md bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
-                      {t.productEgyFlax.spec1}
-                    </span>
-                    <span className="inline-flex rounded-md bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
-                      {t.productEgyFlax.spec2}
-                    </span>
-                  </div>
-
-                  <div className="mt-3.5 pt-2.5 border-t border-border/40 flex items-center justify-between text-xs text-primary font-semibold">
-                    <span>{t.productEgyFlax.exploreDetails}</span>
-                    <ChevronRight className="h-4 w-4" />
-                  </div>
-                </div>
-              )}
-            </OptionCard>
+              active={showProductCard}
+              arrowDirection={showProductCard ? 'down' : 'right'}
+            />
           </div>
+
+          {/* FLAX & LINEN PRODUCTS Card: Takes WHOLE WIDTH under both services */}
+          {showProductCard && (
+            <div
+              className={cn(
+                'mt-4 sm:mt-6 w-full relative overflow-hidden rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8',
+                'gf-card bg-card/95 backdrop-blur-md shadow-xl border border-[var(--gold-border)]',
+                'animate-in fade-in-0 slide-in-from-top-3 duration-300',
+              )}
+            >
+              {/* Subtle ambient gold glow */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-12 -right-12 h-36 w-36 rounded-full bg-primary/10 blur-3xl rtl:-left-12 rtl:right-auto"
+              />
+
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setShowProductCard(false)}
+                className="absolute top-4 end-4 z-10 flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
+                aria-label={t.productEgyFlax.close}
+              >
+                <X className="h-4 w-4" />
+              </button>
+
+              {/* Product Header & Content */}
+              <div className="flex items-start gap-3.5 sm:gap-4 pe-8">
+                <div className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-2xl bg-accent text-primary border border-[var(--gold-arrow-border)] shadow-sm">
+                  <Feather className="gi h-6 w-6 sm:h-7 sm:w-7" />
+                </div>
+                <div className="flex flex-col text-start">
+                  <h4
+                    className="font-serif text-xl sm:text-2xl md:text-3xl font-black tracking-tight"
+                    style={{
+                      background: 'var(--gold-grad-bright)',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      color: 'var(--gold-primary)',
+                    }}
+                  >
+                    {t.productEgyFlax.name}
+                  </h4>
+                  <p className="text-xs sm:text-sm md:text-base font-medium text-foreground/85 mt-1 leading-snug">
+                    {t.productEgyFlax.tagline}
+                  </p>
+                  <p className="mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground max-w-3xl">
+                    {t.productEgyFlax.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         {/* Natural vertical spacer */}
@@ -479,9 +400,9 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Modern Contact Buttons: Connect Us Bar + Location */}
-            <div className="flex items-center gap-3">
-              {/* Modern Connect Us Select Bar */}
+            {/* Modern Contact Buttons: Horizontal Icon Select Bar + Location */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* Modern Connect Us Select Bar (Horizontal Icons Only) */}
               <ConnectUs />
 
               {/* Modern Location Badge */}
@@ -492,10 +413,10 @@ export default function Home() {
                 aria-label={t.contact.locationAria}
                 title={t.contact.locationLabel}
                 className={cn(
-                  'inline-flex h-11 items-center gap-2 rounded-full px-5',
+                  'inline-flex h-11 items-center gap-2 rounded-full px-4 sm:px-5',
                   'gf bg-card/90 text-foreground shadow-md',
                   'transition-all duration-300 ease-out',
-                  'hover:-translate-y-0.5 hover:shadow-lg',
+                  'hover:-translate-y-0.5 hover:shadow-lg hover:text-primary',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                 )}
               >
@@ -530,12 +451,6 @@ export default function Home() {
       <ShipInquiryDialog
         open={shipInquiryOpen}
         onClose={() => setShipInquiryOpen(false)}
-      />
-
-      {/* FLAX & LINEN PRODUCTS Product Modal */}
-      <EgyFlaxDialog
-        open={egyFlaxOpen}
-        onClose={() => setEgyFlaxOpen(false)}
       />
     </div>
   )
