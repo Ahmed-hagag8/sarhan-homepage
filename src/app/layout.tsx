@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "SARHAN Import & Export — international shipping and custom product solutions. A minimal company landing page.",
   keywords: ["SARHAN", "import", "export", "shipping", "custom product", "international trade"],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/sarhan-logo.png",
   },
 };
 

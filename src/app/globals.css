@@ -242,4 +242,47 @@
     background: var(--gold-grad);
     color: var(--gold-on-gold);
   }
+
+  /* --- Subtle metallic gold glow aura behind brand assets --- */
+  .gold-glow {
+    position: relative;
+  }
+  .gold-glow::before {
+    content: '';
+    position: absolute;
+    inset: -15%;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(224, 176, 48, 0.18) 0%, rgba(212, 175, 55, 0.05) 45%, transparent 70%);
+    filter: blur(28px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .dark .gold-glow::before {
+    background: radial-gradient(circle, rgba(245, 215, 122, 0.16) 0%, rgba(212, 175, 55, 0.06) 45%, transparent 70%);
+    filter: blur(34px);
+  }
+
+  /* --- Glassmorphic gold card frame --- */
+  .gf-card {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(color-mix(in oklch, var(--card) 92%, transparent), color-mix(in oklch, var(--card) 92%, transparent)) padding-box,
+      var(--gold-grad) border-box;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .gf-card:hover {
+    border-color: transparent;
+    background:
+      linear-gradient(color-mix(in oklch, var(--card) 98%, transparent), color-mix(in oklch, var(--card) 98%, transparent)) padding-box,
+      var(--gold-grad-bright) border-box;
+    box-shadow: 0 12px 30px -10px rgba(212, 175, 55, 0.18);
+  }
+
+  /* --- Metallic text gradient --- */
+  .text-gold-grad {
+    background: var(--gold-grad-bright);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
