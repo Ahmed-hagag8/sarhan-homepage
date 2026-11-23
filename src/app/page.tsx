@@ -130,24 +130,25 @@ export default function Home() {
         </section>
 
         {/* ---------- D. About Us ---------- */}
-        <section className="mx-auto mt-20 flex w-full max-w-3xl flex-col items-center gap-6 text-center sm:mt-28 md:mt-32">
+        <section className="mx-auto mt-20 flex w-full max-w-3xl flex-col items-center gap-5 text-center sm:mt-28 md:mt-32">
           <h2
             className={cn(
-              'text-base font-semibold uppercase tracking-[0.25em] text-primary sm:text-lg md:text-xl',
+              'text-xs font-semibold uppercase tracking-[0.25em] text-primary sm:text-sm md:text-sm',
             )}
           >
             {t.about.heading}
           </h2>
           <p
             className={cn(
-              // More prominent description: elegant serif, larger size, golden brand color.
-              // Latin uses Playfair Display; Arabic falls back to Inter (Playfair has no AR glyphs).
+              // About Us is intentionally smaller than the service cards to preserve
+              // the hierarchy: Logo > Cards > About Us > Contact.
+              // Latin uses Playfair Display; Arabic falls back to Inter.
               'font-serif text-about',
-              'text-xl leading-relaxed sm:text-2xl sm:leading-relaxed md:text-2xl md:leading-[1.9]',
+              'text-sm leading-relaxed sm:text-base sm:leading-relaxed md:text-base md:leading-[1.75]',
               // Arabic reads better with extra line height
               dir === 'rtl' && 'leading-loose',
             )}
-            style={dir === 'rtl' ? { lineHeight: 2.1 } : undefined}
+            style={dir === 'rtl' ? { lineHeight: 2 } : undefined}
           >
             {t.about.paragraph}
           </p>
@@ -163,23 +164,23 @@ export default function Home() {
           {/* Thin, shiny metallic gold horizontal divider */}
           <div aria-hidden="true" className="gold-line h-px w-full" />
 
-          {/* Contact area — preserved as a horizontal row at all sizes */}
-          <div className="flex flex-row flex-wrap items-center justify-center gap-3 py-6 sm:gap-6 sm:py-8 md:gap-8 md:py-10">
+          {/* Contact area — smallest, most compact section; horizontal row at all sizes */}
+          <div className="flex flex-row flex-wrap items-center justify-center gap-3 py-4 sm:gap-5 sm:py-6 md:gap-6 md:py-8">
             {/* Phone Icon – Connect Us */}
             <a
               href={PLACEHOLDER_PHONE}
               aria-label={t.contact.connectUsAria}
               title={t.contact.connectUs}
               className={cn(
-                'inline-flex h-12 items-center gap-2.5 rounded-full px-6',
+                'inline-flex h-10 items-center gap-2 rounded-full px-5',
                 'gf text-foreground',
                 'transition-all duration-300 ease-out',
                 'hover:shadow-sm',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
               )}
             >
-              <Phone className="gi h-5 w-5" aria-hidden="true" />
-              <span className="text-base font-medium tracking-tight">
+              <Phone className="gi h-4 w-4" aria-hidden="true" />
+              <span className="text-sm font-medium tracking-tight">
                 {t.contact.connectUs}
               </span>
             </a>
@@ -192,15 +193,15 @@ export default function Home() {
               aria-label={t.contact.locationAria}
               title={t.contact.locationLabel}
               className={cn(
-                'inline-flex h-12 items-center gap-2.5 rounded-full px-6',
+                'inline-flex h-10 items-center gap-2 rounded-full px-5',
                 'gf text-foreground',
                 'transition-all duration-300 ease-out',
                 'hover:shadow-sm',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
               )}
             >
-              <MapPin className="gi h-5 w-5" aria-hidden="true" />
-              <span className="text-base font-medium tracking-tight">
+              <MapPin className="gi h-4 w-4" aria-hidden="true" />
+              <span className="text-sm font-medium tracking-tight">
                 {t.contact.locationLabel}
               </span>
             </a>
