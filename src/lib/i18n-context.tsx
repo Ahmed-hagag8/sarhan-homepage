@@ -46,8 +46,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       themeDark: 'Switch to dark mode',
     },
     logo: {
-      wordmark: 'COMPANY',
-      alt: 'Company logo',
+      wordmark: 'SARHAN',
+      alt: 'SARHAN Import & Export logo',
     },
     options: {
       shipForYou: 'Ship For You',
@@ -78,8 +78,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       themeDark: 'التبديل إلى الوضع الداكن',
     },
     logo: {
-      wordmark: 'COMPANY',
-      alt: 'شعار الشركة',
+      wordmark: 'SARHAN',
+      alt: 'شعار شركة سرحان للاستيراد والتصدير',
     },
     options: {
       shipForYou: 'نشحن لك',

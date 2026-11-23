@@ -17,10 +17,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "COMPANY — Ship For You & Custom Product",
+  title: "SARHAN — Import & Export",
   description:
-    "A minimal company landing page. Two clear options: Ship For You and Custom Product.",
-  keywords: ["company", "shipping", "custom product", "landing page"],
+    "SARHAN Import & Export — international shipping and custom product solutions. A minimal company landing page.",
+  keywords: ["SARHAN", "import", "export", "shipping", "custom product", "international trade"],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },

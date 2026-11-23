@@ -2,52 +2,37 @@
 
 import * as React from 'react'
 import { useI18n } from '@/lib/i18n-context'
-import { cn } from '@/lib/utils'
 
 /**
- * Company logo.
+ * SARHAN Import & Export — official company logo.
  *
- * Currently renders an elegant gold wordmark as a placeholder.
+ * The logo asset at `/sarhan-logo.png` was extracted from the uploaded
+ * reference image: the navy background and drop shadow were removed and the
+ * gold metallic gradients, globe emblem, "SARHAN" wordmark, and
+ * "IMPORT & EXPORT" subtitle were preserved exactly as supplied.
  *
- * --- TO USE THE UPLOADED OFFICIAL LOGO ---
- * 1. Drop the official logo file into `public/` as e.g. `public/company-logo.svg`
- *    (or .png / .webp).
- * 2. Set `LOGO_SRC` below to "/company-logo.svg".
- * 3. Adjust `LOGO_HEIGHT` if the logo needs more or less vertical room.
+ * The image is rendered with object-contain so its original proportions,
+ * golden colors, and details are never modified. The transparent background
+ * lets it sit naturally on both the warm-white (light) and deep charcoal
+ * (dark) page backgrounds.
  *
- * The official logo is rendered with object-contain so its original
- * proportions and details are preserved, and the golden brand color
- * of the logo is never overridden.
+ * To swap the asset, replace `public/sarhan-logo.png`.
  */
-const LOGO_SRC = '' // <-- set to "/company-logo.svg" once the asset is uploaded
-const LOGO_HEIGHT = 72 // px on desktop; scales down on mobile
+const LOGO_SRC = '/sarhan-logo.png'
 
 export function Logo() {
   const { t } = useI18n()
 
-  if (LOGO_SRC) {
-    // Official uploaded logo — preserve identity, proportions, colors.
-    return (
-      <img
-        src={LOGO_SRC}
-        alt={t.logo.alt}
-        className="h-[52px] w-auto object-contain sm:h-[60px] md:h-[72px]"
-        style={{ maxHeight: LOGO_HEIGHT }}
-        draggable={false}
-      />
-    )
-  }
-
-  // Placeholder: refined gold wordmark, centered, with generous tracking.
   return (
-    <h1
-      className={cn(
-        'select-none text-center font-semibold uppercase tracking-[0.35em] text-primary',
-        'text-3xl sm:text-4xl md:text-5xl',
-      )}
-      style={{ fontFeatureSettings: '"ss01"' }}
-    >
-      {t.logo.wordmark}
-    </h1>
+    <img
+      src={LOGO_SRC}
+      alt={t.logo.alt}
+      className={
+        // Height-driven sizing so the logo is the main visual element
+        // while staying balanced across mobile / tablet / desktop.
+        'h-[88px] w-auto select-none object-contain sm:h-[112px] md:h-[140px]'
+      }
+      draggable={false}
+    />
   )
 }

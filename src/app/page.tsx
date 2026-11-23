@@ -104,15 +104,10 @@ export default function Home() {
           aria-label={t.logo.alt}
           className="flex w-full flex-col items-center justify-center py-16 sm:py-24 md:py-28"
         >
-          {/* Official company logo — gold brand identity.
-              Currently renders an elegant gold wordmark placeholder.
-              Swap in the uploaded asset via src/components/logo.tsx (LOGO_SRC). */}
+          {/* Official SARHAN Import & Export logo — transparent background,
+              golden brand identity preserved. Renders naturally on both
+              light (warm-white) and dark (charcoal) page backgrounds. */}
           <Logo />
-          {/* Thin gold accent rule beneath the logo for a premium finish */}
-          <span
-            aria-hidden="true"
-            className="mt-6 h-px w-12 bg-primary/70"
-          />
         </section>
 
         {/* ---------- C. Main Options ---------- */}
