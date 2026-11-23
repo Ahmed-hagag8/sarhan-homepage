@@ -72,7 +72,11 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+<<<<<<< HEAD
     "@types/node": "26.6.6",
+=======
+    "@types/node": "^26.6.6",
+>>>>>>> a420bff5ed9174161a7475bd1ac857d12e8a28cd
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

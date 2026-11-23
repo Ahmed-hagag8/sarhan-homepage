@@ -131,6 +131,10 @@ The application will run on port `3000` (or `PORT` environment variable).
 
 Private & Proprietary © SARHAN Import & Export. All rights reserved.
 add scarab
+## 📄 License
+
+Private & Proprietary © SARHAN Import & Export. All rights reserved.
+add scarab
 
 ## 📄 License
 
