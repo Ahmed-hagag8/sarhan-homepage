@@ -18,8 +18,8 @@ export function ThemeToggle() {
 
   React.useEffect(() => setMounted(true), [])
 
-  // Until mounted, default to light so server/client markup matches.
-  const isDark = mounted && resolvedTheme === 'dark'
+  // Until mounted, default to dark so server/client markup matches.
+  const isDark = mounted ? resolvedTheme === 'dark' : true
   const isLight = !isDark
 
   return (
