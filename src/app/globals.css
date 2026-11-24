@@ -538,4 +538,17 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  /* ---- Performance: reduce paint cost on animated / sticky elements ---- */
+  .sticky {
+    will-change: transform;
+  }
+  .fw-card-article {
+    contain: layout style;
+  }
+  /* Promote heavy gradient backgrounds to their own compositor layer */
+  [class*="fw-wood-btn"],
+  [class*="gold-grad"] {
+    will-change: opacity, transform;
+  }
 }

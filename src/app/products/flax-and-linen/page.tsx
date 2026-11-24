@@ -282,9 +282,13 @@ export default function ProductFlaxAndLinenPage() {
             href="/"
             className="flex items-center gap-2.5 group"
           >
-            <img
+            <Image
               src="/sarhan-logo.png"
               alt="SARHAN Logo"
+              width={44}
+              height={44}
+              priority
+              quality={80}
               className="h-9 w-9 sm:h-11 sm:w-11 object-contain transition-transform group-hover:scale-105"
             />
             <div className="flex flex-col text-start">
@@ -450,6 +454,8 @@ export default function ProductFlaxAndLinenPage() {
                           sizes="(max-width: 768px) 100vw, 420px"
                           className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-106"
                           priority={index < 2}
+                          loading={index < 2 ? "eager" : "lazy"}
+                          quality={85}
                         />
 
                         {/* Overlay — always slightly visible on mobile (gradient), full on hover */}
@@ -664,6 +670,7 @@ export default function ProductFlaxAndLinenPage() {
                 fill
                 sizes="(max-width: 768px) 100vw, 800px"
                 className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                quality={90}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
 
@@ -812,6 +819,8 @@ export default function ProductFlaxAndLinenPage() {
                     alt={selectedProductForShip.name}
                     fill
                     className="object-cover"
+                    sizes="40px"
+                    quality={70}
                   />
                 </div>
                 <div>
@@ -966,9 +975,12 @@ export default function ProductFlaxAndLinenPage() {
           <div className="flex flex-col items-center gap-5 pb-5 sm:pb-6 border-b border-[var(--fw-wood-border)] md:flex-row md:justify-between">
             {/* Brand with Logo */}
             <div className="flex items-center gap-3">
-              <img
+              <Image
                 src="/sarhan-logo.png"
                 alt={ui.companyName}
+                width={40}
+                height={40}
+                quality={75}
                 className="h-9 w-9 sm:h-10 sm:w-10 object-contain"
               />
               <div className="flex flex-col items-start text-start">
