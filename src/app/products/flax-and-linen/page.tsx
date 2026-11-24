@@ -397,27 +397,38 @@ export default function ProductFlaxAndLinenPage() {
       {/* 4. STACKED CARDS ON SCROLL: TACTILE LINEN & WOOD TIERS       */}
       {/* ============================================================ */}
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 sm:px-6 sm:py-10 md:px-8 z-10">
-        <div className="relative flex flex-col space-y-6 sm:space-y-10 md:space-y-14 pb-16 sm:pb-24">
+        <div className="relative flex flex-col space-y-5 sm:space-y-10 md:space-y-14 pb-16 sm:pb-24">
           {CATALOG_PRODUCTS.map((product, index) => {
             const descriptionText = product.description[locale] ?? product.description.en
             const specs = product.specifications[locale] ?? product.specifications.en
             const apps = product.applications[locale] ?? product.applications.en
             const translatedTitle = product.translatedName[locale] ?? product.name
 
-            // Sticky cascade only on md+ screens
-            const stickyTop = `calc(5.5rem + ${index * 8}px)`
+            // Mobile header ~52px, desktop header ~88px. Add index*6px per card for the cascade peek.
+            const mobileTop = `calc(3.5rem + ${index * 6}px)`
+            const desktopTop = `calc(5.5rem + ${index * 8}px)`
             const zIndexValue = index + 10
 
             return (
               <div
                 key={product.id}
                 id={product.id}
-                style={{
-                  top: stickyTop,
-                  zIndex: zIndexValue,
-                }}
-                className="sticky max-md:relative max-md:top-0 w-full"
+                style={{ zIndex: zIndexValue }}
+                className={cn(
+                  'w-full sticky',
+                  // The top value is set via a CSS variable trick via inline style is not reactive to breakpoints,
+                  // so we apply two className overrides and let CSS handle it.
+                )}
+                // Use data attributes to let CSS pick the right offset
+                data-mobile-top={mobileTop}
+                data-desktop-top={desktopTop}
               >
+                {/* Inline style sets top for desktop; CSS media query overrides for mobile */}
+                <style>{`
+                  #${product.id} { top: ${desktopTop}; }
+                  @media (max-width: 767px) { #${product.id} { top: ${mobileTop}; } }
+                `}</style>
+
                 <article
                   className={cn(
                     'fw-card rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-9 overflow-hidden',
@@ -441,12 +452,20 @@ export default function ProductFlaxAndLinenPage() {
                           priority={index < 2}
                         />
 
-                        {/* Hover Overlay */}
-                        <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                          <div className="inline-flex items-center gap-2 rounded-full fw-wood-btn px-4 py-2 text-xs font-semibold text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
+                        {/* Overlay — always slightly visible on mobile (gradient), full on hover */}
+                        <div className="fw-photo-overlay absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100 bg-black/45 flex items-center justify-center backdrop-blur-[2px]">
+                          <div className="fw-photo-overlay-btn inline-flex items-center gap-2 rounded-full fw-wood-btn px-4 py-2 text-xs font-semibold text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                             <Eye className="h-4 w-4" />
                             <span>{ui.previewBtn}</span>
                           </div>
+                        </div>
+
+                        {/* Always-visible bottom gradient bar on mobile (shows "tap to preview") */}
+                        <div className="absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center pb-2 md:hidden pointer-events-none">
+                          <span className="text-white text-[10px] font-semibold uppercase tracking-widest opacity-80 flex items-center gap-1">
+                            <Eye className="h-3 w-3" />
+                            {ui.previewBtn}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -510,7 +529,7 @@ export default function ProductFlaxAndLinenPage() {
                         <button
                           type="button"
                           onClick={() => setSelectedProductForPreview(product)}
-                          className="inline-flex items-center justify-center gap-1.5 rounded-xl sm:rounded-2xl border border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)] px-3 sm:px-4 py-2.5 sm:py-3 text-xs font-semibold text-[var(--fw-text-main)] hover:border-[var(--fw-flax-gold)] hover:text-[var(--fw-flax-gold)] transition-colors"
+                          className="inline-flex items-center justify-center gap-1.5 rounded-xl sm:rounded-2xl border border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)] px-3 sm:px-4 py-2.5 sm:py-3 text-xs font-semibold text-[var(--fw-text-main)] hover:border-[var(--fw-flax-gold)] hover:text-[var(--fw-flax-gold)] transition-colors active:scale-95"
                         >
                           <Eye className="h-3.5 w-3.5" />
                           <span className="hidden sm:inline">{ui.previewBtn}</span>

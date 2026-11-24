@@ -465,19 +465,20 @@
     box-shadow: var(--fw-card-shadow-hover);
   }
 
-  /* --- Stacked Catalog Cards: Sticky cascade on tablet/desktop, smooth natural flow on mobile --- */
-  @media (min-width: 768px) {
-    .fw-stacked-card {
-      position: sticky;
-      top: var(--card-top, 5.5rem);
-      z-index: var(--card-z, 10);
-    }
+  /* --- Stacked card scroll: works on ALL screen sizes --- */
+  .fw-stacked-card {
+    position: sticky;
   }
-  @media (max-width: 767.98px) {
-    .fw-stacked-card {
-      position: relative !important;
-      top: 0 !important;
-      z-index: 1 !important;
+
+  /* --- Touch device press states for all interactive cards --- */
+  @media (hover: none) and (pointer: coarse) {
+    .fw-wood-btn:active {
+      transform: scale(0.97) translateY(1px);
+      opacity: 0.92;
+    }
+    /* Suppress stuck mid-zoom on touch long-press */
+    .group:active .group-hover\:scale-106 {
+      transform: scale(1.03);
     }
   }
 
