@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Link from 'next/link'
 import {
   ArrowRight,
   Plane,
@@ -41,7 +42,7 @@ function OptionCard({
   arrowDirection?: 'right' | 'down'
 }) {
   return (
-    <div className="relative flex w-full h-full">
+    <div className="relative flex w-full h-full card-slide-in">
       <button
         type="button"
         onClick={onClick}
@@ -53,7 +54,7 @@ function OptionCard({
           'rounded-2xl p-3 sm:p-6 md:p-8',
           'gap-2 text-foreground shadow-sm sm:gap-4 md:gap-6',
           // Metallic gold gradient border; interior tints to accent on hover
-          'gf gf-accent',
+          'gf gf-accent card-hover-lift',
           'transition-all duration-300 ease-out',
           'hover:-translate-y-1 hover:shadow-lg',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
@@ -218,7 +219,7 @@ export default function Home() {
           aria-labelledby="about-us-heading"
           className="w-full max-w-5xl pt-4 sm:pt-6 md:pt-8"
         >
-          <div className="gf-card relative overflow-hidden rounded-3xl p-6 sm:p-8 md:p-12">
+          <div className="gf-card card-slide-in card-hover-lift relative overflow-hidden rounded-3xl p-6 sm:p-8 md:p-12">
             {/* Ambient accent glow inside card */}
             <div
               aria-hidden="true"
@@ -349,6 +350,17 @@ export default function Home() {
                   <p className="mt-3 text-xs sm:text-sm leading-relaxed text-black dark:text-white max-w-3xl">
                     {t.productEgyFlax.description}
                   </p>
+
+                  {/* Go to Product Page Link Button */}
+                  <div className="mt-4 pt-1">
+                    <Link
+                      href="/products/flax-and-linen"
+                      className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-semibold gold-fill shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
+                    >
+                      <span>{t.productEgyFlax.viewProduct}</span>
+                      <ArrowRight className="h-3.5 w-3.5 rtl:-scale-x-100" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

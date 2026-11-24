@@ -57,7 +57,7 @@
   --gold-grad: linear-gradient(135deg, #E5A81E 0%, #C5880C 45%, #8E5F00 100%);
   --gold-grad-bright: linear-gradient(135deg, #F5C242 0%, #E5A81E 45%, #C5880C 100%);
   --gold-grad-line: linear-gradient(90deg, transparent 0%, rgba(197, 136, 12, 0.7) 50%, transparent 100%);
-  --gold-on-gold: #ffffff;
+  --gold-on-gold: #1a1410;
   --gold-arrow-border: rgba(197, 136, 12, 0.55);
   --gold-border: rgba(197, 136, 12, 0.45);
   --background: oklch(0.985 0.004 75);           /* warm white */
@@ -346,5 +346,41 @@
     background: var(--gold-grad-bright);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* =========================================================================
+     Card Sliding Animations & Micro-Interactions (Whole Website)
+     ========================================================================= */
+  @keyframes cardSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .card-slide-in {
+    animation: cardSlideUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Stagger delays for grid sequences */
+  .card-stagger-1 { animation-delay: 0.05s; }
+  .card-stagger-2 { animation-delay: 0.1s; }
+  .card-stagger-3 { animation-delay: 0.15s; }
+  .card-stagger-4 { animation-delay: 0.2s; }
+  .card-stagger-5 { animation-delay: 0.25s; }
+  .card-stagger-6 { animation-delay: 0.3s; }
+  .card-stagger-7 { animation-delay: 0.35s; }
+  .card-stagger-8 { animation-delay: 0.4s; }
+
+  /* Smooth lift and shadow expansion on card hover */
+  .card-hover-lift {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+  }
+  .card-hover-lift:hover {
+    transform: translateY(-6px);
   }
 }

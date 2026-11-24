@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 
 const OPTIONS: { value: Locale; label: string; short: string }[] = [
   { value: 'en', label: 'English', short: 'EN' },
+  { value: 'fr', label: 'Français', short: 'FR' },
   { value: 'ar', label: 'العربية', short: 'AR' },
   { value: 'zh', label: '中文', short: 'ZH' },
 ]

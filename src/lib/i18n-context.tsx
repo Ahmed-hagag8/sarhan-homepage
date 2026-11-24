@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 
-export type Locale = 'en' | 'ar' | 'zh'
+export type Locale = 'en' | 'ar' | 'zh' | 'fr'
 
 type Direction = 'ltr' | 'rtl'
 
@@ -83,6 +83,8 @@ interface TranslationKeys {
     close: string
     hoverTip: string
     exploreDetails: string
+    viewProduct: string
+    backToHome: string
   }
   contactBar: {
     title: string
@@ -191,10 +193,10 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     productEgyFlax: {
       badge: 'Featured Export Product',
       name: 'FLAX & LINEN PRODUCTS',
-      tagline: 'Premium Natural Egyptian Flax & Linen Products',
+      tagline: 'Premium Natural Flax & Linen Products',
       description:
-        'Sustainably cultivated in fertile Egyptian soil and processed to high international standards. High-tensile flax fibers, tow, raw flax, and spun yarn designed for luxury textiles and high-performance industrial applications.',
-      spec1: '100% Organic Egyptian Flax',
+        'Sustainably cultivated and processed to high international standards. High-tensile flax fibers, tow, raw flax, and spun yarn designed for luxury textiles and high-performance industrial applications.',
+      spec1: '100% Pure Natural Flax',
       spec2: 'Superior Tensile Strength',
       spec3: 'ISO Export Quality Certified',
       inquireWhatsApp: 'Order Quote on WhatsApp',
@@ -202,6 +204,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       close: 'Close',
       hoverTip: 'Hover to preview · Click for full product details',
       exploreDetails: 'Explore Product Specifications',
+      viewProduct: 'Go to Product Page',
+      backToHome: 'Back to Home',
     },
     contactBar: {
       title: 'Direct Communication Hub',
@@ -278,7 +282,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       shipForYou: 'نشحن لك',
       shipForYouDesc: 'احصل على تسعير شحن فوري عبر واتساب أو البريد',
       customProduct: 'منتجاتنا',
-      customProductDesc: 'المنتج الحصري: منتجات الكتان واللينين FLAX & LINEN PRODUCTS',
+      customProductDesc: 'المنتج الحصري: منتجات الكتان واللينين',
     },
     shipForm: {
       dialogTitle: 'طلب تسعير شحنة جديدة',
@@ -307,11 +311,11 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     },
     productEgyFlax: {
       badge: 'المنتج الحصري للتصدير',
-      name: 'FLAX & LINEN PRODUCTS',
-      tagline: 'أجود ألياف وخيوط الكتان واللينين المصري الفاخر',
+      name: 'منتجات الكتان واللينين',
+      tagline: 'أجود ألياف وخيوط الكتان واللينين الطبيعي الفاخر',
       description:
-        'كتان مصري طبيعي عالي النقاء مزروع في أجود الأراضي الزراعية ومجهز وفق أعلى مواصفات الجودة العالمية. ألياف قوية، مشاق، وخيوط غزل مخصصة لمصانع النسيج الفاخر والتطبيقات الصناعية الدقيقة.',
-      spec1: 'كتان مصري طبيعي 100%',
+        'ألياف كتان طبيعي عالي النقاء ومجهزة وفق أعلى مواصفات الجودة العالمية. ألياف قوية، مشاق، وخيوط غزل مخصصة لمصانع النسيج الفاخر والتطبيقات الصناعية الدقيقة.',
+      spec1: 'كتان طبيعي 100%',
       spec2: 'متانة وقوة شد فائقة',
       spec3: 'مطابق لمواصفات التصدير الدولية',
       inquireWhatsApp: 'طلب تسعير عبر واتساب',
@@ -319,6 +323,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       close: 'إغلاق',
       hoverTip: 'مرر لمعاينة المنتج · اضغط للتفاصيل الكاملة',
       exploreDetails: 'استعراض مواصفات المنتج',
+      viewProduct: 'الانتقال إلى صفحة المنتج',
+      backToHome: 'العودة إلى الرئيسية',
     },
     contactBar: {
       title: 'مركز التواصل المباشر',
@@ -395,7 +401,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       shipForYou: '为您发货',
       shipForYouDesc: '通过 WhatsApp 或电子邮件获取即时报价',
       customProduct: '特色产品',
-      customProductDesc: '主营推荐：FLAX & LINEN PRODUCTS 纯天然亚麻与高档亚麻制品',
+      customProductDesc: '主营推荐：天然亚麻与麻类制品 — 纯天然纤维与高档面料',
     },
     shipForm: {
       dialogTitle: '获取航运即时报价',
@@ -424,11 +430,11 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     },
     productEgyFlax: {
       badge: '出口核心主打产品',
-      name: 'FLAX & LINEN PRODUCTS',
-      tagline: '特级埃及天然亚麻与高档亚麻制品',
+      name: '天然亚麻与麻类制品',
+      tagline: '特级天然亚麻与高档亚麻制品',
       description:
-        '源自埃及尼罗河流域优质土壤培育，遵循国际高级别纺织出口标准加工。具备出众的高抗拉强度、透气性及柔韧度，专为全球高档纺织面料与工业复合制造供应。',
-      spec1: '100% 埃及原产纯天然亚麻',
+        '遵循国际高级别纺织出口标准精细加工。具备出众的高抗拉强度、透气性及柔韧度，专为全球高档纺织面料与工业复合制造供应。',
+      spec1: '100% 纯正优质天然亚麻',
       spec2: '顶级物理抗拉与韧性指标',
       spec3: '国际 ISO 出口检测标准认证',
       inquireWhatsApp: '通过 WhatsApp 询价',
@@ -436,6 +442,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       close: '关闭',
       hoverTip: '悬停预览产品 · 点击查看完整详情',
       exploreDetails: '查看产品详细技术指标',
+      viewProduct: '前往专属产品页面',
+      backToHome: '返回首页',
     },
     contactBar: {
       title: '即时沟通中心',
@@ -471,6 +479,125 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       rights: '保留所有权利。',
     },
   },
+  fr: {
+    dir: 'ltr',
+    label: 'Français',
+    nav: {
+      languageLabel: 'Langue',
+      themeLabel: 'Thème',
+      themeLight: 'Passer au mode clair',
+      themeDark: 'Passer au mode sombre',
+    },
+    logo: {
+      wordmark: 'SARHAN',
+      alt: 'Logo SARHAN Import & Export',
+    },
+    hero: {
+      badge: 'Commerce International & Logistique',
+      title: 'SARHAN',
+      subtitle: 'Import & Export',
+      description:
+        'Votre passerelle de confiance pour le transport international et l\'approvisionnement sur mesure de produits. Connecter les fabricants mondiaux avec précision, fiabilité et rapidité.',
+      featureShipping: 'Fret Aérien & Maritime',
+      featureCustom: 'Sourcing Personnalisé',
+      featureReliability: 'Suivi de Bout en Bout',
+    },
+    about: {
+      badge: 'Qui Sommes-Nous',
+      heading: 'À Propos',
+      paragraph:
+        'Nous sommes une entreprise dédiée à fournir des solutions de transport fiables et des produits personnalisés adaptés à vos besoins. Nous privilégions la clarté, la qualité et les partenariats durables — pour faire progresser votre entreprise en toute confiance.',
+      pillar1Title: 'Réseau Mondial',
+      pillar1Desc: 'Accès direct aux fabricants et ports internationaux certifiés.',
+      pillar2Title: 'Solutions Sur Mesure',
+      pillar2Desc: 'Des spécifications adaptées avec précision aux exigences de votre marché.',
+      pillar3Title: 'Clarté Garantie',
+      pillar3Desc: 'Communication transparente, calendriers fiables et aucune mauvaise surprise.',
+    },
+    options: {
+      heading: 'Nos Services Principaux',
+      subheading: 'Choisissez un service pour démarrer votre demande avec notre entreprise',
+      shipForYou: 'Expédier Pour Vous',
+      shipForYouDesc: 'Devis d\'expédition instantané via WhatsApp ou Email',
+      customProduct: 'Nos Produits',
+      customProductDesc: 'En vedette : PRODUITS EN LIN & FIBRES — fibres naturelles & textiles',
+    },
+    shipForm: {
+      dialogTitle: 'Demander un Devis d\'Expédition',
+      dialogDesc: 'Renseignez les détails de votre cargaison et envoyez-les directement à notre équipe logistique via WhatsApp ou Email.',
+      nameLabel: 'Votre Nom / Entreprise',
+      namePlaceholder: 'ex. Jean Dupont / Global Corp',
+      phoneLabel: 'Téléphone / WhatsApp',
+      phonePlaceholder: '+33 6 12 34 56 78',
+      originLabel: 'Origine (Départ)',
+      originPlaceholder: 'ex. Port de Guangzhou, Chine',
+      destLabel: 'Destination (Arrivée)',
+      destPlaceholder: 'ex. Port d\'Alexandrie, Égypte',
+      shippingTypeLabel: 'Mode d\'Expédition',
+      typeAir: 'Fret Aérien (Le plus rapide)',
+      typeSea: 'Fret Maritime (FCL / LCL)',
+      typeExpress: 'Courrier Express Porte-à-Porte',
+      detailsLabel: 'Spécifications du Fret / Remarques',
+      detailsPlaceholder: 'Poids (kg), volume (CBM), type de marchandise ou exigences particulières...',
+      sendWhatsApp: 'Envoyer via WhatsApp',
+      sendEmail: 'Envoyer par Email',
+      submitBoth: 'Envoyer via WhatsApp & Email',
+      submit: 'Envoyer',
+      close: 'Fermer',
+      validationError: 'Veuillez au moins indiquer votre nom et les détails du fret pour soumettre votre demande.',
+      orSendWith: 'Ou choisir l\'envoi par email',
+    },
+    productEgyFlax: {
+      badge: 'Produit Export Vedette',
+      name: 'PRODUITS EN LIN & FIBRES',
+      tagline: 'Produits en Lin & Fibres Naturelles Haut de Gamme',
+      description:
+        'Cultivé de manière durable et traité selon les normes internationales les plus exigeantes. Fibres de lin à haute résistance, étoupes, lin brut et fils filés pour textiles de luxe et applications industrielles de haute performance.',
+      spec1: 'Lin 100% Naturel Pur',
+      spec2: 'Résistance Supérieure à la Traction',
+      spec3: 'Certifié Conforme aux Normes d\'Exportation ISO',
+      inquireWhatsApp: 'Demander un devis sur WhatsApp',
+      inquireEmail: 'Se renseigner par Email',
+      close: 'Fermer',
+      hoverTip: 'Survoler pour aperçu · Cliquer pour tous les détails',
+      exploreDetails: 'Découvrir les Spécifications du Produit',
+      viewProduct: 'Voir la Page du Produit',
+      backToHome: 'Retour à l\'Accueil',
+    },
+    contactBar: {
+      title: 'Centre de Communication Directe',
+      subtitle: 'Contactez notre entreprise instantanément sur votre canal préféré',
+      whatsapp: 'WhatsApp Direct',
+      email: 'Contact Email',
+      call: 'Ligne Directe',
+      online: 'Équipe en Ligne',
+      copy: 'Copier le numéro',
+      copied: 'Copié !',
+      directChat: 'Démarrer la discussion',
+      phoneValue: '+1 555-000-0000',
+      emailValue: 'hello@sarhan.example.com',
+      whatsappValue: '+1 555-000-100',
+    },
+    contact: {
+      connectUs: 'Contactez-Nous',
+      connectUsAria: 'Nous appeler',
+      locationLabel: 'Localisation',
+      locationAria: 'Voir notre emplacement sur la carte',
+      phonePlaceholder: 'Le numéro de téléphone sera affiché ici.',
+      locationPlaceholder: 'Le lien de localisation sera affiché ici.',
+      whatsappLabel: 'WhatsApp',
+      emailLabel: 'Email',
+      callLabel: 'Appeler',
+    },
+    footer: {
+      tagline: 'SARHAN — Logistique internationale & sourcing de marchandises de premier choix.',
+      servicesNav: 'Services',
+      aboutNav: 'À Propos',
+      contactNav: 'Contact',
+      locationNav: 'Localisation',
+      rights: 'Tous droits réservés.',
+    },
+  },
 }
 
 interface I18nContextValue {
@@ -489,7 +616,7 @@ function readStoredLocale(): Locale {
   if (typeof window === 'undefined') return 'en'
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY)
-    if (stored === 'ar' || stored === 'en' || stored === 'zh') return stored
+    if (stored === 'ar' || stored === 'en' || stored === 'zh' || stored === 'fr') return stored
   } catch {
     /* ignore */
   }
@@ -528,7 +655,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   }, [locale, mounted])
 
   const toggleLocale = React.useCallback(() => {
-    const next: Locale = locale === 'en' ? 'ar' : locale === 'ar' ? 'zh' : 'en'
+    const next: Locale = locale === 'en' ? 'fr' : locale === 'fr' ? 'ar' : locale === 'ar' ? 'zh' : 'en'
     setLocale(next)
   }, [locale, setLocale])
 
