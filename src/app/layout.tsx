@@ -134,7 +134,7 @@ const organizationSchema = {
       alternateName: ["SARHAN Co.", "sarhanco", "sarhanco.com"],
       url: "https://sarhanco.com",
       logo: "https://sarhanco.com/sarhan-logo.png",
-      email: "info@sarhanco.com",
+      email: "imex@sarhanco.com",
       telephone: "+201133289251",
       description:
         "Premium international commodity trading, shipping, and logistics. Supplying natural flax fiber, linen products, and agricultural commodities to global textile manufacturers.",
@@ -142,7 +142,7 @@ const organizationSchema = {
         "@type": "ContactPoint",
         contactType: "Sales & Inquiries",
         telephone: "+201133289251",
-        email: "info@sarhanco.com",
+        email: "imex@sarhanco.com",
         availableLanguage: ["English", "Arabic", "French", "Chinese"],
       },
       sameAs: ["https://sarhanco.com"],

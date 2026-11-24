@@ -34,7 +34,7 @@ import {
   type CatalogProduct,
 } from './product-data'
 
-const EMAIL_BASE = 'info@sarhanco.com'
+const EMAIL_BASE = 'imex@sarhanco.com'
 
 export default function ProductFlaxAndLinenPage() {
   const { locale, dir } = useI18n()

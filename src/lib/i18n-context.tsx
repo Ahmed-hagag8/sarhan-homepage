@@ -229,7 +229,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       copied: 'Copied!',
       directChat: 'Start Chat',
       phoneValue: '+20 113 328 9251',
-      emailValue: 'info@sarhanco.com',
+      emailValue: 'imex@sarhanco.com',
       whatsappValue: '+20 113 328 9251',
     },
     contact: {
@@ -354,7 +354,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       copied: 'تم النسخ!',
       directChat: 'بدء المحادثة',
       phoneValue: '+20 113 328 9251',
-      emailValue: 'info@sarhanco.com',
+      emailValue: 'imex@sarhanco.com',
       whatsappValue: '+20 113 328 9251',
     },
     contact: {
@@ -479,7 +479,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       copied: '已复制！',
       directChat: '立即发起沟通',
       phoneValue: '+20 113 328 9251',
-      emailValue: 'info@sarhanco.com',
+      emailValue: 'imex@sarhanco.com',
       whatsappValue: '+20 113 328 9251',
     },
     contact: {
@@ -604,7 +604,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       copied: 'Copié !',
       directChat: 'Démarrer la discussion',
       phoneValue: '+20 113 328 9251',
-      emailValue: 'info@sarhanco.com',
+      emailValue: 'imex@sarhanco.com',
       whatsappValue: '+20 113 328 9251',
     },
     contact: {

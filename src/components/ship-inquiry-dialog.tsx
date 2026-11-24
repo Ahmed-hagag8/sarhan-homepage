@@ -27,7 +27,7 @@ interface ShipInquiryDialogProps {
 }
 
 const DUMMY_WHATSAPP_NUMBER = '201133289251'
-const DUMMY_EMAIL_ADDRESS = 'info@sarhanco.com'
+const DUMMY_EMAIL_ADDRESS = 'imex@sarhanco.com'
 
 interface InquiryTemplate {
   waHeader: string
