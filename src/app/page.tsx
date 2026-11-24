@@ -19,8 +19,8 @@ import { ShipInquiryDialog } from '@/components/ship-inquiry-dialog'
 import { useI18n } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
 
-// Placeholder Google Maps location
-const PLACEHOLDER_LOCATION = 'https://www.google.com/maps/search/?api=1&query=SARHAN+Import+and+Export'
+// Official Google Maps location
+const COMPANY_LOCATION = 'https://maps.app.goo.gl/v8xWBsuFXnrVjVfj9'
 
 function OptionCard({
   onClick,
@@ -423,7 +423,7 @@ export default function Home() {
 
               {/* Modern Location Badge */}
               <a
-                href={PLACEHOLDER_LOCATION}
+                href={COMPANY_LOCATION}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t.contact.locationAria}

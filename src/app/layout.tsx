@@ -136,6 +136,7 @@ const organizationSchema = {
       logo: "https://sarhanco.com/sarhan-logo.png",
       email: "imex@sarhanco.com",
       telephone: "+201133289251",
+      hasMap: "https://maps.app.goo.gl/v8xWBsuFXnrVjVfj9",
       description:
         "Premium international commodity trading, shipping, and logistics. Supplying natural flax fiber, linen products, and agricultural commodities to global textile manufacturers.",
       contactPoint: {
@@ -145,7 +146,10 @@ const organizationSchema = {
         email: "imex@sarhanco.com",
         availableLanguage: ["English", "Arabic", "French", "Chinese"],
       },
-      sameAs: ["https://sarhanco.com"],
+      sameAs: [
+        "https://www.sarhanco.com",
+        "https://maps.app.goo.gl/v8xWBsuFXnrVjVfj9"
+      ],
     },
   ],
 };
