@@ -33,6 +33,7 @@ interface InquiryTemplate {
   waHeader: string
   nameLabel: string
   phoneLabel: string
+  emailCustomerLabel: string
   productLabel: string
   catalogLinkLabel: string
   originLabel: string
@@ -48,6 +49,7 @@ const INQUIRY_TEMPLATES: Record<Locale, InquiryTemplate> = {
     waHeader: '🚢 *SARHAN Import & Export — Shipping Quote Request*',
     nameLabel: '👤 *Name / Company:*',
     phoneLabel: '📞 *Phone / Contact:*',
+    emailCustomerLabel: '✉️ *Customer Email:*',
     productLabel: '🏷️ *Product / Cargo:*',
     catalogLinkLabel: '🌾 *Flax Catalog Link:*',
     originLabel: '📍 *Origin (From):*',
@@ -61,6 +63,7 @@ const INQUIRY_TEMPLATES: Record<Locale, InquiryTemplate> = {
     waHeader: '🚢 *سرحان للاستيراد والتصدير — طلب عرض سعر شحن*',
     nameLabel: '👤 *الاسم / الشركة:*',
     phoneLabel: '📞 *الهاتف / للتواصل:*',
+    emailCustomerLabel: '✉️ *بريد العميل:*',
     productLabel: '🏷️ *المنتج / البضاعة:*',
     catalogLinkLabel: '🌾 *رابط كتالوج الكتان:*',
     originLabel: '📍 *بلد المنشأ (من):*',
@@ -74,6 +77,7 @@ const INQUIRY_TEMPLATES: Record<Locale, InquiryTemplate> = {
     waHeader: '🚢 *SARHAN Import & Export — Demande de Devis d’Expédition*',
     nameLabel: '👤 *Nom / Société :*',
     phoneLabel: '📞 *Téléphone / Contact :*',
+    emailCustomerLabel: '✉️ *Email Client :*',
     productLabel: '🏷️ *Produit / Marchandise :*',
     catalogLinkLabel: '🌾 *Lien Catalogue Lin :*',
     originLabel: '📍 *Origine (De) :*',
@@ -87,6 +91,7 @@ const INQUIRY_TEMPLATES: Record<Locale, InquiryTemplate> = {
     waHeader: '🚢 *SARHAN 进出口 — 运输报价申请*',
     nameLabel: '👤 *姓名 / 公司：*',
     phoneLabel: '📞 *电话 / 联系方式：*',
+    emailCustomerLabel: '✉️ *客户邮箱：*',
     productLabel: '🏷️ *产品 / 货物：*',
     catalogLinkLabel: '🌾 *亚麻目录链接：*',
     originLabel: '📍 *始发地（从）：*',
@@ -103,6 +108,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
 
   const [name, setName] = React.useState('')
   const [phone, setPhone] = React.useState('')
+  const [customerEmail, setCustomerEmail] = React.useState('')
   const [selectedProductId, setSelectedProductId] = React.useState('')
   const [origin, setOrigin] = React.useState('')
   const [destination, setDestination] = React.useState('')
@@ -154,6 +160,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
       '─────────────────────────',
       `${tmpl.nameLabel} ${name.trim()}`,
       phone.trim() ? `${tmpl.phoneLabel} ${phone.trim()}` : null,
+      customerEmail.trim() ? `${tmpl.emailCustomerLabel} ${customerEmail.trim()}` : null,
       `${tmpl.productLabel} ${productTitle}`,
       selectedProduct
         ? `${tmpl.catalogLinkLabel} https://sarhanco.com/products/flax-and-linen#${selectedProduct.id}`
@@ -176,6 +183,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
       '==================================================',
       `${tmpl.nameLabel.replace(/[*_:]/g, '').trim()}: ${name.trim()}`,
       phone.trim() ? `${tmpl.phoneLabel.replace(/[*_:]/g, '').trim()}: ${phone.trim()}` : '',
+      customerEmail.trim() ? `${tmpl.emailCustomerLabel.replace(/[*_:]/g, '').trim()}: ${customerEmail.trim()}` : '',
       `${tmpl.productLabel.replace(/[*_:]/g, '').trim()}: ${productTitle}`,
       selectedProduct
         ? `${tmpl.catalogLinkLabel.replace(/[*_:]/g, '').trim()}: /products/flax-and-linen#${selectedProduct.id}`
@@ -259,8 +267,8 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
 
         {/* Form */}
         <form onSubmit={handleSubmitBoth} className="mt-5 space-y-4">
-          {/* Row 1: Name and Phone */}
-          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+          {/* Row 1: Name, Phone and Email */}
+          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-3">
             <div>
               <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
                 <User className="gi h-3.5 w-3.5" />
@@ -287,6 +295,20 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder={t.shipForm.phonePlaceholder}
+                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
+                <Mail className="gi h-3.5 w-3.5" />
+                <span>{t.shipForm.emailLabel}</span>
+              </label>
+              <input
+                type="email"
+                value={customerEmail}
+                onChange={(e) => setCustomerEmail(e.target.value)}
+                placeholder={t.shipForm.emailPlaceholder}
                 className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
               />
             </div>

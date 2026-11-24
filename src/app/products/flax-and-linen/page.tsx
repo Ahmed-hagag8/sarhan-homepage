@@ -156,7 +156,7 @@ export default function ProductFlaxAndLinenPage() {
 
   const handleSubmitShipQuote = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!buyerName.trim() || !buyerEmail.trim()) {
+    if (!buyerName.trim()) {
       setFormError(ui.validationError)
       return
     }
@@ -228,7 +228,7 @@ export default function ProductFlaxAndLinenPage() {
       '==================================================================',
       `${tBody.product}: ${prodName}`,
       `${tBody.client}: ${buyerName.trim()}`,
-      `${tBody.email}: ${buyerEmail.trim()}`,
+      buyerEmail.trim() ? `${tBody.email}: ${buyerEmail.trim()}` : '',
       buyerPhone.trim() ? `${tBody.phone}: ${buyerPhone.trim()}` : '',
       quantity.trim() ? `${tBody.quantity}: ${quantity.trim()}` : '',
       destination.trim() ? `${tBody.dest}: ${destination.trim()}` : '',
@@ -250,7 +250,7 @@ export default function ProductFlaxAndLinenPage() {
         '─────────────────────────',
         `${tBody.product}: ${prodName}`,
         `${tBody.client}: ${buyerName.trim()}`,
-        `${tBody.email}: ${buyerEmail.trim()}`,
+        buyerEmail.trim() ? `${tBody.email}: ${buyerEmail.trim()}` : null,
         buyerPhone.trim() ? `${tBody.phone}: ${buyerPhone.trim()}` : null,
         quantity.trim() ? `${tBody.quantity}: ${quantity.trim()}` : null,
         destination.trim() ? `${tBody.dest}: ${destination.trim()}` : null,
@@ -889,11 +889,9 @@ export default function ProductFlaxAndLinenPage() {
                   <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-[var(--fw-text-main)]">
                     <Mail className="h-3.5 w-3.5 text-[var(--fw-flax-gold)]" />
                     <span>{ui.buyerEmailLabel}</span>
-                    <span className="text-destructive">*</span>
                   </label>
                   <input
                     type="email"
-                    required
                     value={buyerEmail}
                     onChange={(e) => setBuyerEmail(e.target.value)}
                     placeholder={ui.buyerEmailPlaceholder}

@@ -57,6 +57,8 @@ interface TranslationKeys {
     namePlaceholder: string
     phoneLabel: string
     phonePlaceholder: string
+    emailLabel: string
+    emailPlaceholder: string
     originLabel: string
     originPlaceholder: string
     destLabel: string
@@ -184,6 +186,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       namePlaceholder: 'e.g. John Doe / Global Corp',
       phoneLabel: 'Phone / WhatsApp Number',
       phonePlaceholder: '+1 234 567 8900',
+      emailLabel: 'Email Address (Optional)',
+      emailPlaceholder: 'e.g. client@company.com (optional)',
       originLabel: 'Origin (Departure)',
       originPlaceholder: 'e.g. Guangzhou Port, China',
       destLabel: 'Destination (Arrival)',
@@ -310,6 +314,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       namePlaceholder: 'مثال: أحمد محمد / شركة التجارة العالمية',
       phoneLabel: 'رقم الهاتف أو الواتساب',
       phonePlaceholder: '+20 100 000 0000',
+      emailLabel: 'البريد الإلكتروني (اختياري)',
+      emailPlaceholder: 'client@company.com (اختياري)',
       originLabel: 'بلد أو مدينة الإرسال (من)',
       originPlaceholder: 'مثال: ميناء قوانغتشو، الصين',
       destLabel: 'بلد أو مدينة الوصول (إلى)',
@@ -436,6 +442,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       namePlaceholder: '例如：李明 / 国际经贸有限公司',
       phoneLabel: '联系电话 / WhatsApp',
       phonePlaceholder: '+86 138 0000 0000',
+      emailLabel: '电子邮箱（选填）',
+      emailPlaceholder: 'client@company.com（选填）',
       originLabel: '起运地（从）',
       originPlaceholder: '例如：中国广州港 / 深圳港',
       destLabel: '目的地（到）',
@@ -562,6 +570,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       namePlaceholder: 'ex. Jean Dupont / Global Corp',
       phoneLabel: 'Téléphone / WhatsApp',
       phonePlaceholder: '+33 6 12 34 56 78',
+      emailLabel: 'Adresse Email (Optionnel)',
+      emailPlaceholder: 'client@societe.com (optionnel)',
       originLabel: 'Origine (Départ)',
       originPlaceholder: 'ex. Port de Guangzhou, Chine',
       destLabel: 'Destination (Arrivée)',
