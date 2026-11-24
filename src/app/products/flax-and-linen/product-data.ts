@@ -222,6 +222,66 @@ export const CATALOG_UI = {
     fr: 'Veuillez renseigner votre nom, email et les spécifications.',
     zh: '请至少填写您的姓名、企业邮箱以及货运需求。',
   },
+  atelierPill: {
+    en: 'ORGANIC MODERN FIBER ATELIER',
+    ar: 'مركز ألياف الكتان الطبيعي الفاخر',
+    fr: 'ATELIER DES FIBRES NATURELLES',
+    zh: '现代天然植物纤维工坊',
+  },
+  isoCompliance: {
+    en: 'ISO 9001 Compliance',
+    ar: 'مطابق لمواصفات ISO 9001',
+    fr: 'Conformité ISO 9001',
+    zh: '符合 ISO 9001 质量认证',
+  },
+  categoryFlaxAndLinen: {
+    en: 'NATURAL FLAX & LINEN',
+    ar: 'كتان ولينين طبيعي',
+    fr: 'LIN & FIBRES NATURELLES',
+    zh: '纯天然高品级亚麻',
+  },
+  stepPrefix: {
+    en: 'STEP',
+    ar: 'المرحلة',
+    fr: 'ÉTAPE',
+    zh: '工序',
+  },
+  stagePrefix: {
+    en: 'Stage',
+    ar: 'المرحلة',
+    fr: 'Étape',
+    zh: '阶段',
+  },
+  requestSuccess: {
+    en: 'Your shipping request has been prepared and sent!',
+    ar: 'تم تجهيز وإرسال طلب الشحن بنجاح!',
+    fr: 'Votre demande d\'expédition a été préparée et envoyée avec succès !',
+    zh: '您的货运申请已成功生成并发送！',
+  },
+  topBtn: {
+    en: 'Top',
+    ar: 'للأعلى',
+    fr: 'Haut',
+    zh: '返回顶部',
+  },
+  rightsReserved: {
+    en: 'All rights reserved.',
+    ar: 'جميع الحقوق محفوظة.',
+    fr: 'Tous droits réservés.',
+    zh: '版权所有，保留一切权利。',
+  },
+  subFooterText: {
+    en: 'International Logistics & Natural Commodity Sourcing',
+    ar: 'الخدمات اللوجستية الدولية وتوريد السلع الطبيعية الفاخرة',
+    fr: 'Logistique internationale et approvisionnement en matières premières naturelles',
+    zh: '国际大宗商品物流与天然原料供应链',
+  },
+  viewInCatalog: {
+    en: 'View in Catalog',
+    ar: 'عرض بالكتالوج',
+    fr: 'Voir dans le catalogue',
+    zh: '在画册中查看',
+  },
 }
 
 export const FLAX_ABOUT = {
@@ -298,9 +358,9 @@ export const FLAX_PROCESS = {
       number: '01',
       title: {
         en: 'Field',
-        ar: 'الحقل (Field)',
-        fr: 'Le Champ (Field)',
-        zh: '田间产区 (Field)',
+        ar: 'الحقل',
+        fr: 'Le Champ',
+        zh: '天然产区',
       },
       desc: {
         en: 'Nile Delta flax straw, retted under the same sun it grew in.',
@@ -313,9 +373,9 @@ export const FLAX_PROCESS = {
       number: '02',
       title: {
         en: 'Scutch',
-        ar: 'التسليط (Scutch)',
-        fr: 'Le Teillage (Scutch)',
-        zh: '机械打成 (Scutch)',
+        ar: 'التسليط (فصل الألياف)',
+        fr: 'Le Teillage',
+        zh: '机械打成',
       },
       desc: {
         en: 'Turbines free the long line fiber and knock out the shives.',
@@ -328,9 +388,9 @@ export const FLAX_PROCESS = {
       number: '03',
       title: {
         en: 'Hackle',
-        ar: 'التمشيط (Hackle)',
-        fr: 'Le Peignage (Hackle)',
-        zh: '精梳整理 (Hackle)',
+        ar: 'التمشيط',
+        fr: 'Le Peignage',
+        zh: '精梳整理',
       },
       desc: {
         en: 'Steel pins comb the fiber parallel, uniform, spinning-ready.',
@@ -343,9 +403,9 @@ export const FLAX_PROCESS = {
       number: '04',
       title: {
         en: 'Bale',
-        ar: 'الكبس والبالات (Bale)',
-        fr: 'Le Pressage en Balles (Bale)',
-        zh: '压缩打包 (Bale)',
+        ar: 'الكبس في بالات',
+        fr: 'Le Pressage en Balles',
+        zh: '高密打包',
       },
       desc: {
         en: 'Pressed at 200–250 kg, graded, marked, container-planned.',
@@ -358,9 +418,9 @@ export const FLAX_PROCESS = {
       number: '05',
       title: {
         en: 'Ship',
-        ar: 'الشحن والتصدير (Ship)',
-        fr: 'L\'Expédition (Ship)',
-        zh: '全球海运 (Ship)',
+        ar: 'الشحن والتصدير',
+        fr: 'L\'Expédition',
+        zh: '全球海运',
       },
       desc: {
         en: 'FOB, CFR, or CIF — to your port, with full export documents.',
@@ -380,8 +440,8 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     translatedName: {
       en: 'Scutched Flax',
       ar: 'الكتان المشوط',
-      fr: 'Lin Teillé (Scutched Flax)',
-      zh: '打成亚麻 (Scutched Flax)',
+      fr: 'Lin Teillé',
+      zh: '机械打成长亚麻',
     },
     photo: '/products/scutched_flax_new.jpg',
     description: {
@@ -410,8 +470,8 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     translatedName: {
       en: 'Hackled Flax',
       ar: 'كتان ممشط',
-      fr: 'Lin Peigné (Hackled Flax)',
-      zh: '精梳亚麻 (Hackled Flax)',
+      fr: 'Lin Peigné',
+      zh: '精梳优质长亚麻',
     },
     photo: '/products/hackled_flax_new.jpg',
     description: {
@@ -439,9 +499,9 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     name: 'Hackled Flax in Sliver',
     translatedName: {
       en: 'Hackled Flax in Sliver',
-      ar: 'كتان ممشط باللون الفضي',
-      fr: 'Ruban de Lin Peigné (Sliver)',
-      zh: '精梳亚麻条 (Flax Sliver)',
+      ar: 'كتان ممشط على شكل أشرطة',
+      fr: 'Ruban de Lin Peigné',
+      zh: '精梳亚麻条',
     },
     photo: '/products/hackled_flax_sliver_new.jpg',
     description: {
@@ -469,9 +529,9 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     name: 'Hackled Flax Tow',
     translatedName: {
       en: 'Hackled Flax Tow',
-      ar: 'شعر الكتان الناتج عن التسريح',
-      fr: 'Étoupes de Lin Peigné (Tow)',
-      zh: '精梳亚麻短麻 (Flax Tow)',
+      ar: 'عوادم تمشيط الكتان',
+      fr: 'Étoupes de Lin Peigné',
+      zh: '精梳亚麻短麻',
     },
     photo: '/products/hackled_flax_tow_new.jpg',
     description: {
@@ -501,7 +561,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
       en: 'Rescutched Flax Tow',
       ar: 'شعر كتان معاد تشويطه',
       fr: 'Étoupes de Lin Reteillé',
-      zh: '重打亚麻短麻 (Rescutched Tow)',
+      zh: '重打亚麻短麻',
     },
     photo: '/products/rescutched_flax_tow_new.jpg',
     description: {
@@ -531,7 +591,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
       en: 'Rescutched Tow Sliver',
       ar: 'شريط تو كتان معاد تقشيره',
       fr: 'Ruban d\'Étoupes Reteillées',
-      zh: '重打短麻条 (Tow Sliver)',
+      zh: '重打短麻条',
     },
     photo: '/products/rescutched_tow_sliver_new.jpg',
     description: {
@@ -560,8 +620,8 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     translatedName: {
       en: 'Cottonised Flax',
       ar: 'الكتان المعالج بالقطن',
-      fr: 'Lin Cotonisé (Cottonised Flax)',
-      zh: '棉化亚麻 (Cottonised Flax)',
+      fr: 'Lin Cotonisé',
+      zh: '棉化软亚麻',
     },
     photo: '/products/cottonised_flax_new.jpg',
     description: {
@@ -590,8 +650,8 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     translatedName: {
       en: 'Hackled Flax Dolls',
       ar: 'حزم الكتان المسرّح',
-      fr: 'Poupées de Lin Peigné (Dolls)',
-      zh: '精梳亚麻发束 (Flax Dolls)',
+      fr: 'Poupées de Lin Peigné',
+      zh: '精梳亚麻发束',
     },
     photo: '/products/hackled_flax_dolls_new.jpg',
     description: {
@@ -621,7 +681,7 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
       en: 'Flax Seeds',
       ar: 'بذور كتان',
       fr: 'Graines de Lin',
-      zh: '优选亚麻种子 (Flax Seeds)',
+      zh: '优选高纯度亚麻籽',
     },
     photo: '/products/flax_seeds.jpg',
     description: {

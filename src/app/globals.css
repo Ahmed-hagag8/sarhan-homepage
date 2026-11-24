@@ -465,6 +465,22 @@
     box-shadow: var(--fw-card-shadow-hover);
   }
 
+  /* --- Stacked Catalog Cards: Sticky cascade on tablet/desktop, smooth natural flow on mobile --- */
+  @media (min-width: 768px) {
+    .fw-stacked-card {
+      position: sticky;
+      top: var(--card-top, 5.5rem);
+      z-index: var(--card-z, 10);
+    }
+  }
+  @media (max-width: 767.98px) {
+    .fw-stacked-card {
+      position: relative !important;
+      top: 0 !important;
+      z-index: 1 !important;
+    }
+  }
+
   /* --- Tactile Wood Action Button --- */
   .fw-wood-btn {
     background: var(--fw-wood-grad);

@@ -52,6 +52,7 @@ interface TranslationKeys {
     generalCargo: string
     flaxCategory: string
     viewFlaxCatalog: string
+    viewInCatalog: string
     nameLabel: string
     namePlaceholder: string
     phoneLabel: string
@@ -122,6 +123,7 @@ interface TranslationKeys {
     contactNav: string
     locationNav: string
     rights: string
+    subFooterNotice: string
   }
 }
 
@@ -176,6 +178,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       generalCargo: 'Custom / General Cargo',
       flaxCategory: 'Flax & Linen Products',
       viewFlaxCatalog: 'View Flax & Linen Catalog',
+      viewInCatalog: 'View in Catalog',
       nameLabel: 'Your Name / Company',
       namePlaceholder: 'e.g. John Doe / Global Corp',
       phoneLabel: 'Phone / WhatsApp Number',
@@ -247,6 +250,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       contactNav: 'Contact',
       locationNav: 'Location',
       rights: 'All rights reserved.',
+      subFooterNotice: 'International Logistics & Commodity Trading Excellence',
     },
   },
   ar: {
@@ -299,6 +303,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       generalCargo: 'شحنة عامة / بضاعة مخصصة',
       flaxCategory: 'منتجات وخامات الكتان',
       viewFlaxCatalog: 'تصفح كتالوج الكتان الكامل',
+      viewInCatalog: 'عرض بالكتالوج',
       nameLabel: 'الاسم أو اسم الشركة',
       namePlaceholder: 'مثال: أحمد محمد / شركة التجارة العالمية',
       phoneLabel: 'رقم الهاتف أو الواتساب',
@@ -370,6 +375,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       contactNav: 'تواصل معنا',
       locationNav: 'موقعنا',
       rights: 'جميع الحقوق محفوظة.',
+      subFooterNotice: 'الريادة في الخدمات اللوجستية الدولية وتجارة السلع الأساسية',
     },
   },
   zh: {
@@ -422,6 +428,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       generalCargo: '通用货物 / 自定义货运',
       flaxCategory: '天然亚麻及麻纤维系列',
       viewFlaxCatalog: '浏览亚麻全系画册',
+      viewInCatalog: '在画册中查看',
       nameLabel: '您的姓名 / 公司名称',
       namePlaceholder: '例如：李明 / 国际经贸有限公司',
       phoneLabel: '联系电话 / WhatsApp',
@@ -493,6 +500,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       contactNav: '联系方式',
       locationNav: '地图定位',
       rights: '保留所有权利。',
+      subFooterNotice: '国际物流与优质大宗商品进出口卓越服务',
     },
   },
   fr: {
@@ -545,6 +553,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       generalCargo: 'Cargaison Générale / Fret Spécifique',
       flaxCategory: 'Produits en Lin & Fibres',
       viewFlaxCatalog: 'Voir le catalogue du lin',
+      viewInCatalog: 'Voir dans le catalogue',
       nameLabel: 'Votre Nom / Entreprise',
       namePlaceholder: 'ex. Jean Dupont / Global Corp',
       phoneLabel: 'Téléphone / WhatsApp',
@@ -616,6 +625,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       contactNav: 'Contact',
       locationNav: 'Localisation',
       rights: 'Tous droits réservés.',
+      subFooterNotice: 'Excellence en logistique internationale et négoce de matières premières',
     },
   },
 }

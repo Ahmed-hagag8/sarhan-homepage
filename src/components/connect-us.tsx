@@ -108,7 +108,7 @@ export function ConnectUs() {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  aria-label="Close"
+                  aria-label={t.shipForm.close}
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-black hover:text-black dark:text-white dark:hover:text-white hover:bg-muted/80 transition-colors"
                 >
                   <X className="h-5 w-5" />

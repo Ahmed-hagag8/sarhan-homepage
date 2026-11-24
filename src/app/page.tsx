@@ -457,7 +457,7 @@ export default function Home() {
             </span>
 
             <span className="text-[11px] text-black dark:text-white">
-              International Logistics & Commodity Trading Excellence
+              {t.footer.subFooterNotice}
             </span>
           </div>
         </div>

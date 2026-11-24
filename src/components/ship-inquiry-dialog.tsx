@@ -17,7 +17,7 @@ import {
   ChevronDown,
 } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
-import { useI18n } from '@/lib/i18n-context'
+import { useI18n, type Locale } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
 import { CATALOG_PRODUCTS } from '@/app/products/flax-and-linen/product-data'
 
@@ -28,6 +28,75 @@ interface ShipInquiryDialogProps {
 
 const DUMMY_WHATSAPP_NUMBER = '1555000100'
 const DUMMY_EMAIL_ADDRESS = 'hello@sarhan.example.com'
+
+interface InquiryTemplate {
+  waHeader: string
+  nameLabel: string
+  phoneLabel: string
+  productLabel: string
+  catalogLinkLabel: string
+  originLabel: string
+  destLabel: string
+  specsLabel: string
+  footerNote: string
+  emailSubject: string
+  emailHeader: string
+}
+
+const INQUIRY_TEMPLATES: Record<Locale, InquiryTemplate> = {
+  en: {
+    waHeader: '🚢 *SARHAN Import & Export — Shipping Quote Request*',
+    nameLabel: '👤 *Name / Company:*',
+    phoneLabel: '📞 *Phone / Contact:*',
+    productLabel: '🏷️ *Product / Cargo:*',
+    catalogLinkLabel: '🌾 *Flax Catalog Link:*',
+    originLabel: '📍 *Origin (From):*',
+    destLabel: '🏁 *Destination (To):*',
+    specsLabel: '📦 *Cargo Specifications:*',
+    footerNote: 'Sent via SARHAN Official Portal',
+    emailSubject: 'Shipping Quote Request',
+    emailHeader: 'SARHAN Import & Export — Shipping Quote Request',
+  },
+  ar: {
+    waHeader: '🚢 *سرحان للاستيراد والتصدير — طلب عرض سعر شحن*',
+    nameLabel: '👤 *الاسم / الشركة:*',
+    phoneLabel: '📞 *الهاتف / للتواصل:*',
+    productLabel: '🏷️ *المنتج / البضاعة:*',
+    catalogLinkLabel: '🌾 *رابط كتالوج الكتان:*',
+    originLabel: '📍 *بلد المنشأ (من):*',
+    destLabel: '🏁 *جهة الوصول (إلى):*',
+    specsLabel: '📦 *مواصفات وتفاصيل الشحنة:*',
+    footerNote: 'تم الإرسال عبر البوابة الرسمية لسرحان للاستيراد والتصدير',
+    emailSubject: 'طلب عرض سعر شحن',
+    emailHeader: 'سرحان للاستيراد والتصدير — طلب عرض سعر شحن',
+  },
+  fr: {
+    waHeader: '🚢 *SARHAN Import & Export — Demande de Devis d’Expédition*',
+    nameLabel: '👤 *Nom / Société :*',
+    phoneLabel: '📞 *Téléphone / Contact :*',
+    productLabel: '🏷️ *Produit / Marchandise :*',
+    catalogLinkLabel: '🌾 *Lien Catalogue Lin :*',
+    originLabel: '📍 *Origine (De) :*',
+    destLabel: '🏁 *Destination (Vers) :*',
+    specsLabel: '📦 *Spécifications de la cargaison :*',
+    footerNote: 'Envoyé via le portail officiel SARHAN',
+    emailSubject: "Demande de Devis d'Expédition",
+    emailHeader: "SARHAN Import & Export — Demande de Devis d'Expédition",
+  },
+  zh: {
+    waHeader: '🚢 *SARHAN 进出口 — 运输报价申请*',
+    nameLabel: '👤 *姓名 / 公司：*',
+    phoneLabel: '📞 *电话 / 联系方式：*',
+    productLabel: '🏷️ *产品 / 货物：*',
+    catalogLinkLabel: '🌾 *亚麻目录链接：*',
+    originLabel: '📍 *始发地（从）：*',
+    destLabel: '🏁 *目的地（至）：*',
+    specsLabel: '📦 *货物规格及详情：*',
+    footerNote: '通过 SARHAN 官方门户发送',
+    emailSubject: '运输报价申请',
+    emailHeader: 'SARHAN 进出口 — 运输报价申请',
+  },
+}
 
 export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
   const { t, locale, dir } = useI18n()
@@ -73,25 +142,26 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
     e.preventDefault()
     if (!validate()) return
 
+    const tmpl = INQUIRY_TEMPLATES[locale] ?? INQUIRY_TEMPLATES.en
     const productTitle = selectedProduct
-      ? `${selectedProduct.translatedName[locale] ?? selectedProduct.name} (${selectedProduct.name})`
+      ? (locale === 'en' ? selectedProduct.name : (selectedProduct.translatedName[locale] ?? selectedProduct.name))
       : t.shipForm.generalCargo
 
     // 1. Prepare WhatsApp message
     const waMessage = [
-      '🚢 *SARHAN Import & Export — Shipping Quote Request*',
+      tmpl.waHeader,
       '─────────────────────────',
-      `👤 *Name / Company:* ${name.trim()}`,
-      phone.trim() ? `📞 *Phone / Contact:* ${phone.trim()}` : null,
-      `🏷️ *Product / Cargo:* ${productTitle}`,
+      `${tmpl.nameLabel} ${name.trim()}`,
+      phone.trim() ? `${tmpl.phoneLabel} ${phone.trim()}` : null,
+      `${tmpl.productLabel} ${productTitle}`,
       selectedProduct
-        ? `🌾 *Flax Catalog Link:* https://sarhan.example.com/products/flax-and-linen#${selectedProduct.id}`
+        ? `${tmpl.catalogLinkLabel} https://sarhan.example.com/products/flax-and-linen#${selectedProduct.id}`
         : null,
-      origin.trim() ? `📍 *Origin (From):* ${origin.trim()}` : null,
-      destination.trim() ? `🏁 *Destination (To):* ${destination.trim()}` : null,
-      `📦 *Cargo Specifications:* \n${details.trim()}`,
+      origin.trim() ? `${tmpl.originLabel} ${origin.trim()}` : null,
+      destination.trim() ? `${tmpl.destLabel} ${destination.trim()}` : null,
+      `${tmpl.specsLabel} \n${details.trim()}`,
       '─────────────────────────',
-      'Sent via SARHAN Official Portal',
+      tmpl.footerNote,
     ]
       .filter(Boolean)
       .join('\n')
@@ -99,24 +169,24 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
     const waUrl = `https://wa.me/${DUMMY_WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`
 
     // 2. Prepare Email message
-    const subject = `Shipping Quote Request: ${selectedProduct ? selectedProduct.name : 'General Cargo'} — ${name.trim()}`
+    const subject = `${tmpl.emailSubject}: ${productTitle} — ${name.trim()}`
     const emailBody = [
-      'SARHAN Import & Export — Shipping Quote Request',
+      tmpl.emailHeader,
       '==================================================',
-      `Name / Company: ${name.trim()}`,
-      phone.trim() ? `Contact Phone: ${phone.trim()}` : '',
-      `Selected Commodity / Product: ${productTitle}`,
+      `${tmpl.nameLabel.replace(/[*_:]/g, '').trim()}: ${name.trim()}`,
+      phone.trim() ? `${tmpl.phoneLabel.replace(/[*_:]/g, '').trim()}: ${phone.trim()}` : '',
+      `${tmpl.productLabel.replace(/[*_:]/g, '').trim()}: ${productTitle}`,
       selectedProduct
-        ? `Catalog Item Link: /products/flax-and-linen#${selectedProduct.id}`
+        ? `${tmpl.catalogLinkLabel.replace(/[*_:]/g, '').trim()}: /products/flax-and-linen#${selectedProduct.id}`
         : '',
-      origin.trim() ? `Origin (From): ${origin.trim()}` : '',
-      destination.trim() ? `Destination (To): ${destination.trim()}` : '',
+      origin.trim() ? `${tmpl.originLabel.replace(/[*_:]/g, '').trim()}: ${origin.trim()}` : '',
+      destination.trim() ? `${tmpl.destLabel.replace(/[*_:]/g, '').trim()}: ${destination.trim()}` : '',
       '',
-      'Cargo Specifications & Details:',
+      `${tmpl.specsLabel.replace(/[*_:]/g, '').trim()}:`,
       details.trim(),
       '',
       '==================================================',
-      'Sent from SARHAN Online Portal',
+      tmpl.footerNote,
     ]
       .filter(Boolean)
       .join('\n')
@@ -252,7 +322,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
                 <optgroup label={t.shipForm.flaxCategory}>
                   {CATALOG_PRODUCTS.map((prod) => (
                     <option key={prod.id} value={prod.id}>
-                      {prod.translatedName[locale] ?? prod.name} ({prod.name})
+                      {locale === 'en' ? prod.name : (prod.translatedName[locale] ?? prod.name)}
                     </option>
                   ))}
                 </optgroup>
@@ -289,15 +359,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
                   target="_blank"
                   className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-card/90 px-2.5 py-1 text-[11px] font-semibold text-primary hover:bg-card border border-border/50 transition-colors shadow-xs"
                 >
-                  <span>
-                    {locale === 'ar'
-                      ? 'عرض بالكتالوج'
-                      : locale === 'fr'
-                        ? 'Voir détails'
-                        : locale === 'zh'
-                          ? '查看详情'
-                          : 'View in Catalog'}
-                  </span>
+                  <span>{t.shipForm.viewInCatalog}</span>
                   <ExternalLink className="h-3 w-3 rtl:-scale-x-100" />
                 </Link>
               </div>
