@@ -7,12 +7,12 @@ import { WhatsAppIcon } from '@/components/whatsapp-icon'
 import { useI18n } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
 
-const WHATSAPP_NUMBER = '+1 555-000-100'
-const WHATSAPP_URL = 'https://wa.me/1555000100'
+const WHATSAPP_NUMBER = '+20 113 328 9251'
+const WHATSAPP_URL = 'https://wa.me/201133289251'
 const EMAIL_ADDRESS = 'hello@sarhan.example.com'
 const EMAIL_URL = 'mailto:hello@sarhan.example.com'
-const PHONE_NUMBER = '+1 555-000-0000'
-const PHONE_URL = 'tel:+15550000000'
+const PHONE_NUMBER = '+20 113 328 9251'
+const PHONE_URL = 'tel:+201133289251'
 
 export function ConnectUs() {
   const { t } = useI18n()
@@ -88,8 +88,8 @@ export function ConnectUs() {
               {/* Header */}
               <div className="flex items-start justify-between gap-4 pb-4 border-b border-border/50">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent border border-[var(--gold-arrow-border)]">
-                    <Phone className="gi h-6 w-6" strokeWidth={1.75} />
+                  <div className="arrow-chip flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl">
+                    <Phone className="h-6 w-6" strokeWidth={1.75} />
                   </div>
                   <div>
                     <h2
@@ -109,7 +109,7 @@ export function ConnectUs() {
                   type="button"
                   onClick={() => setOpen(false)}
                   aria-label={t.shipForm.close}
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-black hover:text-black dark:text-white dark:hover:text-white hover:bg-muted/80 transition-colors"
+                  className="arrow-chip flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 hover:scale-105"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -130,8 +130,8 @@ export function ConnectUs() {
                   )}
                 >
                   <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent border border-[var(--gold-arrow-border)] transition-transform duration-300 group-hover:scale-105">
-                      <WhatsAppIcon className="gi h-6 w-6" />
+                    <div className="arrow-chip flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-105">
+                      <WhatsAppIcon className="h-6 w-6" />
                     </div>
                     <div className="flex flex-col text-start min-w-0">
                       <span className="text-sm sm:text-base font-bold text-black dark:text-white tracking-tight">
@@ -143,7 +143,7 @@ export function ConnectUs() {
                     </div>
                   </div>
 
-                  <div className="arrow-chip flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-105">
+                  <div className="arrow-chip flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-105">
                     <ArrowRight className="h-4 w-4 rtl:-scale-x-100" />
                   </div>
                 </a>
@@ -159,8 +159,8 @@ export function ConnectUs() {
                   )}
                 >
                   <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent border border-[var(--gold-arrow-border)] transition-transform duration-300 group-hover:scale-105">
-                      <Mail className="gi h-6 w-6" />
+                    <div className="arrow-chip flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-105">
+                      <Mail className="h-6 w-6" />
                     </div>
                     <div className="flex flex-col text-start min-w-0">
                       <span className="text-sm sm:text-base font-bold text-black dark:text-white tracking-tight">
@@ -172,7 +172,7 @@ export function ConnectUs() {
                     </div>
                   </div>
 
-                  <div className="arrow-chip flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-105">
+                  <div className="arrow-chip flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-105">
                     <ArrowRight className="h-4 w-4 rtl:-scale-x-100" />
                   </div>
                 </a>
@@ -188,8 +188,8 @@ export function ConnectUs() {
                   )}
                 >
                   <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent border border-[var(--gold-arrow-border)] transition-transform duration-300 group-hover:scale-105">
-                      <Phone className="gi h-5 w-5" />
+                    <div className="arrow-chip flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-105">
+                      <Phone className="h-6 w-6" />
                     </div>
                     <div className="flex flex-col text-start min-w-0">
                       <span className="text-sm sm:text-base font-bold text-black dark:text-white tracking-tight">
@@ -201,7 +201,7 @@ export function ConnectUs() {
                     </div>
                   </div>
 
-                  <div className="arrow-chip flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-105">
+                  <div className="arrow-chip flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-105">
                     <ArrowRight className="h-4 w-4 rtl:-scale-x-100" />
                   </div>
                 </a>

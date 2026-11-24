@@ -122,6 +122,7 @@ const organizationSchema = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "Sales",
+    telephone: "+201133289251",
     availableLanguage: ["English", "Arabic", "French", "Chinese"],
   },
   sameAs: [],

@@ -26,7 +26,7 @@ interface ShipInquiryDialogProps {
   onClose: () => void
 }
 
-const DUMMY_WHATSAPP_NUMBER = '1555000100'
+const DUMMY_WHATSAPP_NUMBER = '201133289251'
 const DUMMY_EMAIL_ADDRESS = 'hello@sarhan.example.com'
 
 interface InquiryTemplate {
@@ -229,8 +229,8 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
         {/* Header */}
         <div className="flex items-start justify-between gap-4 pb-4 border-b border-border/50">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent border border-[var(--gold-arrow-border)]">
-              <Plane className="gi h-6 w-6" strokeWidth={1.75} />
+            <div className="arrow-chip flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl">
+              <Plane className="h-6 w-6" strokeWidth={1.75} />
             </div>
             <div>
               <h2
@@ -250,7 +250,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             type="button"
             onClick={onClose}
             aria-label={t.shipForm.close}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-black hover:text-black dark:text-white dark:hover:text-white hover:bg-muted/80 transition-colors"
+            className="arrow-chip flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 hover:scale-105"
           >
             <X className="h-5 w-5" />
           </button>
