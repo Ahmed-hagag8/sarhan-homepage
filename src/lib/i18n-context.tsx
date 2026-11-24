@@ -67,6 +67,7 @@ interface TranslationKeys {
     typeExpress: string
     detailsLabel: string
     detailsPlaceholder: string
+    sendViaLabel: string
     sendWhatsApp: string
     sendEmail: string
     submitBoth: string
@@ -193,6 +194,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       typeExpress: 'Door-to-Door Courier',
       detailsLabel: 'Cargo Specifications / Notes',
       detailsPlaceholder: 'Weight (kg), volume (CBM), commodity type, or special requirements...',
+      sendViaLabel: 'Send Inquiry via',
       sendWhatsApp: 'Send via WhatsApp',
       sendEmail: 'Send via Email',
       submitBoth: 'Send via WhatsApp & Email',
@@ -318,6 +320,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       typeExpress: 'شحن سريع من الباب للباب',
       detailsLabel: 'مواصفات وتفاصيل الشحنة',
       detailsPlaceholder: 'الوزن التقريبي (كجم)، الحجم (CBM)، نوع البضاعة، أو أي متطلبات خاصة...',
+      sendViaLabel: 'طريقة الإرسال المفضلّة',
       sendWhatsApp: 'إرسال عبر واتساب',
       sendEmail: 'إرسال عبر البريد',
       submitBoth: 'إرسال عبر واتساب والبريد',
@@ -443,6 +446,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       typeExpress: '门到门国际快递',
       detailsLabel: '货物详情与具体说明',
       detailsPlaceholder: '预估重量（kg）、体积（CBM）、品类说明或特殊温控要求...',
+      sendViaLabel: '选择发送渠道',
       sendWhatsApp: '通过 WhatsApp 发送',
       sendEmail: '通过电子邮件发送',
       submitBoth: '通过 WhatsApp 和邮件发送',
@@ -568,6 +572,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       typeExpress: 'Courrier Express Porte-à-Porte',
       detailsLabel: 'Spécifications du Fret / Remarques',
       detailsPlaceholder: 'Poids (kg), volume (CBM), type de marchandise ou exigences particulières...',
+      sendViaLabel: 'Envoyer la demande via',
       sendWhatsApp: 'Envoyer via WhatsApp',
       sendEmail: 'Envoyer par Email',
       submitBoth: 'Envoyer via WhatsApp & Email',

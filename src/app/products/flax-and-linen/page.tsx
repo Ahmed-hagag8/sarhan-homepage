@@ -24,6 +24,7 @@ import {
 } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { LanguageSelector } from '@/components/language-selector'
+import { WhatsAppIcon } from '@/components/whatsapp-icon'
 import { useI18n } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
 import {
@@ -35,6 +36,7 @@ import {
 } from './product-data'
 
 const EMAIL_BASE = 'imex@sarhanco.com'
+const WHATSAPP_NUMBER = '201133289251'
 
 export default function ProductFlaxAndLinenPage() {
   const { locale, dir } = useI18n()
@@ -50,6 +52,7 @@ export default function ProductFlaxAndLinenPage() {
   const [notes, setNotes] = React.useState('')
   const [formError, setFormError] = React.useState('')
   const [submittedSuccess, setSubmittedSuccess] = React.useState(false)
+  const [sendVia, setSendVia] = React.useState<'whatsapp' | 'email'>('whatsapp')
 
   const ui = React.useMemo(() => {
     return {
@@ -92,6 +95,9 @@ export default function ProductFlaxAndLinenPage() {
       rightsReserved: CATALOG_UI.rightsReserved[locale] ?? CATALOG_UI.rightsReserved.en,
       subFooterText: CATALOG_UI.subFooterText[locale] ?? CATALOG_UI.subFooterText.en,
       viewInCatalog: CATALOG_UI.viewInCatalog[locale] ?? CATALOG_UI.viewInCatalog.en,
+      sendViaLabel: CATALOG_UI.sendViaLabel[locale] ?? CATALOG_UI.sendViaLabel.en,
+      sendWhatsApp: CATALOG_UI.sendWhatsApp[locale] ?? CATALOG_UI.sendWhatsApp.en,
+      sendEmail: CATALOG_UI.sendEmail[locale] ?? CATALOG_UI.sendEmail.en,
       previewBtn: locale === 'ar' ? 'معاينة' : locale === 'fr' ? 'Aperçu' : locale === 'zh' ? '预览' : 'Preview',
       previewHeading: locale === 'ar' ? 'معاينة المنتج والشهادات' : locale === 'fr' ? 'Aperçu du Produit' : locale === 'zh' ? '产品高清预览' : 'Product Preview',
       closeBtn: locale === 'ar' ? 'إغلاق' : locale === 'fr' ? 'Fermer' : locale === 'zh' ? '关闭' : 'Close',
@@ -238,8 +244,33 @@ export default function ProductFlaxAndLinenPage() {
 
     const mailtoUrl = `mailto:${EMAIL_BASE}?subject=${encodeURIComponent(tBody.subject)}&body=${encodeURIComponent(emailBody)}`
 
-    // Open user's email client
-    window.location.href = mailtoUrl
+    if (sendVia === 'whatsapp') {
+      const waMessage = [
+        tBody.title,
+        '─────────────────────────',
+        `${tBody.product}: ${prodName}`,
+        `${tBody.client}: ${buyerName.trim()}`,
+        `${tBody.email}: ${buyerEmail.trim()}`,
+        buyerPhone.trim() ? `${tBody.phone}: ${buyerPhone.trim()}` : null,
+        quantity.trim() ? `${tBody.quantity}: ${quantity.trim()}` : null,
+        destination.trim() ? `${tBody.dest}: ${destination.trim()}` : null,
+        selectedProductForShip ? `https://www.sarhanco.com/products/flax-and-linen#${selectedProductForShip.id}` : null,
+        '─────────────────────────',
+        tBody.specsHeader,
+        notes.trim() || tBody.defaultNotes,
+        '─────────────────────────',
+        tBody.footer,
+      ]
+        .filter(Boolean)
+        .join('\n')
+
+      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`
+      window.open(waUrl, '_blank', 'noopener,noreferrer')
+    } else {
+      // Open user's email client directly to imex@sarhanco.com
+      window.location.href = mailtoUrl
+    }
+
     setSubmittedSuccess(true)
     setTimeout(() => {
       handleCloseShipModal()
@@ -932,6 +963,44 @@ export default function ProductFlaxAndLinenPage() {
                 />
               </div>
 
+              {/* Row 5: Send Via Selector (WhatsApp or Email) */}
+              <div>
+                <label className="mb-1.5 flex items-center justify-between text-xs font-semibold text-[var(--fw-text-main)]">
+                  <span>{ui.sendViaLabel}</span>
+                  <span className="text-[11px] text-[var(--fw-text-soft)] font-normal">
+                    {sendVia === 'email' ? 'imex@sarhanco.com' : '+20 113 328 9251'}
+                  </span>
+                </label>
+                <div className="grid grid-cols-2 gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => setSendVia('whatsapp')}
+                    className={cn(
+                      'flex items-center justify-center gap-2 rounded-xl p-3 text-xs sm:text-sm font-bold border transition-all duration-200 cursor-pointer',
+                      sendVia === 'whatsapp'
+                        ? 'fw-wood-btn text-white border-transparent shadow-md'
+                        : 'bg-[var(--fw-surface-subtle)] text-[var(--fw-text-main)] border-[var(--fw-wood-border)] hover:border-[var(--fw-flax-gold)]',
+                    )}
+                  >
+                    <WhatsAppIcon className="h-4 w-4" />
+                    <span>{ui.sendWhatsApp}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSendVia('email')}
+                    className={cn(
+                      'flex items-center justify-center gap-2 rounded-xl p-3 text-xs sm:text-sm font-bold border transition-all duration-200 cursor-pointer',
+                      sendVia === 'email'
+                        ? 'fw-wood-btn text-white border-transparent shadow-md'
+                        : 'bg-[var(--fw-surface-subtle)] text-[var(--fw-text-main)] border-[var(--fw-wood-border)] hover:border-[var(--fw-flax-gold)]',
+                    )}
+                  >
+                    <Mail className="h-4 w-4" />
+                    <span>{ui.sendEmail}</span>
+                  </button>
+                </div>
+              </div>
+
               {/* Error notice */}
               {formError && (
                 <p className="text-xs font-medium text-destructive animate-in fade-in">
@@ -951,10 +1020,15 @@ export default function ProductFlaxAndLinenPage() {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="fw-wood-btn group relative w-full inline-flex items-center justify-center gap-3 rounded-2xl py-3.5 px-6 font-semibold text-sm sm:text-base"
+                  className="fw-wood-btn group relative w-full inline-flex items-center justify-center gap-3 rounded-2xl py-3.5 px-6 font-semibold text-sm sm:text-base cursor-pointer"
                 >
+                  {sendVia === 'whatsapp' ? (
+                    <WhatsAppIcon className="h-5 w-5" />
+                  ) : (
+                    <Mail className="h-5 w-5" />
+                  )}
                   <span className="font-bold tracking-wider uppercase text-sm sm:text-base">
-                    {ui.submitBtn}
+                    {sendVia === 'whatsapp' ? ui.sendWhatsApp : `${ui.sendEmail} (imex@sarhanco.com)`}
                   </span>
 
                   <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 dark:bg-black/25 backdrop-blur-xs transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1">

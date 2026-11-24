@@ -108,6 +108,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
   const [destination, setDestination] = React.useState('')
   const [details, setDetails] = React.useState('')
   const [error, setError] = React.useState('')
+  const [sendVia, setSendVia] = React.useState<'whatsapp' | 'email'>('whatsapp')
 
   const selectedProduct = React.useMemo(() => {
     return CATALOG_PRODUCTS.find((p) => p.id === selectedProductId)
@@ -193,13 +194,13 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
 
     const mailtoUrl = `mailto:${DUMMY_EMAIL_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`
 
-    // Open WhatsApp in a new tab
-    window.open(waUrl, '_blank', 'noopener,noreferrer')
-
-    // Trigger user's mail client
-    setTimeout(() => {
+    if (sendVia === 'whatsapp') {
+      // Open WhatsApp in a new tab
+      window.open(waUrl, '_blank', 'noopener,noreferrer')
+    } else {
+      // Trigger user's mail client directly to imex@sarhanco.com
       window.location.href = mailtoUrl
-    }, 250)
+    }
 
     onClose()
   }
@@ -414,6 +415,44 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             />
           </div>
 
+          {/* Row 5: Send Via Selector (WhatsApp or Email) */}
+          <div>
+            <label className="mb-1.5 flex items-center justify-between text-xs font-semibold text-foreground dark:text-white">
+              <span>{t.shipForm.sendViaLabel}</span>
+              <span className="text-[11px] text-muted-foreground/80 dark:text-white/60 font-normal">
+                {sendVia === 'email' ? 'imex@sarhanco.com' : '+20 113 328 9251'}
+              </span>
+            </label>
+            <div className="grid grid-cols-2 gap-2.5">
+              <button
+                type="button"
+                onClick={() => setSendVia('whatsapp')}
+                className={cn(
+                  'flex items-center justify-center gap-2 rounded-xl p-3 text-xs sm:text-sm font-bold border transition-all duration-200 cursor-pointer',
+                  sendVia === 'whatsapp'
+                    ? 'gold-fill border-transparent shadow-md'
+                    : 'bg-muted/40 text-foreground dark:text-white border-border/70 hover:bg-muted/70',
+                )}
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                <span>{t.shipForm.sendWhatsApp}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setSendVia('email')}
+                className={cn(
+                  'flex items-center justify-center gap-2 rounded-xl p-3 text-xs sm:text-sm font-bold border transition-all duration-200 cursor-pointer',
+                  sendVia === 'email'
+                    ? 'gold-fill border-transparent shadow-md'
+                    : 'bg-muted/40 text-foreground dark:text-white border-border/70 hover:bg-muted/70',
+                )}
+              >
+                <Mail className="h-4 w-4" />
+                <span>{t.shipForm.sendEmail}</span>
+              </button>
+            </div>
+          </div>
+
           {/* Validation error notice */}
           {error && (
             <p className="text-xs font-medium text-destructive animate-in fade-in">
@@ -426,16 +465,21 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             <button
               type="submit"
               className={cn(
-                'group relative w-full inline-flex items-center justify-center gap-3 rounded-2xl py-3.5 px-6 font-semibold text-sm sm:text-base',
+                'group relative w-full inline-flex items-center justify-center gap-3 rounded-2xl py-3.5 px-6 font-semibold text-sm sm:text-base cursor-pointer',
                 'gold-fill border border-transparent shadow-lg shadow-[rgba(197,136,12,0.25)] dark:shadow-[rgba(212,175,55,0.2)]',
                 'hover:shadow-xl hover:shadow-[rgba(197,136,12,0.38)] dark:hover:shadow-[rgba(212,175,55,0.35)]',
                 'hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-300 ease-out',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
               )}
             >
+              {sendVia === 'whatsapp' ? (
+                <WhatsAppIcon className="h-5 w-5" />
+              ) : (
+                <Mail className="h-5 w-5" />
+              )}
               {/* Submit Label */}
               <span className="font-bold tracking-wider uppercase text-sm sm:text-base">
-                {t.shipForm.submit}
+                {sendVia === 'whatsapp' ? t.shipForm.sendWhatsApp : `${t.shipForm.sendEmail} (imex@sarhanco.com)`}
               </span>
 
               {/* Action arrow */}

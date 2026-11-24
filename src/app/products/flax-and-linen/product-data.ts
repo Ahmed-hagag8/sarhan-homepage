@@ -210,6 +210,24 @@ export const CATALOG_UI = {
     fr: 'Grade souhaité (A/B), tolérance d\'humidité, terme CIF/FOB...',
     zh: '期望等级（A/B级）、含杂率要求、贸易术语 CIF/FOB 等...',
   },
+  sendViaLabel: {
+    en: 'Send inquiry via',
+    ar: 'طريقة الإرسال المفضلّة',
+    fr: 'Envoyer la demande via',
+    zh: '选择发送渠道',
+  },
+  sendWhatsApp: {
+    en: 'Send via WhatsApp',
+    ar: 'إرسال عبر واتساب',
+    fr: 'Envoyer via WhatsApp',
+    zh: '通过 WhatsApp 发送',
+  },
+  sendEmail: {
+    en: 'Send via Email',
+    ar: 'إرسال عبر البريد الإلكتروني',
+    fr: 'Envoyer par Email',
+    zh: '通过电子邮件发送',
+  },
   submitBtn: {
     en: 'SUBMIT SHIPPING REQUEST',
     ar: 'إرسال طلب الشحن',
