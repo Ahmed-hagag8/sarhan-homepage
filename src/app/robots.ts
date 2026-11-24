@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://sarhan-trade.com/sitemap.xml",
-    host: "https://sarhan-trade.com",
+    sitemap: "https://sarhanco.com/sitemap.xml",
+    host: "https://sarhanco.com",
   };
 }

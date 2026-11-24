@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 
-const BASE_URL = "https://sarhan-trade.com";
+const BASE_URL = "https://sarhanco.com";
 const PAGE_URL = `${BASE_URL}/products/flax-and-linen`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Flax & Linen Collection | Natural Fiber Atelier",
+  title: "Flax & Linen Collection | SARHAN Co.",
   description:
-    "Premium natural flax and linen fiber collection by SARHAN Import & Export. Scutched flax, hackled flax, cottonised flax, flax tow, and flax seeds — ready for global shipping with ISO 9001 compliance.",
+    "Premium natural flax and linen fiber collection by SARHAN Co. (sarhanco.com). Scutched flax, hackled flax, cottonised flax, flax tow, and flax seeds — ready for global shipping with ISO 9001 compliance.",
   keywords: [
+    "sarhanco",
+    "sarhanco.com",
     "flax fiber",
     "linen",
     "scutched flax",
@@ -21,14 +23,15 @@ export const metadata: Metadata = {
     "Egypt flax",
     "ISO 9001",
     "fiber atelier",
+    "SARHAN Co",
   ],
   openGraph: {
     type: "website",
     locale: "en_US",
     alternateLocale: ["ar_EG", "fr_FR", "zh_CN"],
     url: PAGE_URL,
-    siteName: "SARHAN Import & Export",
-    title: "Flax & Linen Collection | Natural Fiber Atelier — SARHAN",
+    siteName: "SARHAN Co.",
+    title: "Flax & Linen Collection | SARHAN Co.",
     description:
       "Premium natural flax and linen fiber. Scutched flax, hackled flax, cottonised flax, tow, and seeds — ready for global shipping. ISO 9001 compliant.",
     images: [
@@ -36,13 +39,13 @@ export const metadata: Metadata = {
         url: "/products/scutched_flax_new.jpg",
         width: 1200,
         height: 630,
-        alt: "Scutched Flax — SARHAN Natural Fiber Collection",
+        alt: "Scutched Flax — SARHAN Co. Natural Fiber Collection",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Flax & Linen Collection | SARHAN Natural Fiber Atelier",
+    title: "Flax & Linen Collection | SARHAN Co.",
     description:
       "Premium natural flax and linen fiber for global textile manufacturers. ISO 9001 compliant shipping.",
     images: ["/products/scutched_flax_new.jpg"],

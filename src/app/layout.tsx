@@ -29,18 +29,22 @@ const geistMono = Geist_Mono({
   fallback: ["Courier New", "monospace"],
 });
 
-const BASE_URL = "https://sarhan-trade.com";
+const BASE_URL = "https://sarhanco.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "SARHAN — Import & Export | International Trade & Logistics",
-    template: "%s | SARHAN Import & Export",
+    default: "SARHAN Co. — Import & Export | International Trade & Logistics",
+    template: "%s | SARHAN Co.",
   },
   description:
-    "SARHAN Import & Export — premium international commodity trading, shipping, and logistics. Supplying natural flax fiber, linen products, and agricultural commodities to global textile manufacturers.",
+    "SARHAN Co. (sarhanco.com) — premium international commodity trading, shipping, and logistics. Supplying natural flax fiber, linen products, and agricultural commodities to global textile manufacturers.",
   keywords: [
+    "sarhanco",
+    "sarhanco.com",
     "SARHAN",
+    "SARHAN Co",
+    "SARHAN Import & Export",
     "import",
     "export",
     "shipping",
@@ -52,9 +56,9 @@ export const metadata: Metadata = {
     "Egypt export",
     "natural fiber",
   ],
-  authors: [{ name: "SARHAN Import & Export" }],
-  creator: "SARHAN Import & Export",
-  publisher: "SARHAN Import & Export",
+  authors: [{ name: "SARHAN Co." }],
+  creator: "SARHAN Co.",
+  publisher: "SARHAN Co.",
   robots: {
     index: true,
     follow: true,
@@ -71,8 +75,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     alternateLocale: ["ar_EG", "fr_FR", "zh_CN"],
     url: BASE_URL,
-    siteName: "SARHAN Import & Export",
-    title: "SARHAN — International Trade & Logistics",
+    siteName: "SARHAN Co.",
+    title: "SARHAN Co. — International Trade & Logistics",
     description:
       "Premium international commodity trading, shipping, and logistics. Supplying natural flax fiber, linen products, and agricultural commodities to global textile manufacturers.",
     images: [
@@ -80,13 +84,13 @@ export const metadata: Metadata = {
         url: "/sarhan-logo.png",
         width: 1200,
         height: 630,
-        alt: "SARHAN Import & Export",
+        alt: "SARHAN Co. Logo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SARHAN — International Trade & Logistics",
+    title: "SARHAN Co. — International Trade & Logistics",
     description:
       "Premium international commodity trading, shipping, and logistics. Natural flax fiber & linen for global textile manufacturers.",
     images: ["/sarhan-logo.png"],
@@ -113,19 +117,37 @@ export const metadata: Metadata = {
 
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "SARHAN Import & Export",
-  url: "https://sarhan-trade.com",
-  logo: "https://sarhan-trade.com/sarhan-logo.png",
-  description:
-    "Premium international commodity trading, shipping, and logistics. Supplying natural flax fiber, linen products, and agricultural commodities to global textile manufacturers.",
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "Sales",
-    telephone: "+201133289251",
-    availableLanguage: ["English", "Arabic", "French", "Chinese"],
-  },
-  sameAs: [],
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://sarhanco.com/#website",
+      url: "https://sarhanco.com",
+      name: "SARHAN Co.",
+      alternateName: ["sarhanco", "sarhanco.com", "سرحان للاستيراد والتصدير"],
+      description: "SARHAN Co. — International Trade, Logistics & Flax Commodities",
+      inLanguage: ["en", "ar", "fr", "zh"],
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://sarhanco.com/#organization",
+      name: "SARHAN Import & Export",
+      alternateName: ["SARHAN Co.", "sarhanco", "sarhanco.com"],
+      url: "https://sarhanco.com",
+      logo: "https://sarhanco.com/sarhan-logo.png",
+      email: "info@sarhanco.com",
+      telephone: "+201133289251",
+      description:
+        "Premium international commodity trading, shipping, and logistics. Supplying natural flax fiber, linen products, and agricultural commodities to global textile manufacturers.",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "Sales & Inquiries",
+        telephone: "+201133289251",
+        email: "info@sarhanco.com",
+        availableLanguage: ["English", "Arabic", "French", "Chinese"],
+      },
+      sameAs: ["https://sarhanco.com"],
+    },
+  ],
 };
 
 export default function RootLayout({

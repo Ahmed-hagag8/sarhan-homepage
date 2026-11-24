@@ -9,8 +9,8 @@ import { cn } from '@/lib/utils'
 
 const WHATSAPP_NUMBER = '+20 113 328 9251'
 const WHATSAPP_URL = 'https://wa.me/201133289251'
-const EMAIL_ADDRESS = 'hello@sarhan.example.com'
-const EMAIL_URL = 'mailto:hello@sarhan.example.com'
+const EMAIL_ADDRESS = 'info@sarhanco.com'
+const EMAIL_URL = 'mailto:info@sarhanco.com'
 const PHONE_NUMBER = '+20 113 328 9251'
 const PHONE_URL = 'tel:+201133289251'
 

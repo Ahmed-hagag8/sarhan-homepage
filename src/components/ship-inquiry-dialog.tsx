@@ -27,7 +27,7 @@ interface ShipInquiryDialogProps {
 }
 
 const DUMMY_WHATSAPP_NUMBER = '201133289251'
-const DUMMY_EMAIL_ADDRESS = 'hello@sarhan.example.com'
+const DUMMY_EMAIL_ADDRESS = 'info@sarhanco.com'
 
 interface InquiryTemplate {
   waHeader: string
@@ -155,7 +155,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
       phone.trim() ? `${tmpl.phoneLabel} ${phone.trim()}` : null,
       `${tmpl.productLabel} ${productTitle}`,
       selectedProduct
-        ? `${tmpl.catalogLinkLabel} https://sarhan.example.com/products/flax-and-linen#${selectedProduct.id}`
+        ? `${tmpl.catalogLinkLabel} https://sarhanco.com/products/flax-and-linen#${selectedProduct.id}`
         : null,
       origin.trim() ? `${tmpl.originLabel} ${origin.trim()}` : null,
       destination.trim() ? `${tmpl.destLabel} ${destination.trim()}` : null,

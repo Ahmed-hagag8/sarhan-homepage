@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sarhan-trade.com/sitemap.xml
+Sitemap: https://sarhanco.com/sitemap.xml
