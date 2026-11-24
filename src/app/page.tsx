@@ -57,7 +57,7 @@ function OptionCard({
           'transition-all duration-300 ease-out',
           'hover:-translate-y-1 hover:shadow-lg',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-          active && 'ring-2 ring-primary border-primary shadow-md',
+          active && 'ring-2 ring-primary border-primary shadow-md is-active',
         )}
       >
         {/* Subtle gold accent bar that grows on hover / active */}
@@ -72,16 +72,15 @@ function OptionCard({
         />
 
         <div className="flex min-w-0 items-center gap-2 sm:gap-4 md:gap-5">
-          {/* Leading icon container with metallic sheen */}
+          {/* Leading icon container (plane & box) with matching gold hover styling like the arrow */}
           <div
             aria-hidden="true"
             className={cn(
-              'flex h-9 w-9 sm:h-12 sm:w-12 md:h-14 md:w-14 shrink-0 items-center justify-center rounded-xl',
-              'border border-border/60 bg-muted/50 transition-colors duration-300 group-hover:bg-accent/60',
-              active && 'bg-accent/80',
+              'arrow-chip flex h-9 w-9 sm:h-12 sm:w-12 md:h-14 md:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl transition-all duration-300',
+              active && 'is-active',
             )}
           >
-            <span className="gi flex items-center justify-center">
+            <span className="flex items-center justify-center">
               {icon}
             </span>
           </div>
@@ -92,11 +91,11 @@ function OptionCard({
                 {badge}
               </span>
             )}
-            <span className="text-xs sm:text-base md:text-xl font-bold leading-snug tracking-tight truncate sm:whitespace-normal dark:text-white">
+            <span className="text-xs sm:text-base md:text-xl font-bold leading-snug tracking-tight truncate sm:whitespace-normal text-black dark:text-white">
               {label}
             </span>
             {description && (
-              <span className="mt-0.5 hidden text-xs text-muted-foreground/90 sm:block md:text-sm line-clamp-2 dark:text-white">
+              <span className="mt-0.5 hidden text-xs text-black sm:block md:text-sm line-clamp-2 dark:text-white">
                 {description}
               </span>
             )}
@@ -108,6 +107,7 @@ function OptionCard({
           className={cn(
             'arrow-chip flex h-7 w-7 sm:h-10 sm:w-10 md:h-11 md:w-11 shrink-0 items-center justify-center rounded-full transition-transform duration-300',
             arrowDirection === 'down' ? 'rotate-90' : 'rtl:-scale-x-100',
+            active && 'is-active',
           )}
         >
           <ArrowRight className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
@@ -142,7 +142,7 @@ export default function Home() {
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/70 hover:text-foreground dark:text-white dark:hover:text-white transition-colors sm:text-sm"
+            className="text-xs font-semibold uppercase tracking-[0.2em] text-black hover:text-black dark:text-white dark:hover:text-white transition-colors sm:text-sm"
           >
             {t.logo.wordmark}
           </button>
@@ -175,9 +175,9 @@ export default function Home() {
           {/* Hero Right (Desktop) / Below Logo (Mobile): Description */}
           <div className="order-2 flex w-full flex-col items-center text-center md:order-2 md:w-7/12 lg:w-1/2 md:items-start md:text-start">
             {/* Main Headline */}
-            <h1 className="font-serif text-3xl font-bold tracking-tight text-foreground dark:text-white sm:text-4xl md:text-5xl lg:text-5xl">
+            <h1 className="font-serif text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl md:text-5xl lg:text-5xl">
               <span>{t.hero.title}</span>
-              <span className="block mt-1 sm:mt-1.5 text-xl font-medium tracking-normal text-muted-foreground dark:text-white sm:text-2xl md:text-3xl">
+              <span className="block mt-1 sm:mt-1.5 text-xl font-medium tracking-normal text-black dark:text-white sm:text-2xl md:text-3xl">
                 {t.hero.subtitle}
               </span>
             </h1>
@@ -185,7 +185,7 @@ export default function Home() {
             {/* Description Paragraph */}
             <p
               className={cn(
-                'mt-4 text-sm leading-relaxed text-muted-foreground dark:text-white sm:text-base md:text-lg sm:leading-relaxed max-w-xl',
+                'mt-4 text-sm leading-relaxed text-black dark:text-white sm:text-base md:text-lg sm:leading-relaxed max-w-xl',
                 dir === 'rtl' && 'leading-loose',
               )}
             >
@@ -226,15 +226,10 @@ export default function Home() {
             />
 
             <div className="relative z-10 flex flex-col items-center text-center gap-4 sm:gap-6">
-              {/* Category label */}
-              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-primary sm:text-sm">
-                {t.about.badge}
-              </span>
-
               {/* Heading */}
               <h2
                 id="about-us-heading"
-                className="font-serif text-2xl font-bold tracking-tight text-foreground dark:text-white sm:text-3xl md:text-4xl"
+                className="font-serif text-2xl font-bold tracking-tight text-black dark:text-white sm:text-3xl md:text-4xl"
               >
                 {t.about.heading}
               </h2>
@@ -242,7 +237,7 @@ export default function Home() {
               {/* Main paragraph */}
               <p
                 className={cn(
-                  'font-serif max-w-3xl text-sm leading-relaxed sm:text-base sm:leading-relaxed md:text-lg md:leading-[1.8] text-foreground/90 dark:text-white',
+                  'font-serif max-w-3xl text-sm leading-relaxed sm:text-base sm:leading-relaxed md:text-lg md:leading-[1.8] text-black dark:text-white',
                   dir === 'rtl' && 'leading-loose',
                 )}
                 style={dir === 'rtl' ? { lineHeight: 2 } : undefined}
@@ -260,15 +255,24 @@ export default function Home() {
             =================================================================== */}
         <section
           id="services-section"
-          aria-label={t.options.heading}
-          className="mt-14 w-full max-w-4xl sm:mt-18 md:mt-24"
+          aria-labelledby="services-heading"
+          className="mt-14 w-full max-w-5xl sm:mt-18 md:mt-24"
         >
-          {/* Section Header */}
-          <div className="mb-6 flex flex-col items-center text-center sm:mb-8">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground dark:text-white sm:text-sm">
+          {/* Section Header: Matching About Us size and typography */}
+          <div className="mb-8 flex flex-col items-center text-center gap-3 sm:gap-4 sm:mb-10">
+            <h2
+              id="services-heading"
+              className="font-serif text-2xl font-bold tracking-tight text-black dark:text-white sm:text-3xl md:text-4xl"
+            >
               {t.options.heading}
-            </h3>
-            <p className="mt-1 text-xs text-muted-foreground/80 dark:text-white sm:text-sm">
+            </h2>
+            <p
+              className={cn(
+                'font-serif max-w-3xl text-sm leading-relaxed sm:text-base sm:leading-relaxed md:text-lg md:leading-[1.8] text-black dark:text-white',
+                dir === 'rtl' && 'leading-loose',
+              )}
+              style={dir === 'rtl' ? { lineHeight: 2 } : undefined}
+            >
               {t.options.subheading}
             </p>
           </div>
@@ -315,7 +319,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setShowProductCard(false)}
-                className="absolute top-4 end-4 z-10 flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground dark:text-white hover:bg-muted/60 transition-colors"
+                className="absolute top-4 end-4 z-10 flex h-8 w-8 items-center justify-center rounded-lg text-black hover:text-black dark:text-white dark:hover:text-white hover:bg-muted/60 transition-colors"
                 aria-label={t.productEgyFlax.close}
               >
                 <X className="h-4 w-4" />
@@ -339,10 +343,10 @@ export default function Home() {
                   >
                     {t.productEgyFlax.name}
                   </h4>
-                  <p className="text-xs sm:text-sm md:text-base font-medium text-foreground/85 dark:text-white mt-1 leading-snug">
+                  <p className="text-xs sm:text-sm md:text-base font-medium text-black dark:text-white mt-1 leading-snug">
                     {t.productEgyFlax.tagline}
                   </p>
-                  <p className="mt-3 text-xs sm:text-sm leading-relaxed text-muted-foreground dark:text-white max-w-3xl">
+                  <p className="mt-3 text-xs sm:text-sm leading-relaxed text-black dark:text-white max-w-3xl">
                     {t.productEgyFlax.description}
                   </p>
                 </div>
@@ -365,20 +369,20 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-border/50">
             {/* Brand column */}
             <div className="flex flex-col items-center md:items-start text-center md:text-start gap-1.5">
-              <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-foreground dark:text-white">
+              <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-black dark:text-white">
                 {t.logo.wordmark}
               </span>
-              <p className="text-xs sm:text-sm text-muted-foreground dark:text-white max-w-sm">
+              <p className="text-xs sm:text-sm text-black dark:text-white max-w-sm">
                 {t.footer.tagline}
               </p>
             </div>
 
             {/* Quick Navigation Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-medium text-muted-foreground dark:text-white">
+            <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-medium text-black dark:text-white">
               <button
                 type="button"
                 onClick={() => scrollToSection('hero-section')}
-                className="hover:text-foreground dark:hover:text-white px-2.5 py-1 rounded-lg hover:bg-muted/50 transition-colors"
+                className="text-black hover:text-black dark:text-white dark:hover:text-white px-2.5 py-1 rounded-lg hover:bg-muted/50 transition-colors"
               >
                 {t.hero.title}
               </button>
@@ -386,7 +390,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => scrollToSection('about-section')}
-                className="hover:text-foreground dark:hover:text-white px-2.5 py-1 rounded-lg hover:bg-muted/50 transition-colors"
+                className="text-black hover:text-black dark:text-white dark:hover:text-white px-2.5 py-1 rounded-lg hover:bg-muted/50 transition-colors"
               >
                 {t.footer.aboutNav}
               </button>
@@ -394,7 +398,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => scrollToSection('services-section')}
-                className="hover:text-foreground dark:hover:text-white px-2.5 py-1 rounded-lg hover:bg-muted/50 transition-colors"
+                className="text-black hover:text-black dark:text-white dark:hover:text-white px-2.5 py-1 rounded-lg hover:bg-muted/50 transition-colors"
               >
                 {t.footer.servicesNav}
               </button>
@@ -414,7 +418,7 @@ export default function Home() {
                 title={t.contact.locationLabel}
                 className={cn(
                   'inline-flex h-11 items-center gap-2 rounded-full px-4 sm:px-5',
-                  'gf bg-card/90 text-foreground dark:text-white shadow-md',
+                  'gf bg-card/90 text-black dark:text-white shadow-md',
                   'transition-all duration-300 ease-out',
                   'hover:-translate-y-0.5 hover:shadow-lg hover:text-primary',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
@@ -429,9 +433,9 @@ export default function Home() {
           </div>
 
           {/* Bottom row: Subtle copyright & brand notice */}
-          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground/75 dark:text-white">
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-black dark:text-white">
             <span className="inline-flex items-center gap-1.5">
-              <span className="font-semibold tracking-[0.15em] text-foreground/70 dark:text-white">
+              <span className="font-semibold tracking-[0.15em] text-black dark:text-white">
                 {t.logo.wordmark}
               </span>
               <span aria-hidden="true">·</span>
@@ -440,7 +444,7 @@ export default function Home() {
               <span>{t.footer.rights}</span>
             </span>
 
-            <span className="text-[11px] text-muted-foreground/60 dark:text-white">
+            <span className="text-[11px] text-black dark:text-white">
               International Logistics & Commodity Trading Excellence
             </span>
           </div>

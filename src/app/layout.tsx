@@ -25,7 +25,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "SARHAN — Import & Export",
   description:
-    "SARHAN Import & Export — international shipping and custom product solutions. A minimal company landing page.",
+    "SARHAN Import & Export — international shipping and custom products. A minimal company landing page.",
   keywords: ["SARHAN", "import", "export", "shipping", "custom product", "international trade"],
   icons: {
     icon: "/sarhan-logo.png",

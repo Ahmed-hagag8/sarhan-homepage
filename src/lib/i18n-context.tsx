@@ -64,6 +64,8 @@ interface TranslationKeys {
     detailsPlaceholder: string
     sendWhatsApp: string
     sendEmail: string
+    submitBoth: string
+    submit: string
     close: string
     validationError: string
     orSendWith: string
@@ -134,7 +136,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     hero: {
       badge: 'International Trade & Logistics',
       title: 'SARHAN',
-      subtitle: 'Import & Export Solutions',
+      subtitle: 'Import & Export',
       description:
         'Your trusted gateway for seamless international shipping and tailored custom product sourcing. Connecting worldwide manufacturers with precision, reliability, and speed.',
       featureShipping: 'Air & Sea Freight',
@@ -145,7 +147,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       badge: 'Who We Are',
       heading: 'About Us',
       paragraph:
-        'We are a dedicated team delivering reliable shipping solutions and tailored custom products. Our focus is on clarity, quality, and long-term partnerships — helping your business move forward with confidence.',
+        'We are a dedicated company delivering reliable shipping solutions and tailored custom products. Our focus is on clarity, quality, and long-term partnerships — helping your business move forward with confidence.',
       pillar1Title: 'Global Network',
       pillar1Desc: 'Direct access to verified international manufacturers and ports.',
       pillar2Title: 'Custom Solutions',
@@ -155,7 +157,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     },
     options: {
       heading: 'Our Core Services',
-      subheading: 'Choose a service to begin your request with our team',
+      subheading: 'Choose a service to begin your request with our company',
       shipForYou: 'Ship For You',
       shipForYouDesc: 'Instant shipping quote via WhatsApp or Email',
       customProduct: 'Our Products',
@@ -180,6 +182,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       detailsPlaceholder: 'Weight (kg), volume (CBM), commodity type, or special requirements...',
       sendWhatsApp: 'Send via WhatsApp',
       sendEmail: 'Send via Email',
+      submitBoth: 'Send via WhatsApp & Email',
+      submit: 'Submit',
       close: 'Close',
       validationError: 'Please provide at least your name and cargo details to send the inquiry.',
       orSendWith: 'Or choose email dispatch',
@@ -201,7 +205,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     },
     contactBar: {
       title: 'Direct Communication Hub',
-      subtitle: 'Connect with our team instantly across your preferred channel',
+      subtitle: 'Connect with our company instantly across your preferred channel',
       whatsapp: 'WhatsApp Chat',
       email: 'Email Inquiry',
       call: 'Phone Direct',
@@ -249,7 +253,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     hero: {
       badge: 'التجارة الدولية والخدمات اللوجستية',
       title: 'سرحان',
-      subtitle: 'حلول الاستيراد والتصدير',
+      subtitle: 'الاستيراد والتصدير',
       description:
         'بوابتكم الموثوقة للشحن الدولي وتوريد المنتجات المخصصة. نربطكم بأبرز المصانع والأسواق العالمية بأعلى معايير الدقة والأمان والسرعة.',
       featureShipping: 'شحن بحري وجوي',
@@ -260,7 +264,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       badge: 'من نحن',
       heading: 'عن الشركة',
       paragraph:
-        'نحن فريق متخصص نقدّم حلول شحن موثوقة ومنتجات مخصصة تناسب احتياجاتك. نركّز على الوضوح والجودة والشراكات طويلة الأمد — لنساعد عملك على التقدّم بثقة.',
+        'نحن شركة متخصصة نقدّم حلول شحن موثوقة ومنتجات مخصصة تناسب احتياجاتك. نركّز على الوضوح والجودة والشراكات طويلة الأمد — لنساعد عملك على التقدّم بثقة.',
       pillar1Title: 'شبكة توريد عالمية',
       pillar1Desc: 'ربط مباشر بأفضل الموانئ والمصانع المعتمدة عالمياً.',
       pillar2Title: 'حلول مخصصة',
@@ -270,7 +274,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     },
     options: {
       heading: 'خدماتنا ومنتجاتنا',
-      subheading: 'اختر الخدمة لبدء طلبك وتواصل فوراً مع فريقنا',
+      subheading: 'اختر الخدمة لبدء طلبك وتواصل فوراً مع شركتنا',
       shipForYou: 'نشحن لك',
       shipForYouDesc: 'احصل على تسعير شحن فوري عبر واتساب أو البريد',
       customProduct: 'منتجاتنا',
@@ -295,6 +299,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       detailsPlaceholder: 'الوزن التقريبي (كجم)، الحجم (CBM)، نوع البضاعة، أو أي متطلبات خاصة...',
       sendWhatsApp: 'إرسال عبر واتساب',
       sendEmail: 'إرسال عبر البريد',
+      submitBoth: 'إرسال عبر واتساب والبريد',
+      submit: 'إرسال',
       close: 'إغلاق',
       validationError: 'يرجى كتابة الاسم وتفاصيل الشحنة على الأقل لإرسال الطلب.',
       orSendWith: 'أو أرسل عبر البريد الإلكتروني',
@@ -316,7 +322,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     },
     contactBar: {
       title: 'مركز التواصل المباشر',
-      subtitle: 'تواصل مع فريقنا في أي وقت عبر القناة الأنسب لك',
+      subtitle: 'تواصل مع شركتنا في أي وقت عبر القناة الأنسب لك',
       whatsapp: 'واتساب مباشر',
       email: 'البريد الإلكتروني',
       call: 'اتصال هاتفي',
@@ -364,7 +370,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     hero: {
       badge: '国际贸易与全球物流',
       title: 'SARHAN',
-      subtitle: '专业进出口解决方案',
+      subtitle: '进出口',
       description:
         '您在国际货运与定制产品制造领域的可靠合作伙伴。连接全球优质供应链，以精准、高效与信赖助力您的业务拓展。',
       featureShipping: '海陆空多元物流',
@@ -375,7 +381,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       badge: '了解我们',
       heading: '关于我们',
       paragraph:
-        '我们是一支专业团队，提供可靠的航运解决方案和量身定制的产品。我们专注于清晰、品质与长期合作——助力您的业务自信前行。',
+        '我们是一家专业进出口公司，提供可靠的航运解决方案和量身定制的产品。我们专注于清晰、品质与长期合作——助力您的业务自信前行。',
       pillar1Title: '全球合作网络',
       pillar1Desc: '直连国际主要港口及认证制造基地。',
       pillar2Title: '定制化解决方案',
@@ -385,7 +391,7 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     },
     options: {
       heading: '核心服务与主营产品',
-      subheading: '选择服务或产品，与我们的专家团队即刻对接',
+      subheading: '选择服务或产品，与我们的公司即刻对接',
       shipForYou: '为您发货',
       shipForYouDesc: '通过 WhatsApp 或电子邮件获取即时报价',
       customProduct: '特色产品',
@@ -410,6 +416,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       detailsPlaceholder: '预估重量（kg）、体积（CBM）、品类说明或特殊温控要求...',
       sendWhatsApp: '通过 WhatsApp 发送',
       sendEmail: '通过电子邮件发送',
+      submitBoth: '通过 WhatsApp 和邮件发送',
+      submit: '提交',
       close: '关闭',
       validationError: '请至少填写您的姓名和货物详情以发送询价。',
       orSendWith: '或选择邮件快速咨询',

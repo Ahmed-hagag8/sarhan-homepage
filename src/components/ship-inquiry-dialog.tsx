@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { X, Plane, Mail, User, Phone, MapPin, FileText } from 'lucide-react'
+import { X, Plane, Mail, User, Phone, MapPin, FileText, ArrowRight } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
 import { useI18n } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
@@ -49,11 +49,12 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
     return true
   }
 
-  const handleSendWhatsApp = (e: React.FormEvent) => {
+  const handleSubmitBoth = (e: React.FormEvent) => {
     e.preventDefault()
     if (!validate()) return
 
-    const message = [
+    // 1. Prepare WhatsApp message
+    const waMessage = [
       '🚢 *SARHAN Import & Export — Shipping Quote Request*',
       '─────────────────────────',
       `👤 *Name / Company:* ${name.trim()}`,
@@ -67,17 +68,11 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
       .filter(Boolean)
       .join('\n')
 
-    const url = `https://wa.me/${DUMMY_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
-    window.open(url, '_blank', 'noopener,noreferrer')
-    onClose()
-  }
+    const waUrl = `https://wa.me/${DUMMY_WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`
 
-  const handleSendEmail = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!validate()) return
-
+    // 2. Prepare Email message
     const subject = `Shipping Quote Request: ${name.trim()}`
-    const body = [
+    const emailBody = [
       'SARHAN Import & Export — Shipping Quote Request',
       '==================================================',
       `Name / Company: ${name.trim()}`,
@@ -94,8 +89,16 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
       .filter(Boolean)
       .join('\n')
 
-    const mailto = `mailto:${DUMMY_EMAIL_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-    window.location.href = mailto
+    const mailtoUrl = `mailto:${DUMMY_EMAIL_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`
+
+    // Open WhatsApp in a new tab
+    window.open(waUrl, '_blank', 'noopener,noreferrer')
+
+    // Trigger user's mail client
+    setTimeout(() => {
+      window.location.href = mailtoUrl
+    }, 250)
+
     onClose()
   }
 
@@ -134,7 +137,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
               >
                 {t.shipForm.dialogTitle}
               </h2>
-              <p className="text-xs sm:text-sm text-muted-foreground dark:text-white mt-0.5">
+              <p className="text-xs sm:text-sm text-black dark:text-white mt-0.5">
                 {t.shipForm.dialogDesc}
               </p>
             </div>
@@ -145,14 +148,14 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             type="button"
             onClick={onClose}
             aria-label={t.shipForm.close}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:text-foreground dark:text-white hover:bg-muted/80 transition-colors"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-black hover:text-black dark:text-white dark:hover:text-white hover:bg-muted/80 transition-colors"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Form */}
-        <form className="mt-5 space-y-4">
+        <form onSubmit={handleSubmitBoth} className="mt-5 space-y-4">
           {/* Row 1: Name and Phone */}
           <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
             <div>
@@ -241,32 +244,27 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             </p>
           )}
 
-          {/* Action Buttons: WhatsApp and Email dispatch */}
-          <div className="pt-2 flex flex-col sm:flex-row gap-3">
+          {/* Single Submit Button */}
+          <div className="pt-2">
             <button
-              type="button"
-              onClick={handleSendWhatsApp}
+              type="submit"
               className={cn(
-                'flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl py-3 px-4 font-semibold text-sm',
-                'gf text-foreground shadow-md',
-                'hover:-translate-y-0.5 hover:shadow-lg transition-all active:translate-y-0',
+                'group relative w-full inline-flex items-center justify-center gap-3 rounded-2xl py-3.5 px-6 font-semibold text-sm sm:text-base',
+                'gold-fill border border-transparent shadow-lg shadow-[rgba(197,136,12,0.25)] dark:shadow-[rgba(212,175,55,0.2)]',
+                'hover:shadow-xl hover:shadow-[rgba(197,136,12,0.38)] dark:hover:shadow-[rgba(212,175,55,0.35)]',
+                'hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-300 ease-out',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
               )}
             >
-              <WhatsAppIcon className="gi h-5 w-5" />
-              <span>{t.shipForm.sendWhatsApp}</span>
-            </button>
+              {/* Submit Label */}
+              <span className="font-bold tracking-wider uppercase text-sm sm:text-base">
+                {t.shipForm.submit}
+              </span>
 
-            <button
-              type="button"
-              onClick={handleSendEmail}
-              className={cn(
-                'flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl py-3 px-4 font-semibold text-sm',
-                'gf text-foreground shadow-md',
-                'hover:-translate-y-0.5 hover:shadow-lg transition-all active:translate-y-0',
-              )}
-            >
-              <Mail className="gi h-4 w-4" />
-              <span>{t.shipForm.sendEmail}</span>
+              {/* Action arrow */}
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-black/15 dark:bg-white/15 backdrop-blur-xs transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
+                <ArrowRight className="h-4 w-4 rtl:-scale-x-100" />
+              </div>
             </button>
           </div>
         </form>

@@ -45,10 +45,10 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ---- Light Mode: Warm white + charcoal text + richer, vivid metallic gold ---- */
+/* ---- Light Mode: Warm white + pure black text + richer, vivid metallic gold ---- */
 :root {
   --radius: 0.625rem;
-  --about-text: var(--foreground);                    /* neutral readable text */
+  --about-text: #000000;                              /* pure black text */
   /* Clear, vivid, high-contrast metallic gold for Light Mode — vibrant & prominent */
   --gold-light: #E5A81E;
   --gold-primary: #C5880C;
@@ -61,19 +61,19 @@
   --gold-arrow-border: rgba(197, 136, 12, 0.55);
   --gold-border: rgba(197, 136, 12, 0.45);
   --background: oklch(0.985 0.004 75);           /* warm white */
-  --foreground: oklch(0.20 0.005 60);            /* dark charcoal text */
+  --foreground: #000000;                         /* pure black text */
   --card: oklch(1 0 0);                          /* pure white cards */
-  --card-foreground: oklch(0.20 0.005 60);
+  --card-foreground: #000000;                    /* pure black */
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.20 0.005 60);
+  --popover-foreground: #000000;                 /* pure black */
   --primary: oklch(0.58 0.16 75);                /* rich, prominent brand gold */
   --primary-foreground: oklch(0.98 0 0);
   --secondary: oklch(0.965 0.006 75);
-  --secondary-foreground: oklch(0.20 0.005 60);
+  --secondary-foreground: #000000;               /* pure black */
   --muted: oklch(0.965 0.006 75);
-  --muted-foreground: oklch(0.48 0.01 60);
+  --muted-foreground: #000000;                   /* pure black */
   --accent: oklch(0.95 0.035 80);                /* warm gold hover tint */
-  --accent-foreground: oklch(0.20 0.005 60);
+  --accent-foreground: #000000;                  /* pure black */
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.88 0.03 75);                 /* clear warm gold-tinted border */
   --input: oklch(0.88 0.03 75);
@@ -84,11 +84,11 @@
   --chart-4: oklch(0.76 0.11 85);
   --chart-5: oklch(0.48 0.07 72);
   --sidebar: oklch(0.985 0.004 75);
-  --sidebar-foreground: oklch(0.20 0.005 60);
+  --sidebar-foreground: #000000;                 /* pure black */
   --sidebar-primary: oklch(0.62 0.10 78);
   --sidebar-primary-foreground: oklch(0.16 0.005 60);
   --sidebar-accent: oklch(0.95 0.028 82);
-  --sidebar-accent-foreground: oklch(0.20 0.005 60);
+  --sidebar-accent-foreground: #000000;          /* pure black */
   --sidebar-border: oklch(0.91 0.012 75);
   --sidebar-ring: oklch(0.62 0.10 78);
 }
@@ -148,10 +148,29 @@
     @apply bg-background text-foreground;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+  /* Pure black text across all light mode typography */
+  html:not(.dark),
+  html:not(.dark) body,
+  html:not(.dark) p,
+  html:not(.dark) span:not(.gi):not(.gold-fill):not(.arrow-chip):not([class*="gi"]):not([class*="text-primary"]):not([class*="text-gold"]),
+  html:not(.dark) h1,
+  html:not(.dark) h2,
+  html:not(.dark) h3,
+  html:not(.dark) h4,
+  html:not(.dark) h5,
+  html:not(.dark) h6,
+  html:not(.dark) label,
+  html:not(.dark) input,
+  html:not(.dark) textarea,
+  html:not(.dark) a:not(.gi):not(.gold-fill),
+  html:not(.dark) button:not(.gi):not(.gold-fill) {
+    color: #000000;
+  }
   /* Pure white text across all dark mode typography */
   .dark,
   .dark body,
   .dark p,
+  .dark span:not(.gi):not(.gold-fill):not(.arrow-chip):not([class*="gi"]):not([class*="text-primary"]):not([class*="text-gold"]),
   .dark h1,
   .dark h2,
   .dark h3,
@@ -161,7 +180,7 @@
   .dark label,
   .dark input,
   .dark textarea,
-  .dark a:not(.gi),
+  .dark a:not(.gi):not(.gold-fill),
   .dark button:not(.gi):not(.gold-fill) {
     color: #ffffff;
   }
@@ -236,18 +255,35 @@
     color: var(--gold-light);
   }
 
-  /* --- Card arrow chip: subtle gold border + gold icon by default,
-         fills with the gold gradient on card hover (icon darkens) --- */
+  /* --- Card icon chip (arrow & leading service icons: plane, box):
+         subtle gold border + gold icon by default,
+         fills with the gold gradient on card hover or when active --- */
   .arrow-chip {
     border: 1px solid var(--gold-arrow-border);
     background: color-mix(in oklch, var(--muted) 70%, transparent);
     color: var(--gold-primary);
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
-  .group:hover .arrow-chip {
-    border-color: transparent;
-    background: var(--gold-grad);
-    color: var(--gold-on-gold);
+  .arrow-chip span,
+  .arrow-chip svg {
+    color: inherit !important;
+    stroke: currentColor;
+    transition: color 0.3s ease, stroke 0.3s ease;
+  }
+  .group:hover .arrow-chip,
+  .arrow-chip.is-active,
+  .arrow-chip.active,
+  .group.is-active .arrow-chip {
+    border-color: transparent !important;
+    background: var(--gold-grad) !important;
+    color: var(--gold-on-gold) !important;
+    box-shadow: 0 2px 10px rgba(197, 136, 12, 0.3);
+  }
+  .dark .group:hover .arrow-chip,
+  .dark .arrow-chip.is-active,
+  .dark .arrow-chip.active,
+  .dark .group.is-active .arrow-chip {
+    box-shadow: 0 2px 12px rgba(212, 175, 55, 0.25);
   }
 
   /* --- Metallic gold divider line (fades at edges) --- */
