@@ -383,4 +383,142 @@
   .card-hover-lift:hover {
     transform: translateY(-6px);
   }
+
+  /* =========================================================================
+     FLAX, LINEN & NATURAL WOODS PERSONA
+     Organic Modern & Refined Artisanal Atelier Aesthetic
+     Rooted in tactile unbleached linen fibers, natural white oak, honey teak,
+     and deep smoked walnut timber.
+     ========================================================================= */
+
+  .flax-wood-persona {
+    /* Base linen & wood tokens - Light Mode */
+    --fw-canvas: #FAF6F0;                  /* warm unbleached flax linen canvas */
+    --fw-card: #FFFFFF;                    /* white-oak framed card interior */
+    --fw-card-glass: rgba(255, 255, 255, 0.95);
+    --fw-surface-subtle: #F5EFE6;          /* soft oatmeal ecru */
+    --fw-text-main: #241810;               /* deep smoked walnut (warm dark brown, zero harshness) */
+    --fw-text-muted: #5C493D;              /* warm walnut taupe */
+    --fw-text-soft: #857062;               /* soft woven oat */
+    
+    /* Woods & Fibers */
+    --fw-flax-gold: #C5994A;               /* spun flax gold */
+    --fw-flax-light: #DFC79B;              /* raw straw fiber */
+    --fw-flax-bright: #E8D3A7;
+    --fw-wood-teak: #96673D;               /* honey teak */
+    --fw-wood-walnut: #4A3324;             /* dark roasted walnut */
+    --fw-wood-border: rgba(150, 103, 61, 0.24);
+    --fw-flax-border: rgba(197, 153, 74, 0.38);
+    
+    /* Wood Grain Button & Accent Gradients */
+    --fw-wood-grad: linear-gradient(135deg, #A87547 0%, #85532A 50%, #5E3617 100%);
+    --fw-wood-grad-hover: linear-gradient(135deg, #B98453 0%, #945F33 50%, #6E401D 100%);
+    --fw-flax-grad: linear-gradient(135deg, #F3E4C2 0%, #C5994A 45%, #96673D 100%);
+    --fw-grain-border: linear-gradient(135deg, rgba(197, 153, 74, 0.6) 0%, rgba(150, 103, 61, 0.45) 50%, rgba(94, 54, 23, 0.3) 100%);
+    
+    /* Shadows */
+    --fw-card-shadow: 0 20px 48px -12px rgba(42, 26, 16, 0.12), 0 8px 20px -8px rgba(42, 26, 16, 0.08);
+    --fw-card-shadow-hover: 0 28px 64px -14px rgba(42, 26, 16, 0.18), 0 12px 28px -8px rgba(42, 26, 16, 0.12);
+  }
+
+  .dark .flax-wood-persona {
+    /* Base linen & wood tokens - Dark Mode */
+    --fw-canvas: #15100C;                  /* deep smoked timber & charred walnut canvas */
+    --fw-card: #211812;                    /* aged dark teak & cedar card interior */
+    --fw-card-glass: rgba(33, 24, 18, 0.94);
+    --fw-surface-subtle: #2A1F17;          /* roasted oak interior */
+    --fw-text-main: #FAF5EE;               /* soft bleached linen ivory */
+    --fw-text-muted: #D1C0B0;              /* warm light oat */
+    --fw-text-soft: #9E8B7C;               /* weathered birch */
+    
+    /* Woods & Fibers */
+    --fw-flax-gold: #DFB25E;               /* radiant spun gold flax */
+    --fw-flax-light: #F0DCB0;              /* bright straw */
+    --fw-flax-bright: #FFECC0;
+    --fw-wood-teak: #BD834F;               /* warm amber teak */
+    --fw-wood-walnut: #2D1D13;             /* burnt walnut */
+    --fw-wood-border: rgba(223, 178, 94, 0.24);
+    --fw-flax-border: rgba(223, 178, 94, 0.38);
+    
+    /* Wood Grain Button & Accent Gradients */
+    --fw-wood-grad: linear-gradient(135deg, #B5804F 0%, #905B2E 50%, #683B17 100%);
+    --fw-wood-grad-hover: linear-gradient(135deg, #C78F5B 0%, #A06735 50%, #7A471E 100%);
+    --fw-flax-grad: linear-gradient(135deg, #FFECC0 0%, #DFB25E 45%, #BD834F 100%);
+    --fw-grain-border: linear-gradient(135deg, rgba(223, 178, 94, 0.5) 0%, rgba(189, 131, 79, 0.38) 50%, rgba(104, 59, 23, 0.3) 100%);
+    
+    /* Shadows */
+    --fw-card-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.75), 0 0 20px rgba(189, 131, 79, 0.1);
+    --fw-card-shadow-hover: 0 32px 75px -15px rgba(0, 0, 0, 0.85), 0 0 28px rgba(223, 178, 94, 0.18);
+  }
+
+  /* --- Organic Modern Flax & Wood Card Container --- */
+  .fw-card {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--fw-card-glass), var(--fw-card-glass)) padding-box,
+      var(--fw-grain-border) border-box;
+    backdrop-filter: blur(14px);
+    box-shadow: var(--fw-card-shadow);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+  }
+  .fw-card:hover {
+    box-shadow: var(--fw-card-shadow-hover);
+  }
+
+  /* --- Tactile Wood Action Button --- */
+  .fw-wood-btn {
+    background: var(--fw-wood-grad);
+    color: #FFFDF9;
+    box-shadow: 0 4px 14px rgba(94, 54, 23, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .fw-wood-btn:hover {
+    background: var(--fw-wood-grad-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(94, 54, 23, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  }
+  .fw-wood-btn:active {
+    transform: translateY(0);
+  }
+
+  /* --- Linen Stitched Badge / Pill --- */
+  .fw-linen-pill {
+    background: color-mix(in oklch, var(--fw-flax-gold) 12%, transparent);
+    border: 1px solid var(--fw-flax-border);
+    color: var(--fw-flax-gold);
+    transition: all 0.25s ease;
+  }
+  .fw-linen-pill:hover {
+    background: color-mix(in oklch, var(--fw-flax-gold) 18%, transparent);
+    border-color: var(--fw-flax-gold);
+  }
+
+  /* --- Subtle Linen Weave Grid Texture --- */
+  .fw-linen-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(150, 103, 61, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(150, 103, 61, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .dark .fw-linen-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(223, 178, 94, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(223, 178, 94, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* --- Wood Grain Divider Ribbon --- */
+  .fw-wood-ribbon {
+    background: linear-gradient(90deg, transparent 0%, var(--fw-flax-gold) 20%, var(--fw-wood-teak) 50%, var(--fw-flax-gold) 80%, transparent 100%);
+    height: 1px;
+    opacity: 0.55;
+  }
+
+  /* --- Organic Flax Headline Gradient --- */
+  .fw-headline {
+    background: var(--fw-flax-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }

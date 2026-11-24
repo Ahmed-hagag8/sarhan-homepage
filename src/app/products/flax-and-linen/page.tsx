@@ -9,6 +9,8 @@ import {
   ArrowUp,
   Package,
   Layers,
+  Sparkles,
+  Eye,
   Mail,
   User,
   Phone,
@@ -18,6 +20,7 @@ import {
   CheckCircle2,
   ShieldCheck,
   Award,
+  Feather,
 } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { LanguageSelector } from '@/components/language-selector'
@@ -26,6 +29,8 @@ import { cn } from '@/lib/utils'
 import {
   CATALOG_PRODUCTS,
   CATALOG_UI,
+  FLAX_ABOUT,
+  FLAX_PROCESS,
   type CatalogProduct,
 } from './product-data'
 
@@ -34,6 +39,7 @@ const EMAIL_BASE = 'hello@sarhan.example.com'
 export default function ProductFlaxAndLinenPage() {
   const { locale, dir } = useI18n()
   const [selectedProductForShip, setSelectedProductForShip] = React.useState<CatalogProduct | null>(null)
+  const [selectedProductForPreview, setSelectedProductForPreview] = React.useState<CatalogProduct | null>(null)
 
   // Shipping form state
   const [buyerName, setBuyerName] = React.useState('')
@@ -47,7 +53,6 @@ export default function ProductFlaxAndLinenPage() {
 
   const ui = React.useMemo(() => {
     return {
-      sectionTag: CATALOG_UI.sectionTag[locale] ?? CATALOG_UI.sectionTag.en,
       collectionTitle: CATALOG_UI.collectionTitle[locale] ?? CATALOG_UI.collectionTitle.en,
       collectionSubtitle: CATALOG_UI.collectionSubtitle[locale] ?? CATALOG_UI.collectionSubtitle.en,
       backToHome: CATALOG_UI.backToHome[locale] ?? CATALOG_UI.backToHome.en,
@@ -77,12 +82,40 @@ export default function ProductFlaxAndLinenPage() {
       notesPlaceholder: CATALOG_UI.notesPlaceholder[locale] ?? CATALOG_UI.notesPlaceholder.en,
       submitBtn: CATALOG_UI.submitBtn[locale] ?? CATALOG_UI.submitBtn.en,
       validationError: CATALOG_UI.validationError[locale] ?? CATALOG_UI.validationError.en,
+      previewBtn: locale === 'ar' ? 'معاينة' : locale === 'fr' ? 'Aperçu' : locale === 'zh' ? '预览' : 'Preview',
+      previewHeading: locale === 'ar' ? 'معاينة المنتج والشهادات' : locale === 'fr' ? 'Aperçu du Produit' : locale === 'zh' ? '产品高清预览' : 'Product Preview',
+      closeBtn: locale === 'ar' ? 'إغلاق' : locale === 'fr' ? 'Fermer' : locale === 'zh' ? '关闭' : 'Close',
     }
   }, [locale])
 
-  // Lock body scroll when modal is open
+  const aboutData = React.useMemo(() => {
+    return {
+      badge: FLAX_ABOUT.badge[locale] ?? FLAX_ABOUT.badge.en,
+      heading: FLAX_ABOUT.heading[locale] ?? FLAX_ABOUT.heading.en,
+      description: FLAX_ABOUT.description[locale] ?? FLAX_ABOUT.description.en,
+      stats: FLAX_ABOUT.stats.map((s) => ({
+        value: s.value,
+        label: s.label[locale] ?? s.label.en,
+      })),
+    }
+  }, [locale])
+
+  const processData = React.useMemo(() => {
+    return {
+      badge: FLAX_PROCESS.badge[locale] ?? FLAX_PROCESS.badge.en,
+      title: FLAX_PROCESS.title[locale] ?? FLAX_PROCESS.title.en,
+      subtitle: FLAX_PROCESS.subtitle[locale] ?? FLAX_PROCESS.subtitle.en,
+      steps: FLAX_PROCESS.steps.map((st) => ({
+        number: st.number,
+        title: st.title[locale] ?? st.title.en,
+        desc: st.desc[locale] ?? st.desc.en,
+      })),
+    }
+  }, [locale])
+
+  // Lock body scroll when either modal is open
   React.useEffect(() => {
-    if (selectedProductForShip) {
+    if (selectedProductForShip || selectedProductForPreview) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
@@ -92,9 +125,10 @@ export default function ProductFlaxAndLinenPage() {
     return () => {
       document.body.style.overflow = ''
     }
-  }, [selectedProductForShip])
+  }, [selectedProductForShip, selectedProductForPreview])
 
   const handleOpenShipModal = (product: CatalogProduct) => {
+    setSelectedProductForPreview(null)
     setSelectedProductForShip(product)
     setFormError('')
     setSubmittedSuccess(false)
@@ -112,14 +146,13 @@ export default function ProductFlaxAndLinenPage() {
     }
 
     const prodName = selectedProductForShip?.name ?? 'Flax Commodity'
-    const pageNum = selectedProductForShip?.pageNumber ?? ''
 
-    // Prepare formal email body
-    const subject = `Shipping & Quotation Request: ${prodName} (Catalog Page ${pageNum}) — ${buyerName.trim()}`
+    // Prepare formal email body without page numbers
+    const subject = `Shipping & Quotation Request: ${prodName} — ${buyerName.trim()}`
     const emailBody = [
       'SARHAN FOR IMPORT & EXPORT — OFFICIAL COMMODITY SHIPPING REQUEST',
       '==================================================================',
-      `Product: ${prodName} (Page ${pageNum})`,
+      `Product: ${prodName}`,
       `Customer / Company: ${buyerName.trim()}`,
       `Business Email: ${buyerEmail.trim()}`,
       buyerPhone.trim() ? `Phone / WeChat: ${buyerPhone.trim()}` : '',
@@ -148,42 +181,55 @@ export default function ProductFlaxAndLinenPage() {
   return (
     <div
       dir={dir}
-      className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300 antialiased selection:bg-[#d4af37] selection:text-[#061224]"
+      className="flax-wood-persona fw-linen-pattern min-h-screen flex flex-col bg-[var(--fw-canvas)] text-[var(--fw-text-main)] transition-colors duration-500 antialiased selection:bg-[var(--fw-flax-gold)] selection:text-[#1a120c] relative"
     >
+      {/* Soft Ambient Golden Sunbeam Glow (Organic Sunlight Filtering onto Wood & Linen) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] rounded-full bg-gradient-to-b from-[var(--fw-flax-gold)]/15 via-[var(--fw-wood-teak)]/8 to-transparent blur-3xl z-0"
+      />
+
       {/* ============================================================ */}
-      {/* 1. TOP UTILITY NAVIGATION (Light/Dark Mode, Lang, No WhatsApp)*/}
+      {/* 1. TOP UTILITY NAVIGATION (Flax & Woods Persona)             */}
       {/* ============================================================ */}
-      <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/85 backdrop-blur-md transition-colors">
+      <header className="sticky top-0 z-50 w-full border-b border-[var(--fw-wood-border)] bg-[var(--fw-canvas)]/90 backdrop-blur-md transition-colors">
         <nav
           aria-label="Utility"
-          className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4 md:px-8"
+          className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-2.5 sm:px-6 sm:py-3.5 md:px-8"
         >
           {/* Top Left: Theme toggle + Back to home link */}
           <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-muted/30 px-3 py-1.5 text-xs font-semibold text-foreground hover:border-primary hover:text-primary transition-all group"
+              className="inline-flex items-center gap-1.5 rounded-full border border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)] px-3 py-1.5 text-xs font-semibold text-[var(--fw-text-main)] hover:border-[var(--fw-flax-gold)] hover:text-[var(--fw-flax-gold)] transition-all group"
             >
               <ArrowLeft className="h-3.5 w-3.5 rtl:-scale-x-100 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
               <span className="hidden sm:inline">{ui.backToHome}</span>
             </Link>
           </div>
 
-          {/* Center Brand Wordmark (links to home) */}
+          {/* Center: Brand Identity with New Logo (Transparent) */}
           <Link
             href="/"
-            className="flex flex-col items-center text-center group"
+            className="flex items-center gap-2.5 group"
           >
-            <span className="font-serif text-sm sm:text-base md:text-lg font-bold tracking-[0.2em] sm:tracking-[0.25em] text-foreground group-hover:text-primary transition-colors uppercase">
-              SARHAN
-            </span>
-            <span className="text-[9px] uppercase tracking-[0.28em] text-muted-foreground group-hover:text-primary transition-colors">
-              IMPORT & EXPORT
-            </span>
+            <img
+              src="/sarhan-logo.png"
+              alt="SARHAN Logo"
+              className="h-9 w-9 sm:h-11 sm:w-11 object-contain transition-transform group-hover:scale-105"
+            />
+            <div className="flex flex-col text-start">
+              <span className="font-serif text-sm sm:text-base md:text-lg font-bold tracking-[0.2em] sm:tracking-[0.25em] text-[var(--fw-text-main)] group-hover:text-[var(--fw-flax-gold)] transition-colors uppercase leading-none">
+                SARHAN
+              </span>
+              <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.28em] text-[var(--fw-text-soft)] group-hover:text-[var(--fw-flax-gold)] transition-colors mt-0.5">
+                IMPORT & EXPORT
+              </span>
+            </div>
           </Link>
 
-          {/* Top Right: Language selector (No WhatsApp anywhere) */}
+          {/* Top Right: Language selector */}
           <div className="flex items-center gap-2 sm:gap-3">
             <LanguageSelector />
           </div>
@@ -191,49 +237,38 @@ export default function ProductFlaxAndLinenPage() {
       </header>
 
       {/* ============================================================ */}
-      {/* 2. CATALOG HERO HEADER                                       */}
+      {/* 2. CATALOG HERO HEADER (Flax & Woods Aesthetics)             */}
       {/* ============================================================ */}
-      <section className="relative overflow-hidden border-b border-border/40 py-8 sm:py-12 md:py-14 bg-gradient-to-b from-muted/20 via-transparent to-transparent">
-        <div className="relative mx-auto flex max-w-5xl flex-col items-center px-4 text-center sm:px-6 md:px-8">
-          {/* Tag Pill: "04 PRODUCTS" */}
-          <div className="mb-3.5 inline-flex items-center gap-2 rounded-full border border-[var(--gold-border)] bg-card/80 px-3.5 py-1 shadow-xs">
-            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-            <span className="font-serif text-xs font-bold uppercase tracking-[0.22em] text-primary">
-              {ui.sectionTag}
-            </span>
+      <section className="relative overflow-hidden border-b border-[var(--fw-wood-border)] py-12 sm:py-16 md:py-20 bg-gradient-to-b from-[var(--fw-surface-subtle)]/40 via-transparent to-transparent">
+        <div className="relative mx-auto flex max-w-5xl flex-col items-center px-4 text-center sm:px-6 md:px-8 z-10">
+          {/* Natural Fiber Atelier Pill */}
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full fw-linen-pill px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest shadow-xs">
+            <Feather className="h-3.5 w-3.5" />
+            <span>ORGANIC MODERN FIBER ATELIER</span>
           </div>
 
-          {/* Regal Headline */}
-          <h1
-            className="font-serif text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-center"
-            style={{
-              background: 'var(--gold-grad-bright)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              color: 'var(--gold-primary)',
-            }}
-          >
+          {/* Regal Headline in Spun Flax & Teak Tone */}
+          <h1 className="fw-headline font-serif text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-center">
             {ui.collectionTitle}
           </h1>
 
-          {/* High-contrast readable Subtitle (General Flax, Not Egyptian) */}
-          <p className="mt-3.5 max-w-3xl text-xs sm:text-sm md:text-base leading-relaxed text-foreground/80 dark:text-slate-200 font-normal">
+          {/* High-contrast readable Subtitle */}
+          <p className="mt-4 max-w-3xl text-sm sm:text-base md:text-lg leading-relaxed text-[var(--fw-text-muted)] font-normal">
             {ui.collectionSubtitle}
           </p>
 
           {/* Guarantee Badges */}
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 text-xs font-semibold text-foreground">
-            <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card px-3 py-1 shadow-xs">
-              <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 text-xs font-semibold text-[var(--fw-text-main)]">
+            <div className="flex items-center gap-2 rounded-full border border-[var(--fw-wood-border)] bg-[var(--fw-card-glass)] px-4 py-2 shadow-xs backdrop-blur-xs">
+              <ShieldCheck className="h-4 w-4 text-[var(--fw-flax-gold)]" />
               <span>{ui.egyptOrigin}</span>
             </div>
-            <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card px-3 py-1 shadow-xs">
-              <Package className="h-3.5 w-3.5 text-primary" />
+            <div className="flex items-center gap-2 rounded-full border border-[var(--fw-wood-border)] bg-[var(--fw-card-glass)] px-4 py-2 shadow-xs backdrop-blur-xs">
+              <Package className="h-4 w-4 text-[var(--fw-flax-gold)]" />
               <span>{ui.packagingBales}</span>
             </div>
-            <div className="flex items-center gap-1.5 rounded-full border border-border/60 bg-card px-3 py-1 shadow-xs">
-              <Award className="h-3.5 w-3.5 text-primary" />
+            <div className="flex items-center gap-2 rounded-full border border-[var(--fw-wood-border)] bg-[var(--fw-card-glass)] px-4 py-2 shadow-xs backdrop-blur-xs">
+              <Award className="h-4 w-4 text-[var(--fw-flax-gold)]" />
               <span>ISO 9001 Compliance</span>
             </div>
           </div>
@@ -241,109 +276,392 @@ export default function ProductFlaxAndLinenPage() {
       </section>
 
       {/* ============================================================ */}
-      {/* 3. MAIN CATALOG: COMPACT SQUARE CARDS (4 PER LINE)          */}
+      {/* 3. ABOUT SECTION (Flax & Woods Persona)                      */}
       {/* ============================================================ */}
-      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 sm:py-10 md:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch">
+      <section className="relative mx-auto w-full max-w-5xl px-4 pt-12 pb-6 sm:px-6 md:px-8 z-10">
+        <div className="fw-card card-slide-in relative overflow-hidden rounded-3xl p-6 sm:p-9 md:p-12 text-center">
+          {/* Ambient accent glow */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-[var(--fw-flax-gold)]/10 blur-3xl rtl:-left-24 rtl:right-auto"
+          />
+
+          <div className="relative z-10 flex flex-col items-center text-center">
+            {/* Badge */}
+            <div className="mb-3.5 inline-flex items-center gap-2 rounded-full fw-linen-pill px-4 py-1.5 shadow-xs">
+              <Feather className="h-3.5 w-3.5" />
+              <span className="text-[11px] font-bold uppercase tracking-widest">
+                {aboutData.badge}
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--fw-text-main)]">
+              {aboutData.heading}
+            </h2>
+
+            {/* Paragraph */}
+            <p className="mt-3.5 max-w-3xl text-xs sm:text-sm md:text-base leading-relaxed text-[var(--fw-text-muted)] font-normal">
+              {aboutData.description}
+            </p>
+
+            {/* 3 Key Stat Chips */}
+            <div className="mt-7 grid w-full grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4">
+              {aboutData.stats.map((stat, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center justify-center p-4 sm:p-5 rounded-2xl bg-[var(--fw-surface-subtle)] border border-[var(--fw-wood-border)] shadow-xs text-center transition-all duration-300 hover:border-[var(--fw-flax-gold)] hover:-translate-y-0.5"
+                >
+                  <span className="font-serif text-xl sm:text-2xl font-black text-[var(--fw-flax-gold)]">
+                    {stat.value}
+                  </span>
+                  <span className="mt-1.5 text-xs font-semibold text-[var(--fw-text-muted)]">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 4. STACKED CARDS ON SCROLL: TACTILE LINEN & WOOD TIERS       */}
+      {/* ============================================================ */}
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 sm:py-12 md:px-8 z-10">
+        <div className="relative flex flex-col space-y-12 sm:space-y-16 pb-24">
           {CATALOG_PRODUCTS.map((product, index) => {
             const descriptionText = product.description[locale] ?? product.description.en
             const specs = product.specifications[locale] ?? product.specifications.en
             const apps = product.applications[locale] ?? product.applications.en
             const translatedTitle = product.translatedName[locale] ?? product.name
-            const staggerClass = `card-stagger-${(index % 8) + 1}`
+
+            // Subtle sticky cascade: each card sticks and the next layers smoothly over it
+            const stickyTop = `calc(5.5rem + ${index * 8}px)`
+            const zIndexValue = index + 10
 
             return (
-              <article
+              <div
                 key={product.id}
                 id={product.id}
-                className={cn(
-                  'gf-card card-slide-in card-hover-lift rounded-2xl p-3 sm:p-3.5 flex flex-col justify-between overflow-hidden',
-                  'bg-card text-card-foreground shadow-sm hover:shadow-md border border-[var(--gold-border)]',
-                  staggerClass
-                )}
+                style={{
+                  top: stickyTop,
+                  zIndex: zIndexValue,
+                }}
+                className="sticky w-full"
               >
-                {/* Card Top: Compact Photo & Badges */}
-                <div>
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-muted/50 border border-border/40 group">
-                    <Image
-                      src={product.photo}
-                      alt={translatedTitle}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
-                      priority={index < 4}
-                    />
+                <article
+                  className={cn(
+                    'fw-card rounded-3xl p-6 sm:p-8 md:p-9 overflow-hidden',
+                    'transition-all duration-500 ease-out'
+                  )}
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-center">
+                    {/* Left Column: Natural Timber Framed Photo & Interactive Preview */}
+                    <div className="md:col-span-5 flex flex-col items-center">
+                      <div
+                        onClick={() => setSelectedProductForPreview(product)}
+                        className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-[var(--fw-surface-subtle)] border border-[var(--fw-wood-border)] group cursor-pointer shadow-md"
+                        title={ui.previewBtn}
+                      >
+                        <Image
+                          src={product.photo}
+                          alt={translatedTitle}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 420px"
+                          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-106"
+                          priority={index < 2}
+                        />
 
-                    {/* Page Number Badge */}
-                    <div className="absolute top-2 start-2 z-10 inline-flex items-center rounded-md bg-black/80 px-2 py-0.5 font-mono text-[10px] font-bold text-white shadow-xs backdrop-blur-xs">
-                      PAGE {product.pageNumber}
-                    </div>
-                  </div>
-
-                  {/* Translatable Item Name as PRIMARY Headline */}
-                  <div className="mt-3">
-                    <h2 className="font-serif text-base sm:text-lg font-bold tracking-tight text-foreground leading-snug line-clamp-1">
-                      {translatedTitle}
-                    </h2>
-                    {locale !== 'en' ? (
-                      <p className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground/80 line-clamp-1 mt-0.5">
-                        {product.name}
-                      </p>
-                    ) : (
-                      <p className="text-[10px] uppercase tracking-wider font-semibold text-primary mt-0.5">
-                        NATURAL FLAX & LINEN
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Compact Description (2 lines max to keep card square) */}
-                  <p className="mt-1.5 text-xs leading-relaxed text-foreground/80 dark:text-slate-300 font-normal line-clamp-2">
-                    {descriptionText}
-                  </p>
-
-                  {/* Compact Specifications & Applications Tags */}
-                  <div className="mt-2.5 flex flex-wrap items-center gap-1.5 border-t border-border/40 pt-2 text-[11px]">
-                    <span className="inline-flex items-center gap-1 rounded-md bg-muted/60 px-2 py-0.5 text-foreground/85 font-medium text-[11px] line-clamp-1">
-                      <Layers className="gi h-3 w-3 shrink-0" />
-                      <span>{specs[0]}</span>
-                    </span>
-
-                    <span className="inline-flex items-center rounded-md bg-accent/40 px-2 py-0.5 text-foreground/75 font-normal text-[11px] line-clamp-1">
-                      {apps[0]}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card Bottom: Compact "Ship" Button */}
-                <div className="mt-3.5 pt-2.5 border-t border-border/40">
-                  <button
-                    type="button"
-                    onClick={() => handleOpenShipModal(product)}
-                    className={cn(
-                      'group relative w-full inline-flex items-center justify-between gap-2 rounded-xl py-2 px-3.5 font-bold text-xs',
-                      'gold-fill border border-transparent shadow-xs',
-                      'hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-200 ease-out',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
-                    )}
-                  >
-                    <div className="flex items-center gap-1.5">
-                      <Package className="h-3.5 w-3.5" />
-                      <span>{ui.shipProduct}</span>
+                        {/* Animated Quick Preview Hover Overlay */}
+                        <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                          <div className="inline-flex items-center gap-2 rounded-full fw-wood-btn px-4 py-2 text-xs font-semibold text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
+                            <Eye className="h-4 w-4" />
+                            <span>{ui.previewBtn}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-black/15 dark:bg-white/15 transition-transform duration-200 group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
-                      <ArrowRight className="h-3 w-3 rtl:-scale-x-100" />
+                    {/* Right Column: Localized Content & Actions (Flax & Woods Persona) */}
+                    <div className="md:col-span-7 flex flex-col justify-between text-start">
+                      <div>
+                        {/* Clean Category Label in Linen Pill */}
+                        <div className="inline-block">
+                          <span className="fw-linen-pill text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+                            NATURAL FLAX & LINEN
+                          </span>
+                        </div>
+
+                        {/* Localized Title as Primary Headline */}
+                        <h2
+                          onClick={() => setSelectedProductForPreview(product)}
+                          className="mt-2 font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--fw-text-main)] leading-snug cursor-pointer hover:text-[var(--fw-flax-gold)] transition-colors"
+                        >
+                          {translatedTitle}
+                        </h2>
+
+                        {/* International Reference Name */}
+                        {locale !== 'en' && (
+                          <p className="text-xs sm:text-sm font-mono uppercase tracking-wider text-[var(--fw-text-soft)] mt-1 font-medium">
+                            {product.name}
+                          </p>
+                        )}
+
+                        {/* Full Readable Description */}
+                        <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[var(--fw-text-muted)] font-normal">
+                          {descriptionText}
+                        </p>
+
+                        {/* Specifications & Applications Badges */}
+                        <div className="mt-4 space-y-2.5 border-t border-[var(--fw-wood-border)] pt-3 text-xs">
+                          <div className="flex items-start gap-2 text-[var(--fw-text-main)] font-medium">
+                            <Layers className="h-4 w-4 shrink-0 mt-0.5 text-[var(--fw-flax-gold)]" />
+                            <span>{specs.join(' · ')}</span>
+                          </div>
+
+                          <div className="flex items-start gap-2 text-[var(--fw-text-muted)] font-medium">
+                            <Sparkles className="h-4 w-4 shrink-0 mt-0.5 text-[var(--fw-flax-gold)]" />
+                            <span>{apps.join(' · ')}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Card Bottom Actions */}
+                      <div className="mt-6 pt-4 border-t border-[var(--fw-wood-border)] flex flex-col sm:flex-row items-center gap-3">
+                        {/* Prominent Tactile Wood Ship Button */}
+                        <button
+                          type="button"
+                          onClick={() => handleOpenShipModal(product)}
+                          className="fw-wood-btn group relative flex-1 w-full inline-flex items-center justify-between gap-3 rounded-2xl py-3 px-5 font-bold text-xs sm:text-sm"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Package className="h-4 w-4" />
+                            <span>{ui.shipProduct}</span>
+                          </div>
+
+                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20 dark:bg-black/25 transition-transform duration-200 group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
+                            <ArrowRight className="h-3.5 w-3.5 rtl:-scale-x-100" />
+                          </div>
+                        </button>
+
+                        {/* Preview Details Button */}
+                        <button
+                          type="button"
+                          onClick={() => setSelectedProductForPreview(product)}
+                          className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-2xl border border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)] px-4 py-3 text-xs font-semibold text-[var(--fw-text-main)] hover:border-[var(--fw-flax-gold)] hover:text-[var(--fw-flax-gold)] transition-colors"
+                        >
+                          <Eye className="h-3.5 w-3.5" />
+                          <span>{ui.previewBtn}</span>
+                        </button>
+                      </div>
                     </div>
-                  </button>
-                </div>
-              </article>
+                  </div>
+                </article>
+              </div>
             )
           })}
         </div>
       </main>
 
       {/* ============================================================ */}
-      {/* 4. COMMODITY SHIPPING QUOTE MODAL (Same form styling)        */}
+      {/* 5. PROCESS PIPELINE: From straw to shipment (Five steps)     */}
+      {/* ============================================================ */}
+      <section className="relative mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-24 md:px-8 border-t border-[var(--fw-wood-border)] z-10">
+        <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
+          <div className="mb-3.5 inline-flex items-center gap-2 rounded-full fw-linen-pill px-4 py-1.5 shadow-xs">
+            <span className="text-[11px] font-bold uppercase tracking-widest">
+              {processData.badge}
+            </span>
+          </div>
+          <h2 className="fw-headline font-serif text-3xl sm:text-4xl md:text-5xl font-black tracking-tight">
+            {processData.title}
+          </h2>
+          <p className="mt-3 text-base sm:text-lg font-medium text-[var(--fw-text-muted)] max-w-xl">
+            {processData.subtitle}
+          </p>
+        </div>
+
+        {/* 5 Connected Step Cards */}
+        <div className="relative">
+          {/* Connecting wood ribbon line on desktop */}
+          <div
+            aria-hidden="true"
+            className="hidden lg:block pointer-events-none absolute top-10 inset-x-12 h-0.5 fw-wood-ribbon z-0"
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5 relative z-10">
+            {processData.steps.map((step, idx) => (
+              <div
+                key={step.number}
+                className="fw-card card-hover-lift rounded-2xl p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5"
+              >
+                <div>
+                  {/* Step number badge - Wood & Brass Medallion */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--fw-surface-subtle)] text-[var(--fw-flax-gold)] border border-[var(--fw-flax-border)] font-mono font-black text-base shadow-xs">
+                      {step.number}
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--fw-text-soft)]">
+                      STEP {idx + 1}
+                    </span>
+                  </div>
+
+                  {/* Step Title */}
+                  <h3 className="font-serif text-lg font-bold text-[var(--fw-text-main)] mb-2">
+                    {step.title}
+                  </h3>
+
+                  {/* Step Description */}
+                  <p className="text-xs sm:text-[13px] leading-relaxed text-[var(--fw-text-muted)] font-normal">
+                    {step.desc}
+                  </p>
+                </div>
+
+                {/* Bottom indicator tag */}
+                <div className="mt-5 pt-3 border-t border-[var(--fw-wood-border)] flex items-center justify-between text-[11px] text-[var(--fw-flax-gold)] font-semibold">
+                  <span>Stage {step.number}</span>
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[var(--fw-flax-gold)]" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 6. ANIMATED PRODUCT PREVIEW LIGHTBOX MODAL                   */}
+      {/* ============================================================ */}
+      {selectedProductForPreview && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 md:p-6"
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
+            onClick={() => setSelectedProductForPreview(null)}
+            aria-hidden="true"
+          />
+
+          {/* Modal Container */}
+          <div
+            className={cn(
+              'relative z-10 w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl p-5 sm:p-7 md:p-8',
+              'fw-card text-[var(--fw-text-main)] shadow-2xl',
+              'animate-in fade-in-0 zoom-in-95 duration-200'
+            )}
+          >
+            {/* Header (No Page Number) */}
+            <div className="flex items-center justify-between pb-3.5 border-b border-[var(--fw-wood-border)]">
+              <div className="flex items-center gap-2">
+                <span className="text-xs uppercase font-bold tracking-wider text-[var(--fw-flax-gold)]">
+                  {ui.previewHeading}
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setSelectedProductForPreview(null)}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-[var(--fw-text-muted)] hover:text-[var(--fw-text-main)] hover:bg-[var(--fw-surface-subtle)] transition-colors"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Preview Image with Zoom Animation & Frame */}
+            <div className="mt-4 relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[var(--fw-surface-subtle)] border border-[var(--fw-wood-border)] shadow-md group">
+              <Image
+                src={selectedProductForPreview.photo}
+                alt={selectedProductForPreview.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 800px"
+                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+
+              <div className="absolute bottom-3 start-3 end-3 flex items-end justify-between">
+                <div>
+                  <h3 className="font-serif text-xl sm:text-2xl font-black text-white drop-shadow-md">
+                    {selectedProductForPreview.translatedName[locale] ?? selectedProductForPreview.name}
+                  </h3>
+                  <p className="text-xs font-mono uppercase tracking-wider text-[var(--fw-flax-gold)] font-bold drop-shadow-sm">
+                    {selectedProductForPreview.name}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Full Product Description */}
+            <div className="mt-4 rounded-xl bg-[var(--fw-surface-subtle)] p-4 border border-[var(--fw-wood-border)]">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--fw-flax-gold)] mb-1">
+                {ui.descriptionLabel}
+              </h4>
+              <p className="text-sm leading-relaxed text-[var(--fw-text-main)] font-normal">
+                {selectedProductForPreview.description[locale] ?? selectedProductForPreview.description.en}
+              </p>
+            </div>
+
+            {/* Specifications & Applications Grid */}
+            <div className="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="rounded-xl bg-[var(--fw-surface-subtle)]/70 p-3.5 border border-[var(--fw-wood-border)]">
+                <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[var(--fw-flax-gold)] mb-2">
+                  <Layers className="h-3.5 w-3.5" />
+                  <span>{ui.specificationsLabel}</span>
+                </div>
+                <ul className="space-y-1.5 text-xs text-[var(--fw-text-main)] font-medium">
+                  {(selectedProductForPreview.specifications[locale] ?? selectedProductForPreview.specifications.en).map((spec, i) => (
+                    <li key={i} className="flex items-start gap-1.5">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[var(--fw-flax-gold)] shrink-0 mt-0.5" />
+                      <span>{spec}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="rounded-xl bg-[var(--fw-surface-subtle)]/70 p-3.5 border border-[var(--fw-wood-border)]">
+                <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[var(--fw-flax-gold)] mb-2">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  <span>{ui.applicationsLabel}</span>
+                </div>
+                <ul className="space-y-1.5 text-xs text-[var(--fw-text-muted)] font-medium">
+                  {(selectedProductForPreview.applications[locale] ?? selectedProductForPreview.applications.en).map((app, i) => (
+                    <li key={i} className="flex items-start gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--fw-flax-gold)] shrink-0 mt-1.5" />
+                      <span>{app}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Action Bar */}
+            <div className="mt-5 pt-3.5 border-t border-[var(--fw-wood-border)] flex flex-col sm:flex-row items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={() => setSelectedProductForPreview(null)}
+                className="w-full sm:w-auto px-4 py-2 rounded-xl border border-[var(--fw-wood-border)] text-xs font-semibold text-[var(--fw-text-main)] hover:bg-[var(--fw-surface-subtle)] transition-colors"
+              >
+                {ui.closeBtn}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleOpenShipModal(selectedProductForPreview)}
+                className="fw-wood-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl py-2.5 px-5 font-bold text-xs sm:text-sm"
+              >
+                <Package className="h-4 w-4" />
+                <span>{ui.shipProduct}</span>
+                <ArrowRight className="h-3.5 w-3.5 rtl:-scale-x-100" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ============================================================ */}
+      {/* 7. COMMODITY SHIPPING QUOTE MODAL (Tactile Wood Atelier)     */}
       {/* ============================================================ */}
       {selectedProductForShip && (
         <div
@@ -354,7 +672,7 @@ export default function ProductFlaxAndLinenPage() {
         >
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-black/65 backdrop-blur-md animate-in fade-in duration-200"
+            className="absolute inset-0 bg-black/70 backdrop-blur-md animate-in fade-in duration-200"
             onClick={handleCloseShipModal}
             aria-hidden="true"
           />
@@ -363,24 +681,24 @@ export default function ProductFlaxAndLinenPage() {
           <div
             className={cn(
               'relative z-10 w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-3xl p-5 sm:p-7 md:p-9',
-              'gf-card bg-card/95 text-foreground shadow-2xl shadow-black/40 border border-[var(--gold-border)]',
+              'fw-card text-[var(--fw-text-main)] shadow-2xl',
               'animate-in fade-in-0 zoom-in-95 duration-200'
             )}
           >
             {/* Header */}
-            <div className="flex items-start justify-between gap-4 pb-4 border-b border-border/50">
+            <div className="flex items-start justify-between gap-4 pb-4 border-b border-[var(--fw-wood-border)]">
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent border border-[var(--gold-arrow-border)]">
-                  <Package className="gi h-6 w-6" strokeWidth={1.75} />
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--fw-surface-subtle)] border border-[var(--fw-wood-border)] text-[var(--fw-flax-gold)]">
+                  <Package className="h-6 w-6" strokeWidth={1.75} />
                 </div>
                 <div>
                   <h2
                     id="ship-dialog-title"
-                    className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-foreground"
+                    className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-[var(--fw-text-main)]"
                   >
                     {ui.shipModalTitle}
                   </h2>
-                  <p className="text-xs sm:text-sm text-foreground/80 mt-0.5">
+                  <p className="text-xs sm:text-sm text-[var(--fw-text-muted)] mt-0.5">
                     {ui.shipModalDesc}
                   </p>
                 </div>
@@ -390,14 +708,14 @@ export default function ProductFlaxAndLinenPage() {
               <button
                 type="button"
                 onClick={handleCloseShipModal}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-foreground/80 hover:text-foreground hover:bg-muted/80 transition-colors"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[var(--fw-text-muted)] hover:text-[var(--fw-text-main)] hover:bg-[var(--fw-surface-subtle)] transition-colors"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            {/* Selected Product Banner */}
-            <div className="mt-4 flex items-center justify-between rounded-xl bg-muted/50 p-3 border border-border/60">
+            {/* Selected Product Banner (No Page Number) */}
+            <div className="mt-4 flex items-center justify-between rounded-xl bg-[var(--fw-surface-subtle)] p-3 border border-[var(--fw-wood-border)]">
               <div className="flex items-center gap-2.5">
                 <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg">
                   <Image
@@ -408,10 +726,10 @@ export default function ProductFlaxAndLinenPage() {
                   />
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-primary">
-                    PAGE {selectedProductForShip.pageNumber} · NATURAL FLAX
+                  <span className="text-[10px] uppercase font-bold text-[var(--fw-flax-gold)]">
+                    NATURAL FLAX & LINEN
                   </span>
-                  <p className="text-sm font-bold text-foreground">
+                  <p className="text-sm font-bold text-[var(--fw-text-main)]">
                     {selectedProductForShip.translatedName[locale] ?? selectedProductForShip.name}
                   </p>
                 </div>
@@ -423,8 +741,8 @@ export default function ProductFlaxAndLinenPage() {
               {/* Row 1: Name and Email */}
               <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                    <User className="gi h-3.5 w-3.5" />
+                  <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-[var(--fw-text-main)]">
+                    <User className="h-3.5 w-3.5 text-[var(--fw-flax-gold)]" />
                     <span>{ui.buyerNameLabel}</span>
                     <span className="text-destructive">*</span>
                   </label>
@@ -434,13 +752,13 @@ export default function ProductFlaxAndLinenPage() {
                     value={buyerName}
                     onChange={(e) => setBuyerName(e.target.value)}
                     placeholder={ui.buyerNamePlaceholder}
-                    className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                    className="w-full rounded-xl border border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)] px-3.5 py-2.5 text-sm text-[var(--fw-text-main)] placeholder:text-[var(--fw-text-soft)] focus:border-[var(--fw-flax-gold)] focus:outline-none focus:ring-2 focus:ring-[var(--fw-flax-gold)]/30 transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                    <Mail className="gi h-3.5 w-3.5" />
+                  <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-[var(--fw-text-main)]">
+                    <Mail className="h-3.5 w-3.5 text-[var(--fw-flax-gold)]" />
                     <span>{ui.buyerEmailLabel}</span>
                     <span className="text-destructive">*</span>
                   </label>
@@ -450,7 +768,7 @@ export default function ProductFlaxAndLinenPage() {
                     value={buyerEmail}
                     onChange={(e) => setBuyerEmail(e.target.value)}
                     placeholder={ui.buyerEmailPlaceholder}
-                    className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                    className="w-full rounded-xl border border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)] px-3.5 py-2.5 text-sm text-[var(--fw-text-main)] placeholder:text-[var(--fw-text-soft)] focus:border-[var(--fw-flax-gold)] focus:outline-none focus:ring-2 focus:ring-[var(--fw-flax-gold)]/30 transition-all"
                   />
                 </div>
               </div>
@@ -458,8 +776,8 @@ export default function ProductFlaxAndLinenPage() {
               {/* Row 2: Quantity and Destination */}
               <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                    <Package className="gi h-3.5 w-3.5" />
+                  <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-[var(--fw-text-main)]">
+                    <Package className="h-3.5 w-3.5 text-[var(--fw-flax-gold)]" />
                     <span>{ui.quantityLabel}</span>
                   </label>
                   <input
@@ -467,13 +785,13 @@ export default function ProductFlaxAndLinenPage() {
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
                     placeholder={ui.quantityPlaceholder}
-                    className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                    className="w-full rounded-xl border border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)] px-3.5 py-2.5 text-sm text-[var(--fw-text-main)] placeholder:text-[var(--fw-text-soft)] focus:border-[var(--fw-flax-gold)] focus:outline-none focus:ring-2 focus:ring-[var(--fw-flax-gold)]/30 transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                    <MapPin className="gi h-3.5 w-3.5" />
+                  <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-[var(--fw-text-main)]">
+                    <MapPin className="h-3.5 w-3.5 text-[var(--fw-flax-gold)]" />
                     <span>{ui.destinationLabel}</span>
                   </label>
                   <input
@@ -481,15 +799,15 @@ export default function ProductFlaxAndLinenPage() {
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
                     placeholder={ui.destinationPlaceholder}
-                    className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                    className="w-full rounded-xl border border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)] px-3.5 py-2.5 text-sm text-[var(--fw-text-main)] placeholder:text-[var(--fw-text-soft)] focus:border-[var(--fw-flax-gold)] focus:outline-none focus:ring-2 focus:ring-[var(--fw-flax-gold)]/30 transition-all"
                   />
                 </div>
               </div>
 
               {/* Row 3: Phone number */}
               <div>
-                <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                  <Phone className="gi h-3.5 w-3.5" />
+                <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-[var(--fw-text-main)]">
+                  <Phone className="h-3.5 w-3.5 text-[var(--fw-flax-gold)]" />
                   <span>{ui.buyerPhoneLabel}</span>
                 </label>
                 <input
@@ -497,14 +815,14 @@ export default function ProductFlaxAndLinenPage() {
                   value={buyerPhone}
                   onChange={(e) => setBuyerPhone(e.target.value)}
                   placeholder={ui.buyerPhonePlaceholder}
-                  className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                  className="w-full rounded-xl border border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)] px-3.5 py-2.5 text-sm text-[var(--fw-text-main)] placeholder:text-[var(--fw-text-soft)] focus:border-[var(--fw-flax-gold)] focus:outline-none focus:ring-2 focus:ring-[var(--fw-flax-gold)]/30 transition-all"
                 />
               </div>
 
               {/* Row 4: Notes and Specifications */}
               <div>
-                <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                  <FileText className="gi h-3.5 w-3.5" />
+                <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-[var(--fw-text-main)]">
+                  <FileText className="h-3.5 w-3.5 text-[var(--fw-flax-gold)]" />
                   <span>{ui.notesLabel}</span>
                 </label>
                 <textarea
@@ -512,7 +830,7 @@ export default function ProductFlaxAndLinenPage() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder={ui.notesPlaceholder}
-                  className="w-full rounded-xl border border-border/70 bg-muted/40 p-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all resize-none"
+                  className="w-full rounded-xl border border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)] p-3 text-sm text-[var(--fw-text-main)] placeholder:text-[var(--fw-text-soft)] focus:border-[var(--fw-flax-gold)] focus:outline-none focus:ring-2 focus:ring-[var(--fw-flax-gold)]/30 transition-all resize-none"
                 />
               </div>
 
@@ -525,29 +843,23 @@ export default function ProductFlaxAndLinenPage() {
 
               {/* Success notification */}
               {submittedSuccess && (
-                <div className="flex items-center gap-2 rounded-xl bg-primary/10 border border-primary/30 p-3 text-xs font-semibold text-primary animate-in fade-in">
+                <div className="flex items-center gap-2 rounded-xl bg-[var(--fw-flax-gold)]/15 border border-[var(--fw-flax-gold)]/40 p-3 text-xs font-semibold text-[var(--fw-flax-gold)] animate-in fade-in">
                   <CheckCircle2 className="h-4 w-4" />
                   <span>Your shipping request has been prepared and sent!</span>
                 </div>
               )}
 
-              {/* Exact same single Submit Button styling */}
+              {/* Submit Button */}
               <div className="pt-2">
                 <button
                   type="submit"
-                  className={cn(
-                    'group relative w-full inline-flex items-center justify-center gap-3 rounded-2xl py-3.5 px-6 font-semibold text-sm sm:text-base',
-                    'gold-fill border border-transparent shadow-lg shadow-[rgba(197,136,12,0.25)] dark:shadow-[rgba(212,175,55,0.2)]',
-                    'hover:shadow-xl hover:shadow-[rgba(197,136,12,0.38)] dark:hover:shadow-[rgba(212,175,55,0.35)]',
-                    'hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-300 ease-out',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
-                  )}
+                  className="fw-wood-btn group relative w-full inline-flex items-center justify-center gap-3 rounded-2xl py-3.5 px-6 font-semibold text-sm sm:text-base"
                 >
                   <span className="font-bold tracking-wider uppercase text-sm sm:text-base">
                     {ui.submitBtn}
                   </span>
 
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-black/15 dark:bg-white/15 backdrop-blur-xs transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 dark:bg-black/25 backdrop-blur-xs transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
                     <ArrowRight className="h-4 w-4 rtl:-scale-x-100" />
                   </div>
                 </button>
@@ -558,31 +870,38 @@ export default function ProductFlaxAndLinenPage() {
       )}
 
       {/* ============================================================ */}
-      {/* 5. CLEAN FOOTER (Without WhatsApp)                           */}
+      {/* 8. CLEAN FOOTER (Flax & Woods Persona, No WhatsApp)          */}
       {/* ============================================================ */}
-      <footer className="mt-auto w-full border-t border-border/40 bg-card/60 backdrop-blur-md text-foreground">
+      <footer className="mt-auto w-full border-t border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)]/75 backdrop-blur-md text-[var(--fw-text-main)] z-10">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 py-8 sm:py-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-border/50">
-            {/* Left: Brand */}
-            <div className="flex flex-col items-center md:items-start text-center md:text-start gap-1">
-              <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-foreground">
-                {ui.companyName}
-              </span>
-              <p className="text-xs sm:text-sm text-foreground/70 max-w-md">
-                {ui.companyTagline}
-              </p>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-[var(--fw-wood-border)]">
+            {/* Left: Brand with New Logo */}
+            <div className="flex items-center gap-3">
+              <img
+                src="/sarhan-logo.png"
+                alt="SARHAN Logo"
+                className="h-10 w-10 object-contain"
+              />
+              <div className="flex flex-col items-start text-start">
+                <span className="font-serif text-lg sm:text-xl font-bold tracking-tight text-[var(--fw-text-main)]">
+                  {ui.companyName}
+                </span>
+                <p className="text-xs text-[var(--fw-text-muted)] max-w-md">
+                  {ui.companyTagline}
+                </p>
+              </div>
             </div>
 
             {/* Middle: Links */}
-            <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-foreground">
-              <Link href="/" className="hover:text-primary transition-colors">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-[var(--fw-text-main)]">
+              <Link href="/" className="hover:text-[var(--fw-flax-gold)] transition-colors">
                 {ui.backToHome}
               </Link>
               <span>·</span>
               <button
                 type="button"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="inline-flex items-center gap-1 hover:text-primary transition-colors"
+                className="inline-flex items-center gap-1 hover:text-[var(--fw-flax-gold)] transition-colors"
               >
                 <span>Top</span>
                 <ArrowUp className="h-3.5 w-3.5" />
@@ -593,16 +912,16 @@ export default function ProductFlaxAndLinenPage() {
             <div className="flex items-center gap-3">
               <a
                 href={`mailto:${EMAIL_BASE}?subject=${encodeURIComponent('Inquiry: Flax & Linen Products')}`}
-                className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-bold text-foreground hover:border-primary hover:text-primary transition-all shadow-xs"
+                className="inline-flex items-center gap-2 rounded-full border border-[var(--fw-wood-border)] bg-[var(--fw-card-glass)] px-4 py-2 text-xs font-bold text-[var(--fw-text-main)] hover:border-[var(--fw-flax-gold)] hover:text-[var(--fw-flax-gold)] transition-all shadow-xs"
               >
-                <Mail className="gi h-3.5 w-3.5" />
+                <Mail className="h-3.5 w-3.5 text-[var(--fw-flax-gold)]" />
                 <span>{EMAIL_BASE}</span>
               </a>
             </div>
           </div>
 
           {/* Bottom Copyright */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[var(--fw-text-soft)]">
             <span>
               © {new Date().getFullYear()} SARHAN FOR IMPORT & EXPORT. All rights reserved.
             </span>

@@ -1,10 +1,25 @@
 'use client'
 
 import * as React from 'react'
-import { X, Plane, Mail, User, Phone, MapPin, FileText, ArrowRight } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import {
+  X,
+  Plane,
+  Mail,
+  User,
+  Phone,
+  MapPin,
+  FileText,
+  ArrowRight,
+  Package,
+  ExternalLink,
+  ChevronDown,
+} from 'lucide-react'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
 import { useI18n } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
+import { CATALOG_PRODUCTS } from '@/app/products/flax-and-linen/product-data'
 
 interface ShipInquiryDialogProps {
   open: boolean
@@ -15,14 +30,19 @@ const DUMMY_WHATSAPP_NUMBER = '1555000100'
 const DUMMY_EMAIL_ADDRESS = 'hello@sarhan.example.com'
 
 export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
-  const { t, dir } = useI18n()
+  const { t, locale, dir } = useI18n()
 
   const [name, setName] = React.useState('')
   const [phone, setPhone] = React.useState('')
+  const [selectedProductId, setSelectedProductId] = React.useState('')
   const [origin, setOrigin] = React.useState('')
   const [destination, setDestination] = React.useState('')
   const [details, setDetails] = React.useState('')
   const [error, setError] = React.useState('')
+
+  const selectedProduct = React.useMemo(() => {
+    return CATALOG_PRODUCTS.find((p) => p.id === selectedProductId)
+  }, [selectedProductId])
 
   // Close on Escape & Lock body scroll
   React.useEffect(() => {
@@ -53,12 +73,20 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
     e.preventDefault()
     if (!validate()) return
 
+    const productTitle = selectedProduct
+      ? `${selectedProduct.translatedName[locale] ?? selectedProduct.name} (${selectedProduct.name})`
+      : t.shipForm.generalCargo
+
     // 1. Prepare WhatsApp message
     const waMessage = [
       '🚢 *SARHAN Import & Export — Shipping Quote Request*',
       '─────────────────────────',
       `👤 *Name / Company:* ${name.trim()}`,
       phone.trim() ? `📞 *Phone / Contact:* ${phone.trim()}` : null,
+      `🏷️ *Product / Cargo:* ${productTitle}`,
+      selectedProduct
+        ? `🌾 *Flax Catalog Link:* https://sarhan.example.com/products/flax-and-linen#${selectedProduct.id}`
+        : null,
       origin.trim() ? `📍 *Origin (From):* ${origin.trim()}` : null,
       destination.trim() ? `🏁 *Destination (To):* ${destination.trim()}` : null,
       `📦 *Cargo Specifications:* \n${details.trim()}`,
@@ -71,12 +99,16 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
     const waUrl = `https://wa.me/${DUMMY_WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`
 
     // 2. Prepare Email message
-    const subject = `Shipping Quote Request: ${name.trim()}`
+    const subject = `Shipping Quote Request: ${selectedProduct ? selectedProduct.name : 'General Cargo'} — ${name.trim()}`
     const emailBody = [
       'SARHAN Import & Export — Shipping Quote Request',
       '==================================================',
       `Name / Company: ${name.trim()}`,
       phone.trim() ? `Contact Phone: ${phone.trim()}` : '',
+      `Selected Commodity / Product: ${productTitle}`,
+      selectedProduct
+        ? `Catalog Item Link: /products/flax-and-linen#${selectedProduct.id}`
+        : '',
       origin.trim() ? `Origin (From): ${origin.trim()}` : '',
       destination.trim() ? `Destination (To): ${destination.trim()}` : '',
       '',
@@ -189,7 +221,90 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             </div>
           </div>
 
-          {/* Row 2: Origin and Destination */}
+          {/* Row 2: Product / Cargo Selection List */}
+          <div>
+            <div className="mb-1.5 flex items-center justify-between gap-2">
+              <label className="flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
+                <Package className="gi h-3.5 w-3.5" />
+                <span>{t.shipForm.productSelectLabel}</span>
+              </label>
+
+              {/* Direct link to /products/flax-and-linen */}
+              <Link
+                href="/products/flax-and-linen"
+                target="_blank"
+                className="text-[11px] font-bold text-primary hover:underline inline-flex items-center gap-1 transition-colors"
+                title={t.shipForm.viewFlaxCatalog}
+              >
+                <span>{t.shipForm.viewFlaxCatalog}</span>
+                <ExternalLink className="h-3 w-3 rtl:-scale-x-100" />
+              </Link>
+            </div>
+
+            {/* Product Select Dropdown */}
+            <div className="relative">
+              <select
+                value={selectedProductId}
+                onChange={(e) => setSelectedProductId(e.target.value)}
+                className="w-full appearance-none rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 pe-9 text-sm text-foreground dark:text-white focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all font-medium cursor-pointer"
+              >
+                <option value="">{t.shipForm.generalCargo}</option>
+                <optgroup label={t.shipForm.flaxCategory}>
+                  {CATALOG_PRODUCTS.map((prod) => (
+                    <option key={prod.id} value={prod.id}>
+                      {prod.translatedName[locale] ?? prod.name} ({prod.name})
+                    </option>
+                  ))}
+                </optgroup>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 end-0 flex items-center px-3 text-muted-foreground">
+                <ChevronDown className="h-4 w-4" />
+              </div>
+            </div>
+
+            {/* Selected Product Interactive Mini Preview Card */}
+            {selectedProduct && (
+              <div className="mt-2.5 flex items-center justify-between rounded-xl bg-accent/70 border border-[var(--gold-arrow-border)] p-2.5 animate-in fade-in duration-200">
+                <div className="flex items-center gap-2.5 overflow-hidden">
+                  <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg border border-border/50">
+                    <Image
+                      src={selectedProduct.photo}
+                      alt={selectedProduct.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="text-start min-w-0">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-primary block truncate">
+                      {t.shipForm.flaxCategory}
+                    </span>
+                    <p className="text-xs font-bold text-foreground dark:text-white truncate">
+                      {selectedProduct.translatedName[locale] ?? selectedProduct.name}
+                    </p>
+                  </div>
+                </div>
+
+                <Link
+                  href={`/products/flax-and-linen#${selectedProduct.id}`}
+                  target="_blank"
+                  className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-card/90 px-2.5 py-1 text-[11px] font-semibold text-primary hover:bg-card border border-border/50 transition-colors shadow-xs"
+                >
+                  <span>
+                    {locale === 'ar'
+                      ? 'عرض بالكتالوج'
+                      : locale === 'fr'
+                        ? 'Voir détails'
+                        : locale === 'zh'
+                          ? '查看详情'
+                          : 'View in Catalog'}
+                  </span>
+                  <ExternalLink className="h-3 w-3 rtl:-scale-x-100" />
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Row 3: Origin and Destination */}
           <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
             <div>
               <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
@@ -220,7 +335,7 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             </div>
           </div>
 
-          {/* Details & Notes */}
+          {/* Row 4: Details & Notes */}
           <div>
             <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
               <FileText className="gi h-3.5 w-3.5" />

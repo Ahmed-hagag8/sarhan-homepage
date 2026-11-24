@@ -224,21 +224,169 @@ export const CATALOG_UI = {
   },
 }
 
+export const FLAX_ABOUT = {
+  badge: {
+    en: 'NATURAL FIBER HERITAGE',
+    ar: 'عراقة الألياف الطبيعية',
+    fr: 'PATRIMOINE DES FIBRES NATURELLES',
+    zh: '天然植物纤维产业典范',
+  },
+  heading: {
+    en: 'About Our Flax Heritage',
+    ar: 'عن ريادتنا في صناعة وتجارة الكتان',
+    fr: 'Notre Excellence dans le Lin',
+    zh: '专注天然高品级亚麻全产业链',
+  },
+  description: {
+    en: 'SARHAN stands as a trusted strategic supplier of premium natural flax fibers and commodities. Combining sustainable harvesting, precision mechanical processing, and rigorous quality grading, we deliver high-tensile, uniform fibers tailored to the exacting demands of global textile mills and high-performance industrial applications.',
+    ar: 'تُعد شركة سرحان شريكاً استراتيجياً موثوقاً في توريد وتجهيز أجود ألياف وخامات الكتان الطبيعي. نجمع بين أساليب التعتين الطبيعي والمعالجة الميكانيكية الحديثة لنوفّر للمصانع والأسواق العالمية أليافاً عالية الشد ونقية تلبي متطلبات النسيج الفاخر والتطبيقات الصناعية الدقيقة.',
+    fr: 'SARHAN est un partenaire stratégique de référence pour l\'approvisionnement en fibres de lin et matières premières naturelles. Alliant récolte durable, transformation mécanique de pointe et contrôle qualité rigoureux, nous répondons aux normes textiles et industrielles les plus strictes.',
+    zh: 'SARHAN 进出口贸易公司专注为全球客户提供顶尖天然亚麻原料及精深加工纤维。依托天然优选原麻、高精密机械打成与精梳工艺，产出条干均匀、强力出众的高支纤维，满足全球高端纺织面料与工业技术复合材料需求。',
+  },
+  stats: [
+    {
+      value: '100%',
+      label: {
+        en: 'Pure Natural Purity',
+        ar: 'نقاء طبيعي 100%',
+        fr: 'Pureté 100% Naturelle',
+        zh: '100% 纯天然纤维',
+      },
+    },
+    {
+      value: '200–250 kg',
+      label: {
+        en: 'Export-Grade Bales',
+        ar: 'بالات مخصصة للتصدير',
+        fr: 'Balles d\'Exportation',
+        zh: '高密标准外贸包',
+      },
+    },
+    {
+      value: 'FOB / CIF',
+      label: {
+        en: 'End-to-End Logistics',
+        ar: 'تغطية لوجستية عالمية',
+        fr: 'Logistique Complète',
+        zh: '全球港口直达交付',
+      },
+    },
+  ],
+}
+
+export const FLAX_PROCESS = {
+  badge: {
+    en: 'INTEGRATED VALUE CHAIN',
+    ar: 'سلسلة الإنتاج والتصدير المتكاملة',
+    fr: 'CHAÎNE DE VALEUR INTÉGRÉE',
+    zh: '全链条生产与出口交付',
+  },
+  title: {
+    en: 'From straw to shipment',
+    ar: 'من القش حتى الشحن النهائي',
+    fr: 'De la paille à l\'expédition',
+    zh: '从原料原茎到全球装运',
+  },
+  subtitle: {
+    en: 'Five steps. One roof.',
+    ar: 'خمس مراحل متكاملة. تحت سقف واحد.',
+    fr: 'Cinq étapes. Un seul toit.',
+    zh: '五大严谨工序 · 全程一体把控',
+  },
+  steps: [
+    {
+      number: '01',
+      title: {
+        en: 'Field',
+        ar: 'الحقل (Field)',
+        fr: 'Le Champ (Field)',
+        zh: '田间产区 (Field)',
+      },
+      desc: {
+        en: 'Nile Delta flax straw, retted under the same sun it grew in.',
+        ar: 'قش كتان من دلتا النيل، معتّن ومجفف تحت نفس الشمس التي نما تحتها.',
+        fr: 'Paille de lin du delta du Nil, rouie sous le même soleil où elle a grandi.',
+        zh: '精选尼罗河三角洲天然亚麻原茎，在孕育生长的同一艳阳下完成自然温润沤麻。',
+      },
+    },
+    {
+      number: '02',
+      title: {
+        en: 'Scutch',
+        ar: 'التسليط (Scutch)',
+        fr: 'Le Teillage (Scutch)',
+        zh: '机械打成 (Scutch)',
+      },
+      desc: {
+        en: 'Turbines free the long line fiber and knock out the shives.',
+        ar: 'توربينات وماكينات حديثة تفصل ألياف الخطوط الطويلة وتتخلص من القشور والشوائب.',
+        fr: 'Les turbines libèrent la fibre longue et éliminent complètement les anas.',
+        zh: '高效涡轮打麻机精准剥离韧性长纤维，高效剔除木质麻屑与天然碎渣。',
+      },
+    },
+    {
+      number: '03',
+      title: {
+        en: 'Hackle',
+        ar: 'التمشيط (Hackle)',
+        fr: 'Le Peignage (Hackle)',
+        zh: '精梳整理 (Hackle)',
+      },
+      desc: {
+        en: 'Steel pins comb the fiber parallel, uniform, spinning-ready.',
+        ar: 'أمشاط فولاذية دقيقة تجعل الألياف متوازية وموحدة وجاهزة للغزل الفوري.',
+        fr: 'Des pointes d\'acier peignent les fibres en parallèle, uniformes et prêtes pour la filature.',
+        zh: '高密特种钢针纵向多道梳整，使纤维顺直平行、条干均匀，直接适配精密纺纱。',
+      },
+    },
+    {
+      number: '04',
+      title: {
+        en: 'Bale',
+        ar: 'الكبس والبالات (Bale)',
+        fr: 'Le Pressage en Balles (Bale)',
+        zh: '压缩打包 (Bale)',
+      },
+      desc: {
+        en: 'Pressed at 200–250 kg, graded, marked, container-planned.',
+        ar: 'مكبوس في بالات زنة 200–250 كجم، مصنفة بالرتب ومخططة للشحن بالحاويات.',
+        fr: 'Pressé en balles de 200 à 250 kg, classifié, étiqueté et préparé pour les conteneurs.',
+        zh: '高压液压打包成 200–250 公斤标准包，等级严格印标识，科学规划集装箱配载。',
+      },
+    },
+    {
+      number: '05',
+      title: {
+        en: 'Ship',
+        ar: 'الشحن والتصدير (Ship)',
+        fr: 'L\'Expédition (Ship)',
+        zh: '全球海运 (Ship)',
+      },
+      desc: {
+        en: 'FOB, CFR, or CIF — to your port, with full export documents.',
+        ar: 'تسليم FOB أو CFR أو CIF — مباشرة إلى مينائك مع كامل وثائق التصدير والشهادات الرسمية.',
+        fr: 'FOB, CFR ou CIF — directement à votre port, avec tous les documents officiels d\'exportation.',
+        zh: '支持 FOB、CFR 或 CIF 条款 — 点对点直达目的地港口，随附完备出口通关质检证书。',
+      },
+    },
+  ],
+}
+
 export const CATALOG_PRODUCTS: CatalogProduct[] = [
   {
     id: 'scutched-flax',
-    pageNumber: '10',
-    name: 'SCUTCHED FLAX',
+    pageNumber: '01',
+    name: 'Scutched Flax',
     translatedName: {
       en: 'Scutched Flax',
-      ar: 'كتان مسلّط (سكوتشد)',
+      ar: 'الكتان المشوط',
       fr: 'Lin Teillé (Scutched Flax)',
       zh: '打成亚麻 (Scutched Flax)',
     },
-    photo: '/products/scutched_flax_photo.jpg',
+    photo: '/products/scutched_flax_new.jpg',
     description: {
       en: 'Long flax fibers mechanically cleaned using special machines to remove impurities and woody parts.',
-      ar: 'ألياف كتان طويلة منظفة ميكانيكياً باستخدام ماكينات خاصة لإزالة الشوائب والأجزاء الخشبية.',
+      ar: 'الكتان المشوط: ألياف كتان طويلة منظفة ميكانيكياً باستخدام ماكينات خاصة لإزالة الشوائب والأجزاء الخشبية.',
       fr: 'Fibres de lin longues nettoyées mécaniquement à l\'aide de machines spéciales pour éliminer les impuretés et les parties ligneuses.',
       zh: '经专业设备机械加工提纯的长亚麻纤维，彻底剔除木质颗粒与杂质。',
     },
@@ -257,18 +405,18 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'hackled-flax',
-    pageNumber: '11',
-    name: 'HACKLED FLAX',
+    pageNumber: '02',
+    name: 'Hackled Flax',
     translatedName: {
       en: 'Hackled Flax',
-      ar: 'كتان ممشط (هاكلد)',
+      ar: 'كتان ممشط',
       fr: 'Lin Peigné (Hackled Flax)',
       zh: '精梳亚麻 (Hackled Flax)',
     },
-    photo: '/products/hackled_flax_photo.jpg',
+    photo: '/products/hackled_flax_new.jpg',
     description: {
       en: 'Long flax fibers combed after scutching, featuring higher fineness and uniformity.',
-      ar: 'ألياف كتان طويلة ممشطة بعد التسليط، تتميز بنعومة فائقة وتجانس عالٍ في الخيوط.',
+      ar: 'كتان ممشط: ألياف كتان طويلة ممشطة بعد التسليط، تتميز بنعومة فائقة وتجانس عالٍ في الخيوط.',
       fr: 'Fibres de lin longues peignées après teillage, offrant une finesse et une uniformité supérieures.',
       zh: '经打成后再经梳理的长纤维，兼具极高的细度与纤维均匀度。',
     },
@@ -287,18 +435,18 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'hackled-flax-sliver',
-    pageNumber: '12',
-    name: 'HACKLED FLAX IN SLIVER',
+    pageNumber: '03',
+    name: 'Hackled Flax in Sliver',
     translatedName: {
       en: 'Hackled Flax in Sliver',
-      ar: 'شريط كتان ممشط (سليفر)',
+      ar: 'كتان ممشط باللون الفضي',
       fr: 'Ruban de Lin Peigné (Sliver)',
       zh: '精梳亚麻条 (Flax Sliver)',
     },
-    photo: '/products/hackled_flax_sliver_photo.jpg',
+    photo: '/products/hackled_flax_sliver_new.jpg',
     description: {
       en: 'Combed flax fibers processed into sliver form for easier feeding into spinning machines.',
-      ar: 'ألياف كتان ممشطة مجهزة على شكل أشرطة مستمرة لسهولة التغذية المباشرة في ماكينات الغزل.',
+      ar: 'كتان ممشط باللون الفضي: ألياف كتان ممشطة مجهزة على شكل أشرطة مستمرة لسهولة التغذية المباشرة في ماكينات الغزل.',
       fr: 'Fibres de lin peignées transformées en ruban pour une alimentation fluide des métiers à filer.',
       zh: '经精梳加工并集束成连续条状，便于直接喂入精密纺纱设备。',
     },
@@ -317,18 +465,18 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'hackled-flax-tow',
-    pageNumber: '13',
-    name: 'HACKLED FLAX TOW',
+    pageNumber: '04',
+    name: 'Hackled Flax Tow',
     translatedName: {
       en: 'Hackled Flax Tow',
-      ar: 'عوادم تمشيط الكتان (تو)',
+      ar: 'شعر الكتان الناتج عن التسريح',
       fr: 'Étoupes de Lin Peigné (Tow)',
       zh: '精梳亚麻短麻 (Flax Tow)',
     },
-    photo: '/products/hackled_flax_tow_photo.jpg',
+    photo: '/products/hackled_flax_tow_new.jpg',
     description: {
-      en: 'Short flax fibers derived from hackling waste, naturally colored, with adjustable shives percentage upon request.',
-      ar: 'ألياف كتان قصيرة مشتقة من عوادم التمشيط، بلون طبيعي، مع إمكانية ضبط نسبة القشور الخشبية حسب الطلب.',
+      en: 'Short flax fibers derived from hacking waste, naturally colored, with adjustable shives percentage upon request.',
+      ar: 'شعر الكتان الناتج عن التسريح: ألياف كتان قصيرة مشتقة من عوادم التمشيط، بلون طبيعي، مع إمكانية ضبط نسبة القشور الخشبية حسب الطلب.',
       fr: 'Fibres courtes de lin issues du peignage, couleur naturelle, teneur en anas ajustable sur demande.',
       zh: '精梳副产短纤维，保持纯天然色泽，可根据客制要求调节麻屑含量。',
     },
@@ -347,18 +495,18 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'rescutched-flax-tow',
-    pageNumber: '14',
-    name: 'RESCUTCHED FLAX TOW',
+    pageNumber: '05',
+    name: 'Rescutched Flax Tow',
     translatedName: {
       en: 'Rescutched Flax Tow',
-      ar: 'كتان ريسكوتشد تو (قصير)',
+      ar: 'شعر كتان معاد تشويطه',
       fr: 'Étoupes de Lin Reteillé',
       zh: '重打亚麻短麻 (Rescutched Tow)',
     },
-    photo: '/products/rescutched_flax_tow_photo.jpg',
+    photo: '/products/rescutched_flax_tow_new.jpg',
     description: {
       en: 'Very short flax fibers (under 8 cm), suitable for industrial uses or paper manufacturing.',
-      ar: 'ألياف كتان قصيرة جداً (أقل من 8 سم)، مخصصة للاستخدامات الصناعية وتصنيع الورق الممتاز.',
+      ar: 'شعر كتان معاد تشويطه: ألياف كتان قصيرة جداً (أقل من 8 سم)، مخصصة للاستخدامات الصناعية وتصنيع الورق الممتاز.',
       fr: 'Fibres de lin très courtes (moins de 8 cm), adaptées aux usages industriels et à la fabrication de papier.',
       zh: '超短亚麻纤维（小于 8 厘米），专用于特种工业制造及高档纸浆造纸。',
     },
@@ -377,18 +525,18 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'rescutched-tow-sliver',
-    pageNumber: '15',
-    name: 'RESCUTCHED TOW SLIVER',
+    pageNumber: '06',
+    name: 'Rescutched Tow Sliver',
     translatedName: {
       en: 'Rescutched Tow Sliver',
-      ar: 'شريط ريسكوتشد تو (سليفر)',
+      ar: 'شريط تو كتان معاد تقشيره',
       fr: 'Ruban d\'Étoupes Reteillées',
       zh: '重打短麻条 (Tow Sliver)',
     },
-    photo: '/products/rescutched_tow_sliver_photo.jpg',
+    photo: '/products/rescutched_tow_sliver_new.jpg',
     description: {
       en: 'European flax fibers reprocessed to resemble cotton in softness and length, ideal for cotton system spinning.',
-      ar: 'ألياف كتان أوروبية معاد معالجتها لتشبه القطن في النعومة والطول، مثالية لمنظومات غزل القطن.',
+      ar: 'شريط تو كتان معاد تقشيره: ألياف كتان أوروبية معاد معالجتها لتشبه القطن في النعومة والطول، مثالية لمنظومات غزل القطن.',
       fr: 'Fibres de lin européennes retraitées pour égaler le coton en douceur et longueur, idéales pour la filature cotonnière.',
       zh: '进口优质亚麻纤维经特种柔化重构，在触感与长度上趋近棉纤维，完美适配棉纺体系。',
     },
@@ -407,20 +555,20 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'cottonised-flax',
-    pageNumber: '16',
-    name: 'COTTONISED FLAX',
+    pageNumber: '07',
+    name: 'Cottonised Flax',
     translatedName: {
       en: 'Cottonised Flax',
-      ar: 'كتان قطني الطابع (معالج)',
+      ar: 'الكتان المعالج بالقطن',
       fr: 'Lin Cotonisé (Cottonised Flax)',
       zh: '棉化亚麻 (Cottonised Flax)',
     },
-    photo: '/products/cottonised_flax_photo.jpg',
+    photo: '/products/cottonised_flax_new.jpg',
     description: {
-      en: 'Natural flax treated to mimic cotton properties, short and soft, perfect for modern spinning processes.',
-      ar: 'كتان طبيعي معالج ليحاكي خصائص القطن، ألياف قصيرة وفائقة النعومة، مثالي لخطوط الغزل الحديثة.',
-      fr: 'Lin naturel traité pour reproduire les caractéristiques du coton, doux et court, parfait pour les métiers modernes.',
-      zh: '优质天然亚麻经脱胶变性处理，兼具纯麻凉感与棉质柔软蓬松，专为现代高速纺纱打造。',
+      en: 'Egyptian flax treated to mimic cotton properties, short and soft, perfect for modern spinning processes.',
+      ar: 'الكتان المعالج بالقطن: كتان معالج ليحاكي خصائص القطن، ألياف قصيرة وفائقة النعومة، مثالي لخطوط الغزل الحديثة.',
+      fr: 'Lin traité pour reproduire les caractéristiques du coton, doux et court, parfait pour les métiers modernes.',
+      zh: '天然亚麻经脱胶变性处理，兼具纯麻凉感与棉质柔软蓬松，专为现代高速纺纱打造。',
     },
     specifications: {
       en: ['Soft and blendable', 'Free from impurities'],
@@ -437,18 +585,18 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: 'hackled-flax-dolls',
-    pageNumber: '17',
-    name: 'HACKLED FLAX DOLLS',
+    pageNumber: '08',
+    name: 'Hackled Flax Dolls',
     translatedName: {
       en: 'Hackled Flax Dolls',
-      ar: 'عرائس / ضفائر كتان ممشط (أوقية)',
+      ar: 'حزم الكتان المسرّح',
       fr: 'Poupées de Lin Peigné (Dolls)',
       zh: '精梳亚麻发束 (Flax Dolls)',
     },
-    photo: '/products/hackled_flax_dolls_photo.jpg',
+    photo: '/products/hackled_flax_dolls_new.jpg',
     description: {
-      en: 'Flax fibers bundled into hand-usable "dolls" (Uokia, 2-head, or 4-head) for convenient manual applications.',
-      ar: 'ألياف كتان مجمعة ومجدولة يدوياً في هيئة ضفائر (أوقية، رأسين، أو 4 رؤوس) للاستخدامات اليدوية السريعة.',
+      en: 'Flax fibers bundled into hand-usable \'dolls\' (Uokia, 2-head, or 4-head) for convenient manual applications.',
+      ar: 'حزم الكتان المسرّح: ألياف كتان مجمعة ومجدولة يدوياً في هيئة ضفائر (أوقية، رأسين، أو 4 رؤوس) للاستخدامات اليدوية السريعة.',
       fr: 'Fibres de lin nouées en poupées maniables (Uokia, 2 têtes ou 4 têtes) pour une utilisation manuelle aisée.',
       zh: '亚麻纤维整理捆扎为便携手工束发造型（Uokia、2头或4头规格），适用于便捷手工操作。',
     },
@@ -463,6 +611,36 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
       ar: ['عزل السباكة وتوصيلات الأنابيب', 'أعمال الديكور', 'الحرف والأشغال اليدوية', 'الغزل'],
       fr: ['Plomberie et étanchéité', 'Décoration', 'Artisanat d\'art', 'Filature traditionnelle'],
       zh: ['管道螺纹密封（水暖工专用）', '艺术装饰陈列', '传统手工编织', '手工业纺织'],
+    },
+  },
+  {
+    id: 'flax-seeds',
+    pageNumber: '09',
+    name: 'Flax Seeds',
+    translatedName: {
+      en: 'Flax Seeds',
+      ar: 'بذور كتان',
+      fr: 'Graines de Lin',
+      zh: '优选亚麻种子 (Flax Seeds)',
+    },
+    photo: '/products/flax_seeds.jpg',
+    description: {
+      en: 'High-quality flax seeds selected for planting, supporting healthy growth and reliable cultivation.',
+      ar: 'بذور كتان: بذور كتان عالية الجودة منتقاة للزراعة، تدعم النمو الصحي والإنتاج الزراعي الموثوق.',
+      fr: 'Graines de lin de haute qualité sélectionnées pour les semis, favorisant une croissance saine et une culture fiable.',
+      zh: '严选优质天然亚麻良种，发芽率高且适种性强，助力作物健康生长与稳产稳收。',
+    },
+    specifications: {
+      en: ['High germination rate', 'Carefully cleaned & sorted'],
+      ar: ['نسبة إنبات عالية ونقاء ممتاز', 'منقّاة ومفروزة بعناية فائقة'],
+      fr: ['Haute pureté & excellent taux de germination', 'Soigneusement nettoyées et triées'],
+      zh: ['高纯度与优异出苗发芽率', '严选精细除杂与颗粒饱满筛选'],
+    },
+    applications: {
+      en: ['Agricultural planting', 'Cold-press oil extraction', 'Healthy cultivation'],
+      ar: ['الزراعة والإنتاج الزراعي', 'عصر الزيوت الطبيعية', 'الزراعة الإنتاجية الموثوقة'],
+      fr: ['Semis agricole', 'Extraction d\'huile par pression à froid', 'Culture durable'],
+      zh: ['规模化农业优种种植', '纯天然冷榨亚麻籽油提取', '生态绿色农业生产'],
     },
   },
 ]

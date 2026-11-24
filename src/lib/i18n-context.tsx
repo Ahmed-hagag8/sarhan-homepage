@@ -48,6 +48,10 @@ interface TranslationKeys {
   shipForm: {
     dialogTitle: string
     dialogDesc: string
+    productSelectLabel: string
+    generalCargo: string
+    flaxCategory: string
+    viewFlaxCatalog: string
     nameLabel: string
     namePlaceholder: string
     phoneLabel: string
@@ -168,6 +172,10 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     shipForm: {
       dialogTitle: 'Request a Shipping Quote',
       dialogDesc: 'Fill in your cargo details and send directly to our logistics team via WhatsApp or Email.',
+      productSelectLabel: 'Select Product / Commodity',
+      generalCargo: 'Custom / General Cargo',
+      flaxCategory: 'Flax & Linen Products',
+      viewFlaxCatalog: 'View Flax & Linen Catalog',
       nameLabel: 'Your Name / Company',
       namePlaceholder: 'e.g. John Doe / Global Corp',
       phoneLabel: 'Phone / WhatsApp Number',
@@ -287,6 +295,10 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     shipForm: {
       dialogTitle: 'طلب تسعير شحنة جديدة',
       dialogDesc: 'املأ بيانات الشحنة ليتم إرسالها مباشرة لفريق اللوجستيات عبر واتساب أو البريد الإلكتروني.',
+      productSelectLabel: 'تحديد المنتج أو نوع البضاعة',
+      generalCargo: 'شحنة عامة / بضاعة مخصصة',
+      flaxCategory: 'منتجات وخامات الكتان',
+      viewFlaxCatalog: 'تصفح كتالوج الكتان الكامل',
       nameLabel: 'الاسم أو اسم الشركة',
       namePlaceholder: 'مثال: أحمد محمد / شركة التجارة العالمية',
       phoneLabel: 'رقم الهاتف أو الواتساب',
@@ -406,6 +418,10 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     shipForm: {
       dialogTitle: '获取航运即时报价',
       dialogDesc: '填写货物运输信息，直接通过 WhatsApp 或邮件发送给我们的国际物流团队。',
+      productSelectLabel: '选择托运产品 / 货物类型',
+      generalCargo: '通用货物 / 自定义货运',
+      flaxCategory: '天然亚麻及麻纤维系列',
+      viewFlaxCatalog: '浏览亚麻全系画册',
       nameLabel: '您的姓名 / 公司名称',
       namePlaceholder: '例如：李明 / 国际经贸有限公司',
       phoneLabel: '联系电话 / WhatsApp',
@@ -525,6 +541,10 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
     shipForm: {
       dialogTitle: 'Demander un Devis d\'Expédition',
       dialogDesc: 'Renseignez les détails de votre cargaison et envoyez-les directement à notre équipe logistique via WhatsApp ou Email.',
+      productSelectLabel: 'Sélectionner le Produit / Marchandise',
+      generalCargo: 'Cargaison Générale / Fret Spécifique',
+      flaxCategory: 'Produits en Lin & Fibres',
+      viewFlaxCatalog: 'Voir le catalogue du lin',
       nameLabel: 'Votre Nom / Entreprise',
       namePlaceholder: 'ex. Jean Dupont / Global Corp',
       phoneLabel: 'Téléphone / WhatsApp',
