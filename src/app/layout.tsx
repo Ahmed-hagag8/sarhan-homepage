@@ -29,7 +29,7 @@ const geistMono = Geist_Mono({
   fallback: ["Courier New", "monospace"],
 });
 
-const BASE_URL = "https://sarhanco.com";
+const BASE_URL = "https://www.sarhanco.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

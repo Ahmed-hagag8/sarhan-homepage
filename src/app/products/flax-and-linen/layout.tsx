@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const BASE_URL = "https://sarhanco.com";
+const BASE_URL = "https://www.sarhanco.com";
 const PAGE_URL = `${BASE_URL}/products/flax-and-linen`;
 
 export const metadata: Metadata = {

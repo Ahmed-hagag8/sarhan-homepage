@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sarhanco.com/sitemap.xml
+Sitemap: https://www.sarhanco.com/sitemap.xml
