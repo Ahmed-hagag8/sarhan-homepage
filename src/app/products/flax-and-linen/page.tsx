@@ -4,7 +4,6 @@ import * as React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
-  ArrowLeft,
   ArrowRight,
   ArrowUp,
   Package,
@@ -296,40 +295,22 @@ export default function ProductFlaxAndLinenPage() {
           aria-label="Utility"
           className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-2.5 sm:px-6 sm:py-3.5 md:px-8"
         >
-          {/* Top Left: Theme toggle + Back to home link */}
+          {/* Top Left: Theme toggle */}
           <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 rounded-full border border-[var(--fw-wood-border)] bg-[var(--fw-surface-subtle)] px-3 py-1.5 text-xs font-semibold text-[var(--fw-text-main)] hover:border-[var(--fw-flax-gold)] hover:text-[var(--fw-flax-gold)] transition-all group"
-            >
-              <ArrowLeft className="h-3.5 w-3.5 rtl:-scale-x-100 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" />
-              <span className="hidden sm:inline">{ui.backToHome}</span>
-            </Link>
           </div>
 
-          {/* Center: Brand Identity with New Logo (Transparent) */}
+          {/* Center: Brand Identity without Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 group"
+            className="flex flex-col items-center group cursor-pointer"
           >
-            <Image
-              src="/sarhan-logo.png"
-              alt="SARHAN Logo"
-              width={44}
-              height={44}
-              priority
-              quality={80}
-              className="h-9 w-9 sm:h-11 sm:w-11 object-contain transition-transform group-hover:scale-105"
-            />
-            <div className="flex flex-col text-start">
-              <span className="font-serif text-sm sm:text-base md:text-lg font-bold tracking-[0.2em] sm:tracking-[0.25em] text-[var(--fw-text-main)] group-hover:text-[var(--fw-flax-gold)] transition-colors uppercase leading-none">
-                SARHAN
-              </span>
-              <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.28em] text-[var(--fw-text-soft)] group-hover:text-[var(--fw-flax-gold)] transition-colors mt-0.5">
-                IMPORT & EXPORT
-              </span>
-            </div>
+            <span className="font-serif text-sm sm:text-base md:text-lg font-bold tracking-[0.2em] sm:tracking-[0.25em] text-[var(--fw-text-main)] group-hover:text-[var(--fw-flax-gold)] transition-colors uppercase leading-none">
+              SARHAN
+            </span>
+            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.28em] text-[var(--fw-text-soft)] group-hover:text-[var(--fw-flax-gold)] transition-colors mt-0.5">
+              IMPORT & EXPORT
+            </span>
           </Link>
 
           {/* Top Right: Language selector */}

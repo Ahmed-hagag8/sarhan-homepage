@@ -17,7 +17,7 @@ A modern, high-performance landing page for **SARHAN Import & Export**, built wi
 - **FLAX & LINEN PRODUCTS Showcase**:
   - Featured export commodity: **FLAX & LINEN PRODUCTS** (Premium Natural Egyptian Flax & Linen Products).
   - Desktop hover preview revealing product highlights, with a full interactive product modal and direct quote request buttons.
-- **Modern Connect Us Select Bar**:
+- **Modern Contact Us Select Bar**:
   - Floating frosted-glass dock with live status indicator (*Active Now*).
   - Instant direct channels for **WhatsApp**, **Email**, and **Direct Call** with 1-click number copy feedback.
 - **Full Internationalization (i18n)**:

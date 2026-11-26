@@ -139,13 +139,18 @@ export default function Home() {
           {/* Top Left: Theme toggle */}
           <ThemeToggle />
 
-          {/* Center Brand Wordmark */}
+          {/* Center Brand Identity without Logo (Matches Product Page) */}
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-xs font-semibold uppercase tracking-[0.2em] text-black hover:text-black dark:text-white dark:hover:text-white transition-colors sm:text-sm"
+            className="flex flex-col items-center group cursor-pointer"
           >
-            {t.logo.wordmark}
+            <span className="font-serif text-sm sm:text-base md:text-lg font-bold tracking-[0.2em] sm:tracking-[0.25em] text-black dark:text-white group-hover:text-primary transition-colors uppercase leading-none">
+              SARHAN
+            </span>
+            <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.28em] text-muted-foreground dark:text-white/70 group-hover:text-primary transition-colors mt-0.5">
+              IMPORT & EXPORT
+            </span>
           </button>
 
           {/* Top Right: Language selector */}

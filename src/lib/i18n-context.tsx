@@ -239,8 +239,8 @@ const translations: Record<Locale, TranslationKeys & { dir: Direction; label: st
       whatsappValue: '+20 113 328 9251',
     },
     contact: {
-      connectUs: 'Connect Us',
-      connectUsAria: 'Call us',
+      connectUs: 'Contact Us',
+      connectUsAria: 'Contact us',
       locationLabel: 'Location',
       locationAria: 'View our location on the map',
       phonePlaceholder: 'Phone number will be added here.',
