@@ -45,57 +45,57 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ---- Light Mode: Warm white + charcoal text + brighter metallic gold ---- */
+/* ---- Light Mode: Warm white + pure black text + richer, vivid metallic gold ---- */
 :root {
   --radius: 0.625rem;
-  --about-text: var(--foreground);                    /* neutral readable text (was gold) */
-  /* Brighter, richer metallic gold for Light Mode — illuminated and luxurious,
-     not flat yellow or neon. */
-  --gold-light: #FFD95E;
-  --gold-primary: #E0B030;
-  --gold-deep: #B8860B;
-  --gold-highlight: #FFEB9E;
-  --gold-grad: linear-gradient(135deg, #FFD95E 0%, #E0B030 45%, #B8860B 100%);
-  --gold-grad-bright: linear-gradient(135deg, #FFEB9E 0%, #FFD95E 45%, #E0B030 100%);
-  --gold-grad-line: linear-gradient(90deg, transparent 0%, rgba(224, 176, 48, 0.6) 50%, transparent 100%);
+  --about-text: #000000;                              /* pure black text */
+  /* Clear, vivid, high-contrast metallic gold for Light Mode — vibrant & prominent */
+  --gold-light: #E5A81E;
+  --gold-primary: #C5880C;
+  --gold-deep: #8E5F00;
+  --gold-highlight: #F5C242;
+  --gold-grad: linear-gradient(135deg, #E5A81E 0%, #C5880C 45%, #8E5F00 100%);
+  --gold-grad-bright: linear-gradient(135deg, #F5C242 0%, #E5A81E 45%, #C5880C 100%);
+  --gold-grad-line: linear-gradient(90deg, transparent 0%, rgba(197, 136, 12, 0.7) 50%, transparent 100%);
   --gold-on-gold: #1a1410;
-  --gold-arrow-border: rgba(224, 176, 48, 0.45);
+  --gold-arrow-border: rgba(197, 136, 12, 0.55);
+  --gold-border: rgba(197, 136, 12, 0.45);
   --background: oklch(0.985 0.004 75);           /* warm white */
-  --foreground: oklch(0.20 0.005 60);            /* dark charcoal text */
+  --foreground: #000000;                         /* pure black text */
   --card: oklch(1 0 0);                          /* pure white cards */
-  --card-foreground: oklch(0.20 0.005 60);
+  --card-foreground: #000000;                    /* pure black */
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.20 0.005 60);
-  --primary: oklch(0.62 0.10 78);                /* muted brand gold */
-  --primary-foreground: oklch(0.16 0.005 60);    /* near-black on gold */
+  --popover-foreground: #000000;                 /* pure black */
+  --primary: oklch(0.58 0.16 75);                /* rich, prominent brand gold */
+  --primary-foreground: oklch(0.98 0 0);
   --secondary: oklch(0.965 0.006 75);
-  --secondary-foreground: oklch(0.20 0.005 60);
+  --secondary-foreground: #000000;               /* pure black */
   --muted: oklch(0.965 0.006 75);
-  --muted-foreground: oklch(0.50 0.01 60);
-  --accent: oklch(0.95 0.028 82);                /* very pale warm-gold hover tint */
-  --accent-foreground: oklch(0.20 0.005 60);
+  --muted-foreground: #000000;                   /* pure black */
+  --accent: oklch(0.95 0.035 80);                /* warm gold hover tint */
+  --accent-foreground: #000000;                  /* pure black */
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.91 0.012 75);                /* warm gray border, faint gold tint */
-  --input: oklch(0.91 0.012 75);
-  --ring: oklch(0.62 0.10 78);                   /* gold focus ring */
-  --chart-1: oklch(0.62 0.10 78);
+  --border: oklch(0.88 0.03 75);                 /* clear warm gold-tinted border */
+  --input: oklch(0.88 0.03 75);
+  --ring: oklch(0.58 0.16 75);                   /* vivid gold focus ring */
+  --chart-1: oklch(0.58 0.16 75);
   --chart-2: oklch(0.70 0.09 80);
   --chart-3: oklch(0.55 0.08 75);
   --chart-4: oklch(0.76 0.11 85);
   --chart-5: oklch(0.48 0.07 72);
   --sidebar: oklch(0.985 0.004 75);
-  --sidebar-foreground: oklch(0.20 0.005 60);
+  --sidebar-foreground: #000000;                 /* pure black */
   --sidebar-primary: oklch(0.62 0.10 78);
   --sidebar-primary-foreground: oklch(0.16 0.005 60);
   --sidebar-accent: oklch(0.95 0.028 82);
-  --sidebar-accent-foreground: oklch(0.20 0.005 60);
+  --sidebar-accent-foreground: #000000;          /* pure black */
   --sidebar-border: oklch(0.91 0.012 75);
   --sidebar-ring: oklch(0.62 0.10 78);
 }
 
-/* ---- Dark Mode: Deep charcoal-black + light text + gold accents ---- */
+/* ---- Dark Mode: Deep charcoal-black + pure white text + gold accents ---- */
 .dark {
-  --about-text: var(--foreground);                    /* neutral readable text (was gold) */
+  --about-text: #ffffff;
   /* Dark Mode gold — unchanged from the original approved values. */
   --gold-light: #F5D77A;
   --gold-primary: #D4AF37;
@@ -106,20 +106,21 @@
   --gold-grad-line: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.5) 50%, transparent 100%);
   --gold-on-gold: #1a1410;
   --gold-arrow-border: rgba(212, 175, 55, 0.35);
+  --gold-border: rgba(212, 175, 55, 0.3);
   --background: oklch(0.135 0.005 60);           /* deep charcoal-black */
-  --foreground: oklch(0.96 0.004 70);            /* off-white */
+  --foreground: #ffffff;                         /* pure white */
   --card: oklch(0.175 0.005 60);                 /* slightly raised charcoal */
-  --card-foreground: oklch(0.96 0.004 70);
+  --card-foreground: #ffffff;                    /* pure white */
   --popover: oklch(0.175 0.005 60);
-  --popover-foreground: oklch(0.96 0.004 70);
+  --popover-foreground: #ffffff;                 /* pure white */
   --primary: oklch(0.74 0.11 82);                /* brighter gold for dark bg contrast */
-  --primary-foreground: oklch(0.135 0.005 60);
+  --primary-foreground: #000000;
   --secondary: oklch(0.22 0.005 60);
-  --secondary-foreground: oklch(0.96 0.004 70);
+  --secondary-foreground: #ffffff;               /* pure white */
   --muted: oklch(0.22 0.005 60);
-  --muted-foreground: oklch(0.66 0.01 60);
+  --muted-foreground: #ffffff;                   /* pure white */
   --accent: oklch(0.23 0.025 75);                /* dark gold-tinted hover */
-  --accent-foreground: oklch(0.96 0.004 70);
+  --accent-foreground: #ffffff;                  /* pure white */
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(0.78 0.06 82 / 14%);           /* subtle translucent gold-tinted border */
   --input: oklch(0.78 0.06 82 / 18%);
@@ -130,11 +131,11 @@
   --chart-4: oklch(0.80 0.12 86);
   --chart-5: oklch(0.52 0.08 75);
   --sidebar: oklch(0.175 0.005 60);
-  --sidebar-foreground: oklch(0.96 0.004 70);
+  --sidebar-foreground: #ffffff;                 /* pure white */
   --sidebar-primary: oklch(0.74 0.11 82);
-  --sidebar-primary-foreground: oklch(0.135 0.005 60);
+  --sidebar-primary-foreground: #000000;
   --sidebar-accent: oklch(0.23 0.025 75);
-  --sidebar-accent-foreground: oklch(0.96 0.004 70);
+  --sidebar-accent-foreground: #ffffff;          /* pure white */
   --sidebar-border: oklch(0.78 0.06 82 / 14%);
   --sidebar-ring: oklch(0.74 0.11 82);
 }
@@ -146,6 +147,50 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  /* Pure black text across all light mode typography */
+  html:not(.dark),
+  html:not(.dark) body,
+  html:not(.dark) p,
+  html:not(.dark) span:not(.gi):not(.gold-fill):not(.arrow-chip):not([class*="gi"]):not([class*="text-primary"]):not([class*="text-gold"]),
+  html:not(.dark) h1,
+  html:not(.dark) h2,
+  html:not(.dark) h3,
+  html:not(.dark) h4,
+  html:not(.dark) h5,
+  html:not(.dark) h6,
+  html:not(.dark) label,
+  html:not(.dark) input,
+  html:not(.dark) textarea,
+  html:not(.dark) a:not(.gi):not(.gold-fill),
+  html:not(.dark) button:not(.gi):not(.gold-fill) {
+    color: #000000;
+  }
+  /* Pure white text across all dark mode typography */
+  .dark,
+  .dark body,
+  .dark p,
+  .dark span:not(.gi):not(.gold-fill):not(.arrow-chip):not([class*="gi"]):not([class*="text-primary"]):not([class*="text-gold"]),
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6,
+  .dark label,
+  .dark input,
+  .dark textarea,
+  .dark a:not(.gi):not(.gold-fill),
+  .dark button:not(.gi):not(.gold-fill) {
+    color: #ffffff;
+  }
+  .dark .gi {
+    color: var(--gold-primary);
+  }
+  .dark .group:hover .gi,
+  .dark button:hover .gi,
+  .dark a:hover .gi {
+    color: var(--gold-light);
   }
   /* Smooth, subtle theme transition */
   body,
@@ -210,18 +255,35 @@
     color: var(--gold-light);
   }
 
-  /* --- Card arrow chip: subtle gold border + gold icon by default,
-         fills with the gold gradient on card hover (icon darkens) --- */
+  /* --- Card icon chip (arrow & leading service icons: plane, box):
+         subtle gold border + gold icon by default,
+         fills with the gold gradient on card hover or when active --- */
   .arrow-chip {
     border: 1px solid var(--gold-arrow-border);
     background: color-mix(in oklch, var(--muted) 70%, transparent);
     color: var(--gold-primary);
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
-  .group:hover .arrow-chip {
-    border-color: transparent;
-    background: var(--gold-grad);
-    color: var(--gold-on-gold);
+  .arrow-chip span,
+  .arrow-chip svg {
+    color: inherit !important;
+    stroke: currentColor;
+    transition: color 0.3s ease, stroke 0.3s ease;
+  }
+  .group:hover .arrow-chip,
+  .arrow-chip.is-active,
+  .arrow-chip.active,
+  .group.is-active .arrow-chip {
+    border-color: transparent !important;
+    background: var(--gold-grad) !important;
+    color: var(--gold-on-gold) !important;
+    box-shadow: 0 2px 10px rgba(197, 136, 12, 0.3);
+  }
+  .dark .group:hover .arrow-chip,
+  .dark .arrow-chip.is-active,
+  .dark .arrow-chip.active,
+  .dark .group.is-active .arrow-chip {
+    box-shadow: 0 2px 12px rgba(212, 175, 55, 0.25);
   }
 
   /* --- Metallic gold divider line (fades at edges) --- */
@@ -284,5 +346,209 @@
     background: var(--gold-grad-bright);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* =========================================================================
+     Card Sliding Animations & Micro-Interactions (Whole Website)
+     ========================================================================= */
+  @keyframes cardSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .card-slide-in {
+    animation: cardSlideUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Stagger delays for grid sequences */
+  .card-stagger-1 { animation-delay: 0.05s; }
+  .card-stagger-2 { animation-delay: 0.1s; }
+  .card-stagger-3 { animation-delay: 0.15s; }
+  .card-stagger-4 { animation-delay: 0.2s; }
+  .card-stagger-5 { animation-delay: 0.25s; }
+  .card-stagger-6 { animation-delay: 0.3s; }
+  .card-stagger-7 { animation-delay: 0.35s; }
+  .card-stagger-8 { animation-delay: 0.4s; }
+
+  /* Smooth lift and shadow expansion on card hover */
+  .card-hover-lift {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+  }
+  .card-hover-lift:hover {
+    transform: translateY(-6px);
+  }
+
+  /* =========================================================================
+     FLAX, LINEN & NATURAL WOODS PERSONA
+     Organic Modern & Refined Artisanal Atelier Aesthetic
+     Rooted in tactile unbleached linen fibers, natural white oak, honey teak,
+     and deep smoked walnut timber.
+     ========================================================================= */
+
+  .flax-wood-persona {
+    /* Base linen & wood tokens - Light Mode */
+    --fw-canvas: #FAF6F0;                  /* warm unbleached flax linen canvas */
+    --fw-card: #FFFFFF;                    /* white-oak framed card interior */
+    --fw-card-glass: rgba(255, 255, 255, 0.95);
+    --fw-surface-subtle: #F5EFE6;          /* soft oatmeal ecru */
+    --fw-text-main: #241810;               /* deep smoked walnut (warm dark brown, zero harshness) */
+    --fw-text-muted: #5C493D;              /* warm walnut taupe */
+    --fw-text-soft: #857062;               /* soft woven oat */
+    
+    /* Woods & Fibers */
+    --fw-flax-gold: #C5994A;               /* spun flax gold */
+    --fw-flax-light: #DFC79B;              /* raw straw fiber */
+    --fw-flax-bright: #E8D3A7;
+    --fw-wood-teak: #96673D;               /* honey teak */
+    --fw-wood-walnut: #4A3324;             /* dark roasted walnut */
+    --fw-wood-border: rgba(150, 103, 61, 0.24);
+    --fw-flax-border: rgba(197, 153, 74, 0.38);
+    
+    /* Wood Grain Button & Accent Gradients */
+    --fw-wood-grad: linear-gradient(135deg, #A87547 0%, #85532A 50%, #5E3617 100%);
+    --fw-wood-grad-hover: linear-gradient(135deg, #B98453 0%, #945F33 50%, #6E401D 100%);
+    --fw-flax-grad: linear-gradient(135deg, #F3E4C2 0%, #C5994A 45%, #96673D 100%);
+    --fw-grain-border: linear-gradient(135deg, rgba(197, 153, 74, 0.6) 0%, rgba(150, 103, 61, 0.45) 50%, rgba(94, 54, 23, 0.3) 100%);
+    
+    /* Shadows */
+    --fw-card-shadow: 0 20px 48px -12px rgba(42, 26, 16, 0.12), 0 8px 20px -8px rgba(42, 26, 16, 0.08);
+    --fw-card-shadow-hover: 0 28px 64px -14px rgba(42, 26, 16, 0.18), 0 12px 28px -8px rgba(42, 26, 16, 0.12);
+  }
+
+  .dark .flax-wood-persona {
+    /* Base linen & wood tokens - Dark Mode */
+    --fw-canvas: #15100C;                  /* deep smoked timber & charred walnut canvas */
+    --fw-card: #211812;                    /* aged dark teak & cedar card interior */
+    --fw-card-glass: rgba(33, 24, 18, 0.94);
+    --fw-surface-subtle: #2A1F17;          /* roasted oak interior */
+    --fw-text-main: #FAF5EE;               /* soft bleached linen ivory */
+    --fw-text-muted: #D1C0B0;              /* warm light oat */
+    --fw-text-soft: #9E8B7C;               /* weathered birch */
+    
+    /* Woods & Fibers */
+    --fw-flax-gold: #DFB25E;               /* radiant spun gold flax */
+    --fw-flax-light: #F0DCB0;              /* bright straw */
+    --fw-flax-bright: #FFECC0;
+    --fw-wood-teak: #BD834F;               /* warm amber teak */
+    --fw-wood-walnut: #2D1D13;             /* burnt walnut */
+    --fw-wood-border: rgba(223, 178, 94, 0.24);
+    --fw-flax-border: rgba(223, 178, 94, 0.38);
+    
+    /* Wood Grain Button & Accent Gradients */
+    --fw-wood-grad: linear-gradient(135deg, #B5804F 0%, #905B2E 50%, #683B17 100%);
+    --fw-wood-grad-hover: linear-gradient(135deg, #C78F5B 0%, #A06735 50%, #7A471E 100%);
+    --fw-flax-grad: linear-gradient(135deg, #FFECC0 0%, #DFB25E 45%, #BD834F 100%);
+    --fw-grain-border: linear-gradient(135deg, rgba(223, 178, 94, 0.5) 0%, rgba(189, 131, 79, 0.38) 50%, rgba(104, 59, 23, 0.3) 100%);
+    
+    /* Shadows */
+    --fw-card-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.75), 0 0 20px rgba(189, 131, 79, 0.1);
+    --fw-card-shadow-hover: 0 32px 75px -15px rgba(0, 0, 0, 0.85), 0 0 28px rgba(223, 178, 94, 0.18);
+  }
+
+  /* --- Organic Modern Flax & Wood Card Container --- */
+  .fw-card {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--fw-card-glass), var(--fw-card-glass)) padding-box,
+      var(--fw-grain-border) border-box;
+    backdrop-filter: blur(14px);
+    box-shadow: var(--fw-card-shadow);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+  }
+  .fw-card:hover {
+    box-shadow: var(--fw-card-shadow-hover);
+  }
+
+  /* --- Stacked card scroll: works on ALL screen sizes --- */
+  .fw-stacked-card {
+    position: sticky;
+  }
+
+  /* --- Touch device press states for all interactive cards --- */
+  @media (hover: none) and (pointer: coarse) {
+    .fw-wood-btn:active {
+      transform: scale(0.97) translateY(1px);
+      opacity: 0.92;
+    }
+    /* Suppress stuck mid-zoom on touch long-press */
+    .group:active .group-hover\:scale-106 {
+      transform: scale(1.03);
+    }
+  }
+
+  /* --- Tactile Wood Action Button --- */
+  .fw-wood-btn {
+    background: var(--fw-wood-grad);
+    color: #FFFDF9;
+    box-shadow: 0 4px 14px rgba(94, 54, 23, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .fw-wood-btn:hover {
+    background: var(--fw-wood-grad-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(94, 54, 23, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  }
+  .fw-wood-btn:active {
+    transform: translateY(0);
+  }
+
+  /* --- Linen Stitched Badge / Pill --- */
+  .fw-linen-pill {
+    background: color-mix(in oklch, var(--fw-flax-gold) 12%, transparent);
+    border: 1px solid var(--fw-flax-border);
+    color: var(--fw-flax-gold);
+    transition: all 0.25s ease;
+  }
+  .fw-linen-pill:hover {
+    background: color-mix(in oklch, var(--fw-flax-gold) 18%, transparent);
+    border-color: var(--fw-flax-gold);
+  }
+
+  /* --- Subtle Linen Weave Grid Texture --- */
+  .fw-linen-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(150, 103, 61, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(150, 103, 61, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .dark .fw-linen-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(223, 178, 94, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(223, 178, 94, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* --- Wood Grain Divider Ribbon --- */
+  .fw-wood-ribbon {
+    background: linear-gradient(90deg, transparent 0%, var(--fw-flax-gold) 20%, var(--fw-wood-teak) 50%, var(--fw-flax-gold) 80%, transparent 100%);
+    height: 1px;
+    opacity: 0.55;
+  }
+
+  /* --- Organic Flax Headline Gradient --- */
+  .fw-headline {
+    background: var(--fw-flax-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ---- Performance: reduce paint cost on animated / sticky elements ---- */
+  .sticky {
+    will-change: transform;
+  }
+  .fw-card-article {
+    contain: layout style;
+  }
+  /* Promote heavy gradient backgrounds to their own compositor layer */
+  [class*="fw-wood-btn"],
+  [class*="gold-grad"] {
+    will-change: opacity, transform;
   }
 }

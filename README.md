@@ -14,8 +14,8 @@ A modern, high-performance landing page for **SARHAN Import & Export**, built wi
   - Interactive popup when selecting **"Ship For You"**.
   - Form fields for Name, Phone, Origin, Destination, Freight Mode (Air/Sea/Express), and cargo specifications.
   - Direct 1-click dispatch to **WhatsApp** and **Email** with pre-formatted inquiry text.
-- **EGY FLAX Product Showcase**:
-  - Featured export commodity: **EGY FLAX** (Premium Natural Egyptian Flax & Fibers).
+- **FLAX & LINEN PRODUCTS Showcase**:
+  - Featured export commodity: **FLAX & LINEN PRODUCTS** (Premium Natural Egyptian Flax & Linen Products).
   - Desktop hover preview revealing product highlights, with a full interactive product modal and direct quote request buttons.
 - **Modern Connect Us Select Bar**:
   - Floating frosted-glass dock with live status indicator (*Active Now*).
@@ -110,7 +110,7 @@ The application will run on port `3000` (or `PORT` environment variable).
 │   │   └── page.tsx        # Homepage (Hero, About Us, Services, Footer)
 │   ├── components/
 │   │   ├── connect-us.tsx           # Modern floating contact select bar
-│   │   ├── egy-flax-dialog.tsx      # EGY FLAX product details & quote modal
+│   │   ├── egy-flax-dialog.tsx      # FLAX & LINEN PRODUCTS details & quote modal
 │   │   ├── ship-inquiry-dialog.tsx  # Interactive shipping quote form modal
 │   │   ├── language-selector.tsx    # Multilingual language switcher
 │   │   ├── theme-toggle.tsx         # Dark / light mode toggle

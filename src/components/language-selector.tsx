@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils'
 
 const OPTIONS: { value: Locale; label: string; short: string }[] = [
   { value: 'en', label: 'English', short: 'EN' },
+  { value: 'fr', label: 'Français', short: 'FR' },
   { value: 'ar', label: 'العربية', short: 'AR' },
   { value: 'zh', label: '中文', short: 'ZH' },
 ]
@@ -55,7 +56,7 @@ export function LanguageSelector() {
           // Pill: metallic gold gradient border, same height as theme toggle
           'inline-flex h-10 items-center gap-2 rounded-full px-4',
           'gf',
-          'text-sm font-medium text-foreground',
+          'text-sm font-medium text-foreground dark:text-white',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background',
         )}
       >
@@ -99,8 +100,8 @@ export function LanguageSelector() {
                   'flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm',
                   'transition-colors duration-200',
                   isActive
-                    ? 'bg-accent text-foreground font-medium'
-                    : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                    ? 'bg-accent text-foreground dark:text-white font-medium'
+                    : 'text-muted-foreground dark:text-white hover:bg-accent hover:text-foreground',
                 )}
               >
                 <span className="flex items-center gap-2.5">
@@ -109,7 +110,7 @@ export function LanguageSelector() {
                       'flex h-6 w-9 items-center justify-center rounded-md text-[11px] font-semibold tracking-wide',
                       isActive
                         ? 'badge-gold'
-                        : 'bg-muted text-muted-foreground',
+                        : 'bg-muted text-muted-foreground dark:text-white',
                     )}
                   >
                     {option.short}

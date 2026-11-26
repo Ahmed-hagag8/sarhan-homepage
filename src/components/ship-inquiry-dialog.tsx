@@ -1,29 +1,124 @@
 'use client'
 
 import * as React from 'react'
-import { X, Plane, Ship, Zap, Send, Mail, User, Phone, MapPin, FileText, CheckCircle2 } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import {
+  X,
+  Plane,
+  Mail,
+  User,
+  Phone,
+  MapPin,
+  FileText,
+  ArrowRight,
+  Package,
+  ExternalLink,
+  ChevronDown,
+} from 'lucide-react'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
-import { useI18n } from '@/lib/i18n-context'
+import { useI18n, type Locale } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
+import { CATALOG_PRODUCTS } from '@/app/products/flax-and-linen/product-data'
 
 interface ShipInquiryDialogProps {
   open: boolean
   onClose: () => void
 }
 
-const DUMMY_WHATSAPP_NUMBER = '1555000100'
-const DUMMY_EMAIL_ADDRESS = 'hello@sarhan.example.com'
+const DUMMY_WHATSAPP_NUMBER = '201133289251'
+const DUMMY_EMAIL_ADDRESS = 'imex@sarhanco.com'
+
+interface InquiryTemplate {
+  waHeader: string
+  nameLabel: string
+  phoneLabel: string
+  emailCustomerLabel: string
+  productLabel: string
+  catalogLinkLabel: string
+  originLabel: string
+  destLabel: string
+  specsLabel: string
+  footerNote: string
+  emailSubject: string
+  emailHeader: string
+}
+
+const INQUIRY_TEMPLATES: Record<Locale, InquiryTemplate> = {
+  en: {
+    waHeader: '🚢 *SARHAN Import & Export — Shipping Quote Request*',
+    nameLabel: '👤 *Name / Company:*',
+    phoneLabel: '📞 *Phone / Contact:*',
+    emailCustomerLabel: '✉️ *Customer Email:*',
+    productLabel: '🏷️ *Product / Cargo:*',
+    catalogLinkLabel: '🌾 *Flax Catalog Link:*',
+    originLabel: '📍 *Origin (From):*',
+    destLabel: '🏁 *Destination (To):*',
+    specsLabel: '📦 *Cargo Specifications:*',
+    footerNote: 'Sent via SARHAN Official Portal',
+    emailSubject: 'Shipping Quote Request',
+    emailHeader: 'SARHAN Import & Export — Shipping Quote Request',
+  },
+  ar: {
+    waHeader: '🚢 *سرحان للاستيراد والتصدير — طلب عرض سعر شحن*',
+    nameLabel: '👤 *الاسم / الشركة:*',
+    phoneLabel: '📞 *الهاتف / للتواصل:*',
+    emailCustomerLabel: '✉️ *بريد العميل:*',
+    productLabel: '🏷️ *المنتج / البضاعة:*',
+    catalogLinkLabel: '🌾 *رابط كتالوج الكتان:*',
+    originLabel: '📍 *بلد المنشأ (من):*',
+    destLabel: '🏁 *جهة الوصول (إلى):*',
+    specsLabel: '📦 *مواصفات وتفاصيل الشحنة:*',
+    footerNote: 'تم الإرسال عبر البوابة الرسمية لسرحان للاستيراد والتصدير',
+    emailSubject: 'طلب عرض سعر شحن',
+    emailHeader: 'سرحان للاستيراد والتصدير — طلب عرض سعر شحن',
+  },
+  fr: {
+    waHeader: '🚢 *SARHAN Import & Export — Demande de Devis d’Expédition*',
+    nameLabel: '👤 *Nom / Société :*',
+    phoneLabel: '📞 *Téléphone / Contact :*',
+    emailCustomerLabel: '✉️ *Email Client :*',
+    productLabel: '🏷️ *Produit / Marchandise :*',
+    catalogLinkLabel: '🌾 *Lien Catalogue Lin :*',
+    originLabel: '📍 *Origine (De) :*',
+    destLabel: '🏁 *Destination (Vers) :*',
+    specsLabel: '📦 *Spécifications de la cargaison :*',
+    footerNote: 'Envoyé via le portail officiel SARHAN',
+    emailSubject: "Demande de Devis d'Expédition",
+    emailHeader: "SARHAN Import & Export — Demande de Devis d'Expédition",
+  },
+  zh: {
+    waHeader: '🚢 *SARHAN 进出口 — 运输报价申请*',
+    nameLabel: '👤 *姓名 / 公司：*',
+    phoneLabel: '📞 *电话 / 联系方式：*',
+    emailCustomerLabel: '✉️ *客户邮箱：*',
+    productLabel: '🏷️ *产品 / 货物：*',
+    catalogLinkLabel: '🌾 *亚麻目录链接：*',
+    originLabel: '📍 *始发地（从）：*',
+    destLabel: '🏁 *目的地（至）：*',
+    specsLabel: '📦 *货物规格及详情：*',
+    footerNote: '通过 SARHAN 官方门户发送',
+    emailSubject: '运输报价申请',
+    emailHeader: 'SARHAN 进出口 — 运输报价申请',
+  },
+}
 
 export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
-  const { t, dir } = useI18n()
+  const { t, locale, dir } = useI18n()
 
   const [name, setName] = React.useState('')
   const [phone, setPhone] = React.useState('')
+  const [customerEmail, setCustomerEmail] = React.useState('')
+  const [selectedProductId, setSelectedProductId] = React.useState('')
   const [origin, setOrigin] = React.useState('')
   const [destination, setDestination] = React.useState('')
-  const [shippingType, setShippingType] = React.useState<'air' | 'sea' | 'express'>('air')
   const [details, setDetails] = React.useState('')
   const [error, setError] = React.useState('')
+  const [sendVia, setSendVia] = React.useState<'whatsapp' | 'email'>('whatsapp')
+
+  const selectedProduct = React.useMemo(() => {
+    return CATALOG_PRODUCTS.find((p) => p.id === selectedProductId)
+  }, [selectedProductId])
 
   // Close on Escape & Lock body scroll
   React.useEffect(() => {
@@ -41,17 +136,6 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
 
   if (!open) return null
 
-  const getTypeName = () => {
-    switch (shippingType) {
-      case 'air':
-        return t.shipForm.typeAir
-      case 'sea':
-        return t.shipForm.typeSea
-      case 'express':
-        return t.shipForm.typeExpress
-    }
-  }
-
   const validate = () => {
     if (!name.trim() || !details.trim()) {
       setError(t.shipForm.validationError)
@@ -61,55 +145,71 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
     return true
   }
 
-  const handleSendWhatsApp = (e: React.FormEvent) => {
+  const handleSubmitBoth = (e: React.FormEvent) => {
     e.preventDefault()
     if (!validate()) return
 
-    const message = [
-      '🚢 *SARHAN Import & Export — Shipping Quote Request*',
+    const tmpl = INQUIRY_TEMPLATES[locale] ?? INQUIRY_TEMPLATES.en
+    const productTitle = selectedProduct
+      ? (locale === 'en' ? selectedProduct.name : (selectedProduct.translatedName[locale] ?? selectedProduct.name))
+      : t.shipForm.generalCargo
+
+    // 1. Prepare WhatsApp message
+    const waMessage = [
+      tmpl.waHeader,
       '─────────────────────────',
-      `👤 *Name / Company:* ${name.trim()}`,
-      phone.trim() ? `📞 *Phone / Contact:* ${phone.trim()}` : null,
-      origin.trim() ? `📍 *Origin (From):* ${origin.trim()}` : null,
-      destination.trim() ? `🏁 *Destination (To):* ${destination.trim()}` : null,
-      `✈️ *Shipping Mode:* ${getTypeName()}`,
-      `📦 *Cargo Specifications:* \n${details.trim()}`,
+      `${tmpl.nameLabel} ${name.trim()}`,
+      phone.trim() ? `${tmpl.phoneLabel} ${phone.trim()}` : null,
+      customerEmail.trim() ? `${tmpl.emailCustomerLabel} ${customerEmail.trim()}` : null,
+      `${tmpl.productLabel} ${productTitle}`,
+      selectedProduct
+        ? `${tmpl.catalogLinkLabel} https://sarhanco.com/products/flax-and-linen#${selectedProduct.id}`
+        : null,
+      origin.trim() ? `${tmpl.originLabel} ${origin.trim()}` : null,
+      destination.trim() ? `${tmpl.destLabel} ${destination.trim()}` : null,
+      `${tmpl.specsLabel} \n${details.trim()}`,
       '─────────────────────────',
-      'Sent via SARHAN Official Portal',
+      tmpl.footerNote,
     ]
       .filter(Boolean)
       .join('\n')
 
-    const url = `https://wa.me/${DUMMY_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
-    window.open(url, '_blank', 'noopener,noreferrer')
-    onClose()
-  }
+    const waUrl = `https://wa.me/${DUMMY_WHATSAPP_NUMBER}?text=${encodeURIComponent(waMessage)}`
 
-  const handleSendEmail = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!validate()) return
-
-    const subject = `Shipping Quote Request: ${name.trim()} (${getTypeName()})`
-    const body = [
-      'SARHAN Import & Export — Shipping Quote Request',
+    // 2. Prepare Email message
+    const subject = `${tmpl.emailSubject}: ${productTitle} — ${name.trim()}`
+    const emailBody = [
+      tmpl.emailHeader,
       '==================================================',
-      `Name / Company: ${name.trim()}`,
-      phone.trim() ? `Contact Phone: ${phone.trim()}` : '',
-      origin.trim() ? `Origin (From): ${origin.trim()}` : '',
-      destination.trim() ? `Destination (To): ${destination.trim()}` : '',
-      `Freight Mode: ${getTypeName()}`,
+      `${tmpl.nameLabel.replace(/[*_:]/g, '').trim()}: ${name.trim()}`,
+      phone.trim() ? `${tmpl.phoneLabel.replace(/[*_:]/g, '').trim()}: ${phone.trim()}` : '',
+      customerEmail.trim() ? `${tmpl.emailCustomerLabel.replace(/[*_:]/g, '').trim()}: ${customerEmail.trim()}` : '',
+      `${tmpl.productLabel.replace(/[*_:]/g, '').trim()}: ${productTitle}`,
+      selectedProduct
+        ? `${tmpl.catalogLinkLabel.replace(/[*_:]/g, '').trim()}: /products/flax-and-linen#${selectedProduct.id}`
+        : '',
+      origin.trim() ? `${tmpl.originLabel.replace(/[*_:]/g, '').trim()}: ${origin.trim()}` : '',
+      destination.trim() ? `${tmpl.destLabel.replace(/[*_:]/g, '').trim()}: ${destination.trim()}` : '',
       '',
-      'Cargo Specifications & Details:',
+      `${tmpl.specsLabel.replace(/[*_:]/g, '').trim()}:`,
       details.trim(),
       '',
       '==================================================',
-      'Sent from SARHAN Online Portal',
+      tmpl.footerNote,
     ]
       .filter(Boolean)
       .join('\n')
 
-    const mailto = `mailto:${DUMMY_EMAIL_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-    window.location.href = mailto
+    const mailtoUrl = `mailto:${DUMMY_EMAIL_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`
+
+    if (sendVia === 'whatsapp') {
+      // Open WhatsApp in a new tab
+      window.open(waUrl, '_blank', 'noopener,noreferrer')
+    } else {
+      // Trigger user's mail client directly to imex@sarhanco.com
+      window.location.href = mailtoUrl
+    }
+
     onClose()
   }
 
@@ -138,17 +238,17 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
         {/* Header */}
         <div className="flex items-start justify-between gap-4 pb-4 border-b border-border/50">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent border border-[var(--gold-arrow-border)]">
-              <Plane className="gi h-6 w-6" strokeWidth={1.75} />
+            <div className="arrow-chip flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl">
+              <Plane className="h-6 w-6" strokeWidth={1.75} />
             </div>
             <div>
               <h2
                 id="ship-inquiry-title"
-                className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-foreground"
+                className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-foreground dark:text-white"
               >
                 {t.shipForm.dialogTitle}
               </h2>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
+              <p className="text-xs sm:text-sm text-black dark:text-white mt-0.5">
                 {t.shipForm.dialogDesc}
               </p>
             </div>
@@ -159,18 +259,18 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             type="button"
             onClick={onClose}
             aria-label={t.shipForm.close}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
+            className="arrow-chip flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 hover:scale-105"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Form */}
-        <form className="mt-5 space-y-4">
-          {/* Row 1: Name and Phone */}
-          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+        <form onSubmit={handleSubmitBoth} className="mt-5 space-y-4">
+          {/* Row 1: Name, Phone and Email */}
+          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-3">
             <div>
-              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
                 <User className="gi h-3.5 w-3.5" />
                 <span>{t.shipForm.nameLabel}</span>
                 <span className="text-destructive">*</span>
@@ -181,12 +281,12 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={t.shipForm.namePlaceholder}
-                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
               />
             </div>
 
             <div>
-              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
                 <Phone className="gi h-3.5 w-3.5" />
                 <span>{t.shipForm.phoneLabel}</span>
               </label>
@@ -195,15 +295,104 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder={t.shipForm.phonePlaceholder}
-                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
+                <Mail className="gi h-3.5 w-3.5" />
+                <span>{t.shipForm.emailLabel}</span>
+              </label>
+              <input
+                type="email"
+                value={customerEmail}
+                onChange={(e) => setCustomerEmail(e.target.value)}
+                placeholder={t.shipForm.emailPlaceholder}
+                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
               />
             </div>
           </div>
 
-          {/* Row 2: Origin and Destination */}
+          {/* Row 2: Product / Cargo Selection List */}
+          <div>
+            <div className="mb-1.5 flex items-center justify-between gap-2">
+              <label className="flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
+                <Package className="gi h-3.5 w-3.5" />
+                <span>{t.shipForm.productSelectLabel}</span>
+              </label>
+
+              {/* Direct link to /products/flax-and-linen */}
+              <Link
+                href="/products/flax-and-linen"
+                target="_blank"
+                className="text-[11px] font-bold text-primary hover:underline inline-flex items-center gap-1 transition-colors"
+                title={t.shipForm.viewFlaxCatalog}
+              >
+                <span>{t.shipForm.viewFlaxCatalog}</span>
+                <ExternalLink className="h-3 w-3 rtl:-scale-x-100" />
+              </Link>
+            </div>
+
+            {/* Product Select Dropdown */}
+            <div className="relative">
+              <select
+                value={selectedProductId}
+                onChange={(e) => setSelectedProductId(e.target.value)}
+                className="w-full appearance-none rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 pe-9 text-sm text-foreground dark:text-white focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all font-medium cursor-pointer"
+              >
+                <option value="">{t.shipForm.generalCargo}</option>
+                <optgroup label={t.shipForm.flaxCategory}>
+                  {CATALOG_PRODUCTS.map((prod) => (
+                    <option key={prod.id} value={prod.id}>
+                      {locale === 'en' ? prod.name : (prod.translatedName[locale] ?? prod.name)}
+                    </option>
+                  ))}
+                </optgroup>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 end-0 flex items-center px-3 text-muted-foreground">
+                <ChevronDown className="h-4 w-4" />
+              </div>
+            </div>
+
+            {/* Selected Product Interactive Mini Preview Card */}
+            {selectedProduct && (
+              <div className="mt-2.5 flex items-center justify-between rounded-xl bg-accent/70 border border-[var(--gold-arrow-border)] p-2.5 animate-in fade-in duration-200">
+                <div className="flex items-center gap-2.5 overflow-hidden">
+                  <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg border border-border/50">
+                    <Image
+                      src={selectedProduct.photo}
+                      alt={selectedProduct.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="text-start min-w-0">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-primary block truncate">
+                      {t.shipForm.flaxCategory}
+                    </span>
+                    <p className="text-xs font-bold text-foreground dark:text-white truncate">
+                      {selectedProduct.translatedName[locale] ?? selectedProduct.name}
+                    </p>
+                  </div>
+                </div>
+
+                <Link
+                  href={`/products/flax-and-linen#${selectedProduct.id}`}
+                  target="_blank"
+                  className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-card/90 px-2.5 py-1 text-[11px] font-semibold text-primary hover:bg-card border border-border/50 transition-colors shadow-xs"
+                >
+                  <span>{t.shipForm.viewInCatalog}</span>
+                  <ExternalLink className="h-3 w-3 rtl:-scale-x-100" />
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Row 3: Origin and Destination */}
           <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
                 <MapPin className="gi h-3.5 w-3.5 text-primary" />
                 <span>{t.shipForm.originLabel}</span>
               </label>
@@ -212,12 +401,12 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
                 value={origin}
                 onChange={(e) => setOrigin(e.target.value)}
                 placeholder={t.shipForm.originPlaceholder}
-                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
               />
             </div>
 
             <div>
-              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
+              <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
                 <MapPin className="gi h-3.5 w-3.5" />
                 <span>{t.shipForm.destLabel}</span>
               </label>
@@ -226,64 +415,14 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
                 placeholder={t.shipForm.destPlaceholder}
-                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
+                className="w-full rounded-xl border border-border/70 bg-muted/40 px-3.5 py-2.5 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all"
               />
-            </div>
-          </div>
-
-          {/* Row 3: Freight Type Selector */}
-          <div>
-            <label className="mb-2 block text-xs font-semibold text-foreground">
-              {t.shipForm.shippingTypeLabel}
-            </label>
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                onClick={() => setShippingType('air')}
-                className={cn(
-                  'flex flex-col items-center justify-center gap-1.5 rounded-xl border p-2.5 text-xs font-medium transition-all',
-                  shippingType === 'air'
-                    ? 'border-primary bg-accent/80 text-foreground font-semibold shadow-sm'
-                    : 'border-border/60 bg-muted/30 text-muted-foreground hover:bg-muted/60',
-                )}
-              >
-                <Plane className={cn('h-4 w-4', shippingType === 'air' ? 'gi' : '')} />
-                <span className="truncate">{t.shipForm.typeAir}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setShippingType('sea')}
-                className={cn(
-                  'flex flex-col items-center justify-center gap-1.5 rounded-xl border p-2.5 text-xs font-medium transition-all',
-                  shippingType === 'sea'
-                    ? 'border-primary bg-accent/80 text-foreground font-semibold shadow-sm'
-                    : 'border-border/60 bg-muted/30 text-muted-foreground hover:bg-muted/60',
-                )}
-              >
-                <Ship className={cn('h-4 w-4', shippingType === 'sea' ? 'gi' : '')} />
-                <span className="truncate">{t.shipForm.typeSea}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setShippingType('express')}
-                className={cn(
-                  'flex flex-col items-center justify-center gap-1.5 rounded-xl border p-2.5 text-xs font-medium transition-all',
-                  shippingType === 'express'
-                    ? 'border-primary bg-accent/80 text-foreground font-semibold shadow-sm'
-                    : 'border-border/60 bg-muted/30 text-muted-foreground hover:bg-muted/60',
-                )}
-              >
-                <Zap className={cn('h-4 w-4', shippingType === 'express' ? 'gi' : '')} />
-                <span className="truncate">{t.shipForm.typeExpress}</span>
-              </button>
             </div>
           </div>
 
           {/* Row 4: Details & Notes */}
           <div>
-            <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground">
+            <label className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-foreground dark:text-white">
               <FileText className="gi h-3.5 w-3.5" />
               <span>{t.shipForm.detailsLabel}</span>
               <span className="text-destructive">*</span>
@@ -294,8 +433,46 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
               value={details}
               onChange={(e) => setDetails(e.target.value)}
               placeholder={t.shipForm.detailsPlaceholder}
-              className="w-full rounded-xl border border-border/70 bg-muted/40 p-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all resize-none"
+              className="w-full rounded-xl border border-border/70 bg-muted/40 p-3 text-sm text-foreground dark:text-white placeholder:text-muted-foreground/60 dark:placeholder:text-white/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40 transition-all resize-none"
             />
+          </div>
+
+          {/* Row 5: Send Via Selector (WhatsApp or Email) */}
+          <div>
+            <label className="mb-1.5 flex items-center justify-between text-xs font-semibold text-foreground dark:text-white">
+              <span>{t.shipForm.sendViaLabel}</span>
+              <span className="text-[11px] text-muted-foreground/80 dark:text-white/60 font-normal">
+                {sendVia === 'email' ? 'imex@sarhanco.com' : '+20 113 328 9251'}
+              </span>
+            </label>
+            <div className="grid grid-cols-2 gap-2.5">
+              <button
+                type="button"
+                onClick={() => setSendVia('whatsapp')}
+                className={cn(
+                  'flex items-center justify-center gap-2 rounded-xl p-3 text-xs sm:text-sm font-bold border transition-all duration-200 cursor-pointer',
+                  sendVia === 'whatsapp'
+                    ? 'gold-fill border-transparent shadow-md'
+                    : 'bg-muted/40 text-foreground dark:text-white border-border/70 hover:bg-muted/70',
+                )}
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                <span>{t.shipForm.sendWhatsApp}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setSendVia('email')}
+                className={cn(
+                  'flex items-center justify-center gap-2 rounded-xl p-3 text-xs sm:text-sm font-bold border transition-all duration-200 cursor-pointer',
+                  sendVia === 'email'
+                    ? 'gold-fill border-transparent shadow-md'
+                    : 'bg-muted/40 text-foreground dark:text-white border-border/70 hover:bg-muted/70',
+                )}
+              >
+                <Mail className="h-4 w-4" />
+                <span>{t.shipForm.sendEmail}</span>
+              </button>
+            </div>
           </div>
 
           {/* Validation error notice */}
@@ -305,32 +482,32 @@ export function ShipInquiryDialog({ open, onClose }: ShipInquiryDialogProps) {
             </p>
           )}
 
-          {/* Action Buttons: WhatsApp and Email dispatch */}
-          <div className="pt-2 flex flex-col sm:flex-row gap-3">
+          {/* Single Submit Button */}
+          <div className="pt-2">
             <button
-              type="button"
-              onClick={handleSendWhatsApp}
+              type="submit"
               className={cn(
-                'flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl py-3 px-4 font-semibold text-sm',
-                'bg-[#25D366] text-white shadow-md shadow-[#25D366]/20',
-                'hover:bg-[#20ba59] hover:-translate-y-0.5 transition-all active:translate-y-0',
+                'group relative w-full inline-flex items-center justify-center gap-3 rounded-2xl py-3.5 px-6 font-semibold text-sm sm:text-base cursor-pointer',
+                'gold-fill border border-transparent shadow-lg shadow-[rgba(197,136,12,0.25)] dark:shadow-[rgba(212,175,55,0.2)]',
+                'hover:shadow-xl hover:shadow-[rgba(197,136,12,0.38)] dark:hover:shadow-[rgba(212,175,55,0.35)]',
+                'hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] transition-all duration-300 ease-out',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
               )}
             >
-              <WhatsAppIcon className="h-5 w-5 fill-white" />
-              <span>{t.shipForm.sendWhatsApp}</span>
-            </button>
+              {sendVia === 'whatsapp' ? (
+                <WhatsAppIcon className="h-5 w-5" />
+              ) : (
+                <Mail className="h-5 w-5" />
+              )}
+              {/* Submit Label */}
+              <span className="font-bold tracking-wider uppercase text-sm sm:text-base">
+                {sendVia === 'whatsapp' ? t.shipForm.sendWhatsApp : `${t.shipForm.sendEmail} (imex@sarhanco.com)`}
+              </span>
 
-            <button
-              type="button"
-              onClick={handleSendEmail}
-              className={cn(
-                'flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl py-3 px-4 font-semibold text-sm',
-                'gf text-foreground shadow-md',
-                'hover:-translate-y-0.5 hover:shadow-lg transition-all active:translate-y-0',
-              )}
-            >
-              <Mail className="gi h-4 w-4" />
-              <span>{t.shipForm.sendEmail}</span>
+              {/* Action arrow */}
+              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-black/15 dark:bg-white/15 backdrop-blur-xs transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
+                <ArrowRight className="h-4 w-4 rtl:-scale-x-100" />
+              </div>
             </button>
           </div>
         </form>

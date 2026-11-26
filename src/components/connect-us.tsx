@@ -1,243 +1,215 @@
 'use client'
 
 import * as React from 'react'
-import { Phone, Mail, ChevronDown, Check, Copy, ExternalLink, Sparkles } from 'lucide-react'
+import { createPortal } from 'react-dom'
+import { Phone, Mail, X, ArrowRight } from 'lucide-react'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
 import { useI18n } from '@/lib/i18n-context'
 import { cn } from '@/lib/utils'
 
-const WHATSAPP_NUMBER = '+1 555-000-100'
-const WHATSAPP_URL = 'https://wa.me/1555000100'
-const EMAIL_ADDRESS = 'hello@sarhan.example.com'
-const EMAIL_URL = 'mailto:hello@sarhan.example.com'
-const PHONE_NUMBER = '+1 555-000-0000'
-const PHONE_URL = 'tel:+15550000000'
+const WHATSAPP_NUMBER = '+20 113 328 9251'
+const WHATSAPP_URL = 'https://wa.me/201133289251'
+const EMAIL_ADDRESS = 'imex@sarhanco.com'
+const EMAIL_URL = 'mailto:imex@sarhanco.com'
+const PHONE_NUMBER = '+20 113 328 9251'
+const PHONE_URL = 'tel:+201133289251'
 
 export function ConnectUs() {
-  const { t, dir } = useI18n()
+  const { t } = useI18n()
   const [open, setOpen] = React.useState(false)
-  const [copiedKey, setCopiedKey] = React.useState<string | null>(null)
-  const rootRef = React.useRef<HTMLDivElement>(null)
-  const hovering = React.useRef(false)
+  const [mounted, setMounted] = React.useState(false)
 
-  // Outside click & Escape handler
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Close on Escape & Lock body scroll
   React.useEffect(() => {
     if (!open) return
-    const handleOutside = (e: MouseEvent) => {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
-        setOpen(false)
-      }
-    }
-    const handleEsc = (e: KeyboardEvent) => {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false)
     }
-    document.addEventListener('mousedown', handleOutside)
-    document.addEventListener('keydown', handleEsc)
+    document.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
     return () => {
-      document.removeEventListener('mousedown', handleOutside)
-      document.removeEventListener('keydown', handleEsc)
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
     }
   }, [open])
 
-  const handleMouseEnter = () => {
-    hovering.current = true
-    setOpen(true)
-  }
-
-  const handleMouseLeave = () => {
-    hovering.current = false
-    setTimeout(() => {
-      if (!hovering.current) setOpen(false)
-    }, 150)
-  }
-
-  const copyToClipboard = (text: string, key: string, e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (navigator?.clipboard) {
-      navigator.clipboard.writeText(text)
-      setCopiedKey(key)
-      setTimeout(() => setCopiedKey(null), 2000)
-    }
-  }
-
   return (
-    <div
-      ref={rootRef}
-      className="relative inline-block"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* Modern Trigger Bar */}
+    <>
+      {/* Connect Us Button in Footer (Matches Location button styling) */}
       <button
         type="button"
-        aria-haspopup="true"
+        onClick={() => setOpen(true)}
+        aria-haspopup="dialog"
         aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
+        aria-label={t.contact.connectUs}
         className={cn(
-          'group relative flex h-11 items-center gap-3 rounded-full px-5 sm:px-6',
-          'gf bg-card/90 backdrop-blur-md text-foreground shadow-md',
+          'inline-flex h-11 items-center gap-2 rounded-full px-4 sm:px-5 cursor-pointer',
+          'gf bg-card/90 text-black dark:text-white shadow-md',
           'transition-all duration-300 ease-out',
-          'hover:-translate-y-0.5 hover:shadow-lg',
+          'hover:-translate-y-0.5 hover:shadow-lg hover:text-primary',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-          open && 'ring-2 ring-primary/60 border-primary',
         )}
       >
-        {/* Pulsing online indicator + Phone icon */}
-        <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-accent/80 border border-[var(--gold-arrow-border)]">
-          <Phone className="gi h-3.5 w-3.5" strokeWidth={2} />
-          <span className="absolute -top-0.5 -end-0.5 flex h-2.5 w-2.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-          </span>
-        </span>
-
-        <span className="text-sm font-semibold tracking-tight text-foreground">
+        <Phone className="gi h-4 w-4" aria-hidden="true" />
+        <span className="text-sm font-semibold tracking-tight">
           {t.contact.connectUs}
         </span>
-
-        {/* Small chevron */}
-        <ChevronDown
-          className={cn(
-            'gi h-4 w-4 transition-transform duration-300',
-            open && 'rotate-180',
-          )}
-        />
       </button>
 
-      {/* Modern Popover Select Bar */}
-      {open && (
-        <div
-          role="menu"
-          aria-label={t.contact.connectUs}
-          className={cn(
-            'absolute bottom-full mb-3 z-50 w-[310px] sm:w-[340px] rounded-3xl p-3.5',
-            'gf-card bg-card/95 backdrop-blur-xl shadow-2xl shadow-black/25',
-            'animate-in fade-in-0 zoom-in-95 duration-200',
-            'start-1/2 -translate-x-1/2',
-          )}
-        >
-          {/* Header row in dropdown */}
-          <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-border/50 px-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Sparkles className="gi h-3 w-3" />
-              <span>{t.contactBar.title}</span>
-            </span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              {t.contactBar.online}
-            </span>
-          </div>
+      {/* Pop-up Modal rendered at body root via portal to always center in viewport */}
+      {mounted &&
+        open &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="connect-dialog-title"
+          >
+            {/* Backdrop */}
+            <div
+              className="fixed inset-0 bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
+              onClick={() => setOpen(false)}
+              aria-hidden="true"
+            />
 
-          {/* Options List */}
-          <div className="space-y-2">
-            {/* 1. WhatsApp Option */}
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* Modal Container in Dead Center of Viewport */}
+            <div
               className={cn(
-                'group/opt flex items-center justify-between p-2.5 rounded-2xl border border-border/60 bg-muted/30',
-                'hover:border-[#25D366]/40 hover:bg-[#25D366]/10 transition-all',
+                'relative z-10 w-full max-w-lg rounded-3xl p-6 sm:p-8',
+                'gf-card bg-card/95 text-foreground shadow-2xl shadow-black/40',
+                'animate-in fade-in-0 zoom-in-95 duration-200',
               )}
             >
-              <div className="flex items-center gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#25D366]/15 text-[#25D366] transition-transform group-hover/opt:scale-105">
-                  <WhatsAppIcon className="h-5 w-5 fill-[#25D366]" />
-                </span>
-                <div className="flex flex-col text-start">
-                  <span className="text-xs font-semibold text-foreground group-hover/opt:text-[#25D366] transition-colors">
-                    {t.contactBar.whatsapp}
-                  </span>
-                  <span className="text-[11px] text-muted-foreground" dir="ltr">
-                    {WHATSAPP_NUMBER}
-                  </span>
+              {/* Header */}
+              <div className="flex items-start justify-between gap-4 pb-4 border-b border-border/50">
+                <div className="flex items-center gap-3">
+                  <div className="arrow-chip flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl">
+                    <Phone className="h-6 w-6" strokeWidth={1.75} />
+                  </div>
+                  <div>
+                    <h2
+                      id="connect-dialog-title"
+                      className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-black dark:text-white"
+                    >
+                      {t.contact.connectUs}
+                    </h2>
+                    <p className="text-xs sm:text-sm text-black dark:text-white mt-0.5">
+                      {t.contactBar.subtitle}
+                    </p>
+                  </div>
                 </div>
+
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label={t.shipForm.close}
+                  className="arrow-chip flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 hover:scale-105"
+                >
+                  <X className="h-5 w-5" />
+                </button>
               </div>
 
-              <span className="text-xs text-muted-foreground group-hover/opt:text-foreground flex items-center gap-1">
-                <ExternalLink className="h-3.5 w-3.5" />
-              </span>
-            </a>
+              {/* Vertical Enhanced Connect Cards */}
+              <div className="mt-5 space-y-3">
+                {/* 1. WhatsApp Card */}
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    'group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl',
+                    'gf bg-card/90 border border-[var(--gold-border)] shadow-sm',
+                    'hover:-translate-y-0.5 hover:shadow-md hover:bg-accent/60 transition-all duration-300',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                  )}
+                >
+                  <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
+                    <div className="arrow-chip flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-105">
+                      <WhatsAppIcon className="h-6 w-6" />
+                    </div>
+                    <div className="flex flex-col text-start min-w-0">
+                      <span className="text-sm sm:text-base font-bold text-black dark:text-white tracking-tight">
+                        {t.contactBar.whatsapp}
+                      </span>
+                      <span className="text-xs sm:text-sm text-black/75 dark:text-white/75 font-mono truncate mt-0.5">
+                        {WHATSAPP_NUMBER}
+                      </span>
+                    </div>
+                  </div>
 
-            {/* 2. Email Option */}
-            <div
-              className={cn(
-                'group/opt flex items-center justify-between p-2.5 rounded-2xl border border-border/60 bg-muted/30',
-                'hover:border-primary/40 hover:bg-accent/40 transition-all',
-              )}
-            >
-              <a
-                href={EMAIL_URL}
-                className="flex items-center gap-3 flex-1 min-w-0"
-              >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent text-primary transition-transform group-hover/opt:scale-105">
-                  <Mail className="gi h-4 w-4" />
-                </span>
-                <div className="flex flex-col text-start min-w-0">
-                  <span className="text-xs font-semibold text-foreground group-hover/opt:text-primary transition-colors">
-                    {t.contactBar.email}
-                  </span>
-                  <span className="text-[11px] text-muted-foreground truncate" dir="ltr">
-                    {EMAIL_ADDRESS}
-                  </span>
-                </div>
-              </a>
+                  <div className="arrow-chip flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-105">
+                    <ArrowRight className="h-4 w-4 rtl:-scale-x-100" />
+                  </div>
+                </a>
 
-              <button
-                type="button"
-                onClick={(e) => copyToClipboard(EMAIL_ADDRESS, 'email', e)}
-                title={t.contactBar.copy}
-                className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-background/80 transition-colors"
-              >
-                {copiedKey === 'email' ? (
-                  <Check className="h-3.5 w-3.5 text-emerald-500" />
-                ) : (
-                  <Copy className="h-3.5 w-3.5" />
-                )}
-              </button>
+                {/* 2. Email Card */}
+                <a
+                  href={EMAIL_URL}
+                  className={cn(
+                    'group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl',
+                    'gf bg-card/90 border border-[var(--gold-border)] shadow-sm',
+                    'hover:-translate-y-0.5 hover:shadow-md hover:bg-accent/60 transition-all duration-300',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                  )}
+                >
+                  <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
+                    <div className="arrow-chip flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-105">
+                      <Mail className="h-6 w-6" />
+                    </div>
+                    <div className="flex flex-col text-start min-w-0">
+                      <span className="text-sm sm:text-base font-bold text-black dark:text-white tracking-tight">
+                        {t.contactBar.email}
+                      </span>
+                      <span className="text-xs sm:text-sm text-black/75 dark:text-white/75 font-mono truncate mt-0.5">
+                        {EMAIL_ADDRESS}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="arrow-chip flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-105">
+                    <ArrowRight className="h-4 w-4 rtl:-scale-x-100" />
+                  </div>
+                </a>
+
+                {/* 3. Phone Direct Card */}
+                <a
+                  href={PHONE_URL}
+                  className={cn(
+                    'group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl',
+                    'gf bg-card/90 border border-[var(--gold-border)] shadow-sm',
+                    'hover:-translate-y-0.5 hover:shadow-md hover:bg-accent/60 transition-all duration-300',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                  )}
+                >
+                  <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
+                    <div className="arrow-chip flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-105">
+                      <Phone className="h-6 w-6" />
+                    </div>
+                    <div className="flex flex-col text-start min-w-0">
+                      <span className="text-sm sm:text-base font-bold text-black dark:text-white tracking-tight">
+                        {t.contactBar.call}
+                      </span>
+                      <span className="text-xs sm:text-sm text-black/75 dark:text-white/75 font-mono truncate mt-0.5">
+                        {PHONE_NUMBER}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="arrow-chip flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-105">
+                    <ArrowRight className="h-4 w-4 rtl:-scale-x-100" />
+                  </div>
+                </a>
+              </div>
             </div>
-
-            {/* 3. Direct Phone Option */}
-            <div
-              className={cn(
-                'group/opt flex items-center justify-between p-2.5 rounded-2xl border border-border/60 bg-muted/30',
-                'hover:border-primary/40 hover:bg-accent/40 transition-all',
-              )}
-            >
-              <a
-                href={PHONE_URL}
-                className="flex items-center gap-3 flex-1 min-w-0"
-              >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent text-primary transition-transform group-hover/opt:scale-105">
-                  <Phone className="gi h-4 w-4" />
-                </span>
-                <div className="flex flex-col text-start min-w-0">
-                  <span className="text-xs font-semibold text-foreground group-hover/opt:text-primary transition-colors">
-                    {t.contactBar.call}
-                  </span>
-                  <span className="text-[11px] text-muted-foreground" dir="ltr">
-                    {PHONE_NUMBER}
-                  </span>
-                </div>
-              </a>
-
-              <button
-                type="button"
-                onClick={(e) => copyToClipboard(PHONE_NUMBER, 'phone', e)}
-                title={t.contactBar.copy}
-                className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-background/80 transition-colors"
-              >
-                {copiedKey === 'phone' ? (
-                  <Check className="h-3.5 w-3.5 text-emerald-500" />
-                ) : (
-                  <Copy className="h-3.5 w-3.5" />
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+          </div>,
+          document.body,
+        )}
+    </>
   )
 }
